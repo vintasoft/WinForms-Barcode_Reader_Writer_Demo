@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0BDA6D2-6648-471D-807A-8E647B939B68}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BarcodeDemo</RootNamespace>
+    <AssemblyName>BarcodeDemo</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <StartupObject>BarcodeDemo.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,DEMO_VERSION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEMO_VERSION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,DEMO_VERSION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEMO_VERSION</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,DEMO_VERSION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEMO_VERSION</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.Targets" />
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Vintasoft.Barcode">
+      <HintPath>..\..\..\Bin\DotNet2\AnyCPU\Vintasoft.Barcode.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBoxForm.Designer.vb">
+      <DependentUpon>AboutBoxForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBoxForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarcodesInformation.vb" />
+    <Compile Include="Controls\BarcodeWriterSettingsControl.Designer.vb">
+      <DependentUpon>BarcodeWriterSettingsControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BarcodeWriterSettingsControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ExceptionEventArgs.vb" />
+    <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.Designer.vb">
+      <DependentUpon>BarcodeReaderResultsControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15415QualityTestForm.Designer.vb">
+      <DependentUpon>ISO15415QualityTestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15415QualityTestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15416QualityTestForm.Designer.vb">
+      <DependentUpon>ISO15416QualityTestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15416QualityTestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.Designer.vb">
+      <DependentUpon>AdvancedReaderSettingsControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.Designer.vb">
+      <DependentUpon>BarcodeTypesReaderSettingsControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ExpectedBarcodesEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\MaxThreadsCountEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\MinConfidenceEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.Designer.vb">
+      <DependentUpon>ParameterEditorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterSlaveEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ScanIntervalEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ScanDirectionEditorControl.Designer.vb">
+      <DependentUpon>ScanDirectionEditorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ScanDirectionEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FindFiles.vb" />
+    <Compile Include="GetSizeForm.Designer.vb">
+      <DependentUpon>GetSizeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GetSizeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GS1ValueEditorForm.Designer.vb">
+      <DependentUpon>GS1ValueEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GS1ValueEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.vb" />
+    <Compile Include="Properties\AssemblyInfo.vb" />
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PropertyGridForm.Designer.vb">
+      <DependentUpon>PropertyGridForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGridForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectImageFrameForm.Designer.vb">
+      <DependentUpon>SelectImageFrameForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SelectImageFrameForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPdfPageForm.Designer.vb">
+      <DependentUpon>SelectPdfPageForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPdfPageForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutBoxForm.resx">
+      <DependentUpon>AboutBoxForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BarcodeWriterSettingsControl.resx">
+      <DependentUpon>BarcodeWriterSettingsControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\BarcodeReaderResultsControl.resx">
+      <DependentUpon>BarcodeReaderResultsControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\ISO15415QualityTestForm.resx">
+      <DependentUpon>ISO15415QualityTestForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\ISO15416QualityTestForm.resx">
+      <DependentUpon>ISO15416QualityTestForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.resx">
+      <DependentUpon>AdvancedReaderSettingsControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.resx">
+      <DependentUpon>BarcodeTypesReaderSettingsControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.resx">
+      <DependentUpon>ParameterEditorControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\ScanDirectionEditorControl.resx">
+      <DependentUpon>ScanDirectionEditorControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetSizeForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GetSizeForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GS1ValueEditorForm.resx">
+      <DependentUpon>GS1ValueEditorForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyGridForm.resx">
+      <DependentUpon>PropertyGridForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectImageFrameForm.resx">
+      <DependentUpon>SelectImageFrameForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPdfPageForm.resx">
+      <DependentUpon>SelectPdfPageForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+  </ItemGroup>
+</Project>
