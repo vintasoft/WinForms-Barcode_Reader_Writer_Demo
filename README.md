@@ -1,2 +1,1 @@
-# Barcode-Reader-Writer-Demo
-Barcode Reader / Writer Demo
+Barcode Reader / Writer Demo demonstrates how to read and write barcodes in images. Possess advanced barcode recognition and creation settings. Outputs extended barcode recognition results with Barcode Print Quality Test data according to ISO 15415 and 15416 standard.
