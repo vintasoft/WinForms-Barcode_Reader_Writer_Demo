@@ -1,4 +1,4 @@
-<h1>Barcode Reader / Writer Demo</h1>
+<h1>VintaSoft Barcode Reader / Writer Demo</h1>
 
 Demo application shows how to read and write barcodes in images. Possess advanced barcode recognition and creation settings. Outputs extended barcode recognition results with Barcode Print Quality Test data according to ISO 15415 and 15416 standard. Demo uses functionality of <a href="https://www.vintasoft.com/vsbarcode-dotnet-index.html">VintaSoft Barcode .NET SDK</a>. Source codes for C# and VB.NET are available.
 
