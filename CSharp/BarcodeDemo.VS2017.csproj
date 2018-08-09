@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-
     <ProjectGuid>{571B07E7-832F-4F7A-ADD7-3EFEDD3E5ACC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -76,8 +75,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vintasoft.Barcode">
-      <HintPath>..\..\..\..\Bin\DotNet4\AnyCPU\Vintasoft.Barcode.dll</HintPath>
+    <Reference Include="Vintasoft.Barcode, Version=11.0.0.1, Culture=neutral, PublicKeyToken=153caf29a10d2e31, processorArchitecture=MSIL">
+      <HintPath>packages\Vintasoft.Barcode.11.0.0.1\lib\net40\Vintasoft.Barcode.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +293,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
