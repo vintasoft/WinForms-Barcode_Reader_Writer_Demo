@@ -8,17 +8,21 @@ using System.Windows.Forms;
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.GS1;
-using Vintasoft.Barcode.SymbologySubsets;
-using Vintasoft.Barcode.SymbologySubsets.RoyalMailMailmark;
 
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A control that shows the barcode reader results.
+    /// </summary>
     public partial class BarcodeReaderResultsControl : UserControl
     {
 
         #region Fields
 
+        /// <summary>
+        /// Indicates that the barcode value must NOT be shown.
+        /// </summary>
         bool _disableShowingValue = false;
 
         #endregion
@@ -27,6 +31,9 @@ namespace BarcodeDemo
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BarcodeReaderResultsControl"/> class.
+        /// </summary>
         public BarcodeReaderResultsControl()
         {
             InitializeComponent();
@@ -44,7 +51,10 @@ namespace BarcodeDemo
 
         #region Properties
 
-        private IBarcodeInfo[] _recognizedBarcodes;
+        IBarcodeInfo[] _recognizedBarcodes;
+        /// <summary>
+        /// Gets or sets the recognized barcodes.
+        /// </summary>
         public IBarcodeInfo[] RecognizedBarcodes
         {
             get
@@ -59,7 +69,10 @@ namespace BarcodeDemo
             }
         }
 
-        private int _barcodeInfoIndex = 0;
+        int _barcodeInfoIndex = 0;
+        /// <summary>
+        /// Gets or sets the index of current barcode.
+        /// </summary>
         public int BarcodeInfoIndex
         {
             get
@@ -74,7 +87,10 @@ namespace BarcodeDemo
             }
         }
 
-        private Image _barcodeImage;
+        Image _barcodeImage;
+        /// <summary>
+        /// Gets or sets the image with barcodes.
+        /// </summary>
         public Image BarcodeImage
         {
             get
@@ -88,6 +104,9 @@ namespace BarcodeDemo
         }
 
         bool _invertBarcodeImage = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether barcode image is inverted.
+        /// </summary>
         public bool InvertBarcodeImage
         {
             get
@@ -101,6 +120,12 @@ namespace BarcodeDemo
         }
 
         bool _interpretEciCharacters = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether the barcode reader must interpret ECI characters.
+        /// </summary>
+        /// <value>
+        /// <b>True</b> if barcode reader must interpret ECI characters; otherwise, <b>false</b>.
+        /// </value>
         public bool InterpretEciCharacters
         {
             get
@@ -145,24 +170,28 @@ namespace BarcodeDemo
                 totalBarcodesLabel.Text = _recognizedBarcodes.Length.ToString();
             }
         }
-        
+
         /// <summary>
-        /// Removes a special charactes from specified string.
+        /// Removes a special characters from specified string.
         /// </summary>
         private string RemoveSpecialCharacters(string text)
         {
             StringBuilder sb = new StringBuilder();
             if (text != null)
+            {
                 for (int i = 0; i < text.Length; i++)
+                {
                     if (text[i] >= ' ' || text[i] == '\n' || text[i] == '\r' || text[i] == '\t')
                         sb.Append(text[i]);
                     else
                         sb.Append('?');
+                }
+            }
             return sb.ToString();
         }
 
         /// <summary>
-        /// Displays specified barcode info.
+        /// Displays the specified barcode info.
         /// </summary>
         private void ShowBarcodeInformation(IBarcodeInfo info)
         {
@@ -184,6 +213,10 @@ namespace BarcodeDemo
                     barcodeTypeLabel.Text = ((BarcodeSubsetInfo)info).BarcodeSubset.ToString();
                 else
                     barcodeTypeLabel.Text = info.BarcodeType.ToString();
+
+                if (info is StructuredAppendBarcodeInfo)
+                    barcodeTypeLabel.Text += " (Reconstructed)";
+
                 if (info.Confidence == ReaderSettings.ConfidenceNotAvailable)
                 {
                     confidenceLabel.Text = "N/A";
@@ -205,8 +238,16 @@ namespace BarcodeDemo
                 else
                     readingQualityLabel.ForeColor = Color.Green;
                 directionLabel.Text = info.Direction.ToString();
-                boundRectnalgeLabel.Text = info.Region.Rectangle.ToString();
-                rotationAngleLabel.Text = info.Region.Angle.ToString("F3") + "°";
+                if (info.Region == null)
+                {
+                    boundRectnalgeLabel.Text = "N/A";
+                    rotationAngleLabel.Text = "N/A";
+                }
+                else
+                {
+                    boundRectnalgeLabel.Text = info.Region.Rectangle.ToString();
+                    rotationAngleLabel.Text = info.Region.Angle.ToString("F3") + "°";
+                }
                 thresholdLabel.Text = info.Threshold.ToString();
                 info.ShowNonDataFlagsInValue = true;
                 bool isGSValue = info is GS1BarcodeInfo;
@@ -250,7 +291,16 @@ namespace BarcodeDemo
                     info.BarcodeType == BarcodeType.RSSLimited ||
                     info.BarcodeType == BarcodeType.RSSExpandedStacked;
 
-                if (info.ValueItems != null && info.ValueItems.Length > 0 && info.ValueItems[0] is StructuredAppendCharacter)
+                if (info is StructuredAppendBarcodeInfo)
+                {
+                    ISO15415QualityTestButton.Enabled = false;
+                    ISO15416QualityTestButton.Enabled = false;
+                    structureAppendLabel.Text = string.Format("Used Structured Append:\n{0} symbol(s)", info.SymbolComponents.Length);
+                    structureAppendLabel.Visible = true;
+                }
+                else if (info.ValueItems != null &&
+                    info.ValueItems.Length > 0 &&
+                    info.ValueItems[0] is StructuredAppendCharacter)
                 {
                     StructuredAppendCharacter saItem = (StructuredAppendCharacter)info.ValueItems[0];
                     structureAppendLabel.Text = string.Format("Used Structured Append:\nsymbol {0} of {1}", saItem.SymbolPosition, saItem.SymbolCount);
@@ -276,7 +326,7 @@ namespace BarcodeDemo
         private void ShowBarcodeImage(IBarcodeInfo info)
         {
             Image lastImage = barcodePictureBox.Image;
-            if (info == null)
+            if (info == null || info.Region == null)
             {
                 barcodePictureBox.Image = null;
             }
@@ -399,7 +449,7 @@ namespace BarcodeDemo
                     sb.Append(Environment.NewLine);
                     sb.Append(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
                     sb.Append(Environment.NewLine);
-                    
+
                     sb.Append(Environment.NewLine);
                     sb.Append("GS1 decoded value:");
                     sb.Append(Environment.NewLine);
@@ -545,7 +595,7 @@ namespace BarcodeDemo
         {
             bool singleByteEncoding = true;
             for (int i = 0; i < value.Length; i++)
-                if (value[i] > 255)
+                if ((int)value[i] > 255)
                 {
                     singleByteEncoding = false;
                     break;
@@ -567,7 +617,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Returns barcode value as GS1 value.
+        /// Returns the barcode value as the GS1 value.
         /// </summary>
         private string GetGS1BarcodeValue(string value)
         {
@@ -588,7 +638,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Decodes GS1 barcode value.
+        /// Decodes the GS1 barcode value.
         /// </summary>
         private string DecodeGS1BarcodeValue(string value)
         {
@@ -608,7 +658,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Converts a string to binnary format.
+        /// Converts a string to a binary format.
         /// </summary>
         private string StringToBinary(string data, int line)
         {
@@ -643,7 +693,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Add extended barcode infrmation.
+        /// Adds an extended barcode information.
         /// </summary>
         private void AddBarcodeExtendedInformation(string name, object value)
         {
@@ -656,9 +706,13 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Add information about barcode value item.
+        /// Adds an information about barcode value item.
         /// </summary>
-        private void AddBarcodeValueItemInformation(int number, string itemType, string value, string hexValue)
+        private void AddBarcodeValueItemInformation(
+            int number,
+            string itemType,
+            string value,
+            string hexValue)
         {
             DataGridViewRow row = new DataGridViewRow();
             row.Cells.Add(new DataGridViewTextBoxCell());
@@ -673,7 +727,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Displays extended information of specified barcode info.
+        /// Displays an extended information of specified barcode info.
         /// </summary>
         private void ShowBarcodeExtendedInformation(IBarcodeInfo info)
         {
@@ -689,6 +743,7 @@ namespace BarcodeDemo
                 AddBarcodeExtendedInformation("Error correction codewords", info2D.ErrorCorrectionCodewordCount);
                 AddBarcodeExtendedInformation("Total codewords", info2D.TotalCodewordCount);
                 AddBarcodeExtendedInformation("Corrected errors", info2D.CorrectedErrors);
+                AddBarcodeExtendedInformation("Barcode image mirrored", info2D.IsMirrored);
             }
             if (info is BarcodeInfo1D)
             {
@@ -696,79 +751,89 @@ namespace BarcodeDemo
                 AddBarcodeExtendedInformation("Narrow bar count", info1D.NarrowBarCount);
                 AddBarcodeExtendedInformation("Narrow bar size", info1D.NarrowBarSize);
             }
-            switch (info.BarcodeType)
+            if (info is StructuredAppendBarcodeInfo)
             {
-                case BarcodeType.PDF417:
-                case BarcodeType.PDF417Compact:
-                    PDF417Info pdf417Info = (PDF417Info)info;
-                    AddBarcodeExtendedInformation("Error correction level", pdf417Info.ErrorCorrectionLevel);
-                    AddBarcodeExtendedInformation("Row codewords count", pdf417Info.RowCodewordsCount);
-                    AddBarcodeExtendedInformation("Rows count", pdf417Info.RowsCount);
-                    break;
-                case BarcodeType.MicroPDF417:
-                    MicroPDF417Info microPdf417Info = (MicroPDF417Info)info;
-                    AddBarcodeExtendedInformation("Symbol type", microPdf417Info.SymbolType);
-                    break;
-                case BarcodeType.DataMatrix:
-                    DataMatrixInfo dataMatrixInfo = (DataMatrixInfo)info;
-                    AddBarcodeExtendedInformation("Symbol ECC type", dataMatrixInfo.Symbol.SymbolECCType);
-                    AddBarcodeExtendedInformation("Symbol type", dataMatrixInfo.Symbol.SymbolType);
-                    break;
-                case BarcodeType.MicroQR:
-                case BarcodeType.QR:
-                    QRInfo qrInfo = (QRInfo)info;
-                    AddBarcodeExtendedInformation("Error correction level", qrInfo.ErrorCorrectionLevel);
-                    AddBarcodeExtendedInformation("Symbol version", qrInfo.Symbol.Version);
-                    break;
-                case BarcodeType.Aztec:
-                    AztecInfo aztecInfo = (AztecInfo)info;
-                    AddBarcodeExtendedInformation("Error correction data (%)", aztecInfo.Symbol.ErrorCorrectionData.ToString("F3"));
-                    AddBarcodeExtendedInformation("Symbol type", aztecInfo.Symbol.SymbolType);
-                    AddBarcodeExtendedInformation("Data layers", aztecInfo.Symbol.DataLayers);
-                    AddBarcodeExtendedInformation("Bulleye center", aztecInfo.BulleyeCenter);
-                    break;
-                case BarcodeType.HanXinCode:
-                    HanXinCodeInfo hanXinInfo = (HanXinCodeInfo)info;
-                    AddBarcodeExtendedInformation("Symbol version", hanXinInfo.Symbol.Version);
-                    AddBarcodeExtendedInformation("Error correction level", hanXinInfo.Symbol.ErrorCorrectionLevel);
-                    break;
-                case BarcodeType.MaxiCode:
-                    MaxiCodeInfo maxiCodeInfo = (MaxiCodeInfo)info;
-                    AddBarcodeExtendedInformation("Encoding mode", maxiCodeInfo.EncodingMode);
-                    break;
-                case BarcodeType.RSS14:
-                case BarcodeType.RSS14Stacked:
-                case BarcodeType.RSSExpanded:
-                case BarcodeType.RSSExpandedStacked:
-                case BarcodeType.RSSLimited:
-                    RSSInfo rssInfo = (RSSInfo)info;
-                    AddBarcodeExtendedInformation("Segments count", rssInfo.SegmentsCount);
-                    AddBarcodeExtendedInformation("Rows count", rssInfo.RowsCount);
-                    AddBarcodeExtendedInformation("Segments in row", rssInfo.SegmentsInRow);
-                    AddBarcodeExtendedInformation("Linkage flag", rssInfo.LinkageFlag);
-                    break;
-                case BarcodeType.IntelligentMail:
-                    IntelligentMailInfo intelligentMailInfo = (IntelligentMailInfo)info;
-                    AddBarcodeExtendedInformation("Barcode ID", intelligentMailInfo.BarcodeID);
-                    AddBarcodeExtendedInformation("Service Type ID", intelligentMailInfo.ServiceTypeID);
-                    AddBarcodeExtendedInformation("Mailer ID", intelligentMailInfo.MailerID);
-                    AddBarcodeExtendedInformation("Serial Number", intelligentMailInfo.SerialNumber);
-                    if (intelligentMailInfo.RoutingZIPCode != "")
-                        AddBarcodeExtendedInformation("Routing ZIP Code", intelligentMailInfo.RoutingZIPCode);
-                    break;
-                case BarcodeType.Pharmacode:
-                    PharmacodeInfo pharmacodeInfo = (PharmacodeInfo)info;
-                    AddBarcodeExtendedInformation("Reverse read value", pharmacodeInfo.ReverseReadValue);
-                    break;
-                case BarcodeType.UPCE:
-                    UPCEANInfo upcEANInfo = (UPCEANInfo)info;
-                    AddBarcodeExtendedInformation("UPCE value", upcEANInfo.UPCEValue);
-                    break;
-                case BarcodeType.Codabar:
-                    CodabarInfo codabarInfo = (CodabarInfo)info;
-                    AddBarcodeExtendedInformation("Start symbol", codabarInfo.StartSymbol);
-                    AddBarcodeExtendedInformation("Stop symbol", codabarInfo.StopSymbol);
-                    break;
+                AddBarcodeExtendedInformation("Symbol component count", info.SymbolComponents.Length);
+            }
+            else
+            {
+                switch (info.BarcodeType)
+                {
+                    case BarcodeType.PDF417:
+                    case BarcodeType.PDF417Compact:
+                        PDF417Info pdf417Info = (PDF417Info)info;
+                        AddBarcodeExtendedInformation("Error correction level", pdf417Info.ErrorCorrectionLevel);
+                        AddBarcodeExtendedInformation("Row codewords count", pdf417Info.RowCodewordsCount);
+                        AddBarcodeExtendedInformation("Rows count", pdf417Info.RowsCount);
+                        break;
+                    case BarcodeType.MicroPDF417:
+                        MicroPDF417Info microPdf417Info = (MicroPDF417Info)info;
+                        AddBarcodeExtendedInformation("Symbol type", microPdf417Info.SymbolType);
+                        break;
+                    case BarcodeType.DataMatrix:
+                        DataMatrixInfo dataMatrixInfo = (DataMatrixInfo)info;
+                        AddBarcodeExtendedInformation("Symbol ECC type", dataMatrixInfo.Symbol.SymbolECCType);
+                        AddBarcodeExtendedInformation("Symbol type", dataMatrixInfo.Symbol.SymbolType);
+                        break;
+                    case BarcodeType.MicroQR:
+                    case BarcodeType.QR:
+                        QRInfo qrInfo = (QRInfo)info;
+                        AddBarcodeExtendedInformation("Error correction level", qrInfo.ErrorCorrectionLevel);
+                        AddBarcodeExtendedInformation("Data mask pattern", qrInfo.DataMaskPattern);
+                        if (!qrInfo.Symbol.IsMicroQR)
+                            AddBarcodeExtendedInformation("Model", qrInfo.Symbol.Model);
+                        AddBarcodeExtendedInformation("Symbol version", qrInfo.Symbol.Version);
+                        break;
+                    case BarcodeType.Aztec:
+                        AztecInfo aztecInfo = (AztecInfo)info;
+                        AddBarcodeExtendedInformation("Error correction data (%)", aztecInfo.Symbol.ErrorCorrectionData.ToString("F3"));
+                        AddBarcodeExtendedInformation("Symbol type", aztecInfo.Symbol.SymbolType);
+                        AddBarcodeExtendedInformation("Data layers", aztecInfo.Symbol.DataLayers);
+                        AddBarcodeExtendedInformation("Bulleye center", aztecInfo.BulleyeCenter);
+                        break;
+                    case BarcodeType.HanXinCode:
+                        HanXinCodeInfo hanXinInfo = (HanXinCodeInfo)info;
+                        AddBarcodeExtendedInformation("Symbol version", hanXinInfo.Symbol.Version);
+                        AddBarcodeExtendedInformation("Error correction level", hanXinInfo.Symbol.ErrorCorrectionLevel);
+                        break;
+                    case BarcodeType.MaxiCode:
+                        MaxiCodeInfo maxiCodeInfo = (MaxiCodeInfo)info;
+                        AddBarcodeExtendedInformation("Encoding mode", maxiCodeInfo.EncodingMode);
+                        break;
+                    case BarcodeType.RSS14:
+                    case BarcodeType.RSS14Stacked:
+                    case BarcodeType.RSSExpanded:
+                    case BarcodeType.RSSExpandedStacked:
+                    case BarcodeType.RSSLimited:
+                        RSSInfo rssInfo = (RSSInfo)info;
+                        AddBarcodeExtendedInformation("Segments count", rssInfo.SegmentsCount);
+                        AddBarcodeExtendedInformation("Rows count", rssInfo.RowsCount);
+                        AddBarcodeExtendedInformation("Segments in row", rssInfo.SegmentsInRow);
+                        AddBarcodeExtendedInformation("Linkage flag", rssInfo.LinkageFlag);
+                        break;
+                    case BarcodeType.IntelligentMail:
+                        IntelligentMailInfo intelligentMailInfo = (IntelligentMailInfo)info;
+                        AddBarcodeExtendedInformation("Barcode ID", intelligentMailInfo.BarcodeID);
+                        AddBarcodeExtendedInformation("Service Type ID", intelligentMailInfo.ServiceTypeID);
+                        AddBarcodeExtendedInformation("Mailer ID", intelligentMailInfo.MailerID);
+                        AddBarcodeExtendedInformation("Serial Number", intelligentMailInfo.SerialNumber);
+                        if (intelligentMailInfo.RoutingZIPCode != "")
+                            AddBarcodeExtendedInformation("Routing ZIP Code", intelligentMailInfo.RoutingZIPCode);
+                        break;
+                    case BarcodeType.Pharmacode:
+                        PharmacodeInfo pharmacodeInfo = (PharmacodeInfo)info;
+                        AddBarcodeExtendedInformation("Reverse read value", pharmacodeInfo.ReverseReadValue);
+                        break;
+                    case BarcodeType.UPCE:
+                        UPCEANInfo upcEANInfo = (UPCEANInfo)info;
+                        AddBarcodeExtendedInformation("UPCE value", upcEANInfo.UPCEValue);
+                        break;
+                    case BarcodeType.Codabar:
+                        CodabarInfo codabarInfo = (CodabarInfo)info;
+                        AddBarcodeExtendedInformation("Start symbol", codabarInfo.StartSymbol);
+                        AddBarcodeExtendedInformation("Stop symbol", codabarInfo.StopSymbol);
+                        break;
+                }
             }
         }
 
@@ -870,7 +935,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Convers string to HEX representation.
+        /// Convers a string to a HEX representation.
         /// </summary>
         private string StringToHex(string value, int row)
         {
@@ -890,7 +955,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Convers array of byte to HEX representation.
+        /// Convers a byte array to a HEX representation.
         /// </summary>
         private string BytesToHex(byte[] value)
         {
@@ -904,32 +969,47 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Changes current barcode info index to secified index.
+        /// Changes the current barcode info index to the specified index.
         /// </summary>
         /// <param name="index"></param>
         private void MoveToBarcode(int index)
         {
-            if (_disableShowingValue || _recognizedBarcodes == null || index < 0 || index >= _recognizedBarcodes.Length)
+            if (_disableShowingValue ||
+                _recognizedBarcodes == null ||
+                index < 0 ||
+                index >= _recognizedBarcodes.Length)
                 return;
             _barcodeInfoIndex = index;
             ShowBarcodeInformation(_recognizedBarcodes[_barcodeInfoIndex]);
         }
 
+        /// <summary>
+        /// Updates the displaying barcode value.
+        /// </summary>
         private void barcodeValueAs_CheckedChanged(object sender, EventArgs e)
         {
             ShowBarcodeValue();
         }
 
+        /// <summary>
+        /// Updates the displaying barcode value.
+        /// </summary>
         private void readerTextEncodingComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ShowBarcodeValue();
         }
 
+        /// <summary>
+        /// Sets new current barcode info.
+        /// </summary>
         private void selectedBarcodeNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             MoveToBarcode((int)selectedBarcodeNumericUpDown.Value - 1);
         }
 
+        /// <summary>
+        /// Shows the GS1 barcode value.
+        /// </summary>
         private void showGS1DecoderButton_Click(object sender, EventArgs e)
         {
             try
@@ -945,6 +1025,9 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Shows the ISO15415 quality test dialog.
+        /// </summary>
         private void ISO15415QualityTestButton_Click(object sender, EventArgs e)
         {
             if (_barcodeInfoIndex >= 0)
@@ -960,11 +1043,14 @@ namespace BarcodeDemo
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(string.Format("{0}: {1}", ex.GetType().Name, ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
 
+        /// <summary>
+        /// Shows the ISO15416 quality test dialog.
+        /// </summary>
         private void ISO15416QualityTestButton_Click(object sender, EventArgs e)
         {
             if (_barcodeInfoIndex >= 0)

@@ -3,16 +3,16 @@
 namespace BarcodeDemo
 {
     /// <summary>
-    /// Represents a slave parameter editor control.
+    /// A parameter editor control that depends from another parameter editor control.
     /// </summary>
-    public class ParameterSlaveEditorControl: ParameterEditorControl
+    public class ParameterSlaveEditorControl : ParameterEditorControl
     {
 
         #region Properties
 
         ParameterEditorControl _masterParameterEditor;
         /// <summary>
-        /// Gets or sets a master parameter editor.
+        /// Gets or sets a master parameter editor control.
         /// </summary>
         public ParameterEditorControl MasterParameterEditor
         {
@@ -36,7 +36,7 @@ namespace BarcodeDemo
                         _masterParameterEditor.ValueChanged += new EventHandler(MasterParameterEditor_ValueChanged);
                         Minimum = _masterParameterEditor.Minimum;
                         Maximum = _masterParameterEditor.Maximum;
-                        Value = _masterParameterEditor.Value;
+                        this.Value = _masterParameterEditor.Value;
                         Title = _masterParameterEditor.Title;
                         TickFrequency = _masterParameterEditor.TickFrequency;
 
@@ -61,7 +61,8 @@ namespace BarcodeDemo
             set
             {
                 base.Value = value;
-                _masterParameterEditor.Value = value;
+                if (_masterParameterEditor != null)
+                    _masterParameterEditor.Value = value;
             }
         }
 
@@ -71,17 +72,23 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Called when value is changed.
+        /// </summary>
         protected override void OnValueChanged()
         {
             base.OnValueChanged();
-            MasterParameterEditor.Value = Value;
+            if (MasterParameterEditor != null)
+                MasterParameterEditor.Value = Value;
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the MasterParameterEditor control.
+        /// </summary>
         private void MasterParameterEditor_ValueChanged(object sender, EventArgs e)
         {
             Value = _masterParameterEditor.Value;
         }
-  
 
         #endregion
 

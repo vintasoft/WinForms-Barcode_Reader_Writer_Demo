@@ -3,13 +3,16 @@
 namespace BarcodeDemo
 {
     /// <summary>
-    /// Represents an editor control of ReaderSettings.MaximalThreadsCount parameter.
+    /// A control that allows to change the ReaderSettings.MaximalThreadsCount parameter.
     /// </summary>
     public class MaxThreadsCountEditorControl: ParameterEditorControl
     {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MaxThreadsCountEditorControl"/> class.
+        /// </summary>
         public MaxThreadsCountEditorControl()
         {
             Minimum = 1;

@@ -44,7 +44,6 @@ namespace BarcodeDemo.Controls
             this.valueFontSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.valueGapNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.minWidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.setWidthButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.paddingNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -122,7 +121,6 @@ namespace BarcodeDemo.Controls
             this.postalADMiltiplierPanel = new System.Windows.Forms.Panel();
             this.postalADMiltiplierNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.linearBarcodeHeightButton = new System.Windows.Forms.Button();
             this.linearBarcodeTypeComboBox = new System.Windows.Forms.ComboBox();
             this.linearBarcodeHeight = new System.Windows.Forms.NumericUpDown();
             this.linearBarcodeHeightLabel = new System.Windows.Forms.Label();
@@ -132,10 +130,13 @@ namespace BarcodeDemo.Controls
             this.backgroundColorPanel = new System.Windows.Forms.Panel();
             this.selectBackgroundColorButton = new System.Windows.Forms.Button();
             this.barcodeWidthPanel = new System.Windows.Forms.Panel();
+            this.label44 = new System.Windows.Forms.Label();
             this.subsetBarcodeValueButton = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.quietZoneButton = new System.Windows.Forms.Button();
             this.barcodeGroupsTabControl = new System.Windows.Forms.TabControl();
             this.linearBarcodesTabPage = new System.Windows.Forms.TabPage();
+            this.label45 = new System.Windows.Forms.Label();
             this.code16KEncodeingModePanel = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.code16KEncodingModeComboBox = new System.Windows.Forms.ComboBox();
@@ -144,15 +145,17 @@ namespace BarcodeDemo.Controls
             this.code16KRowsComboBox = new System.Windows.Forms.ComboBox();
             this.barcodes2DTabPage = new System.Windows.Forms.TabPage();
             this.twoDimensionalBarcodeComboBox = new System.Windows.Forms.ComboBox();
+            this.microQrSettingsPanel = new System.Windows.Forms.Panel();
+            this.microQRDataMaskPatternComboBox = new System.Windows.Forms.ComboBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.qrSettingsPanel = new System.Windows.Forms.Panel();
+            this.qrDataMaskPatternComboBox = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
             this.microPDF417SettingsPanel = new System.Windows.Forms.Panel();
             this.pdf417SettingsPanel = new System.Windows.Forms.Panel();
             this.aztecSettingsPanel = new System.Windows.Forms.Panel();
             this.maxiCodeSettingsPanel = new System.Windows.Forms.Panel();
             this.dataMatrixSettingsPanel = new System.Windows.Forms.Panel();
-            this.microQrSettingsPanel = new System.Windows.Forms.Panel();
-            this.qrSettingsPanel = new System.Windows.Forms.Panel();
-            this.encodingInfoComboBox = new System.Windows.Forms.ComboBox();
-            this.encodingInfoCheckBox = new System.Windows.Forms.CheckBox();
             this.hanXinCodeSettingsPanel = new System.Windows.Forms.Panel();
             this.hanXinCodeECCLevelComboBox = new System.Windows.Forms.ComboBox();
             this.hanXinCodeEncodingModeComboBox = new System.Windows.Forms.ComboBox();
@@ -160,6 +163,8 @@ namespace BarcodeDemo.Controls
             this.label18 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
+            this.encodingInfoComboBox = new System.Windows.Forms.ComboBox();
+            this.encodingInfoCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.valueFontSizeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueGapNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minWidthNumericUpDown)).BeginInit();
@@ -192,13 +197,13 @@ namespace BarcodeDemo.Controls
             this.code16KEncodeingModePanel.SuspendLayout();
             this.code16KRowsPanel.SuspendLayout();
             this.barcodes2DTabPage.SuspendLayout();
+            this.microQrSettingsPanel.SuspendLayout();
+            this.qrSettingsPanel.SuspendLayout();
             this.microPDF417SettingsPanel.SuspendLayout();
             this.pdf417SettingsPanel.SuspendLayout();
             this.aztecSettingsPanel.SuspendLayout();
             this.maxiCodeSettingsPanel.SuspendLayout();
             this.dataMatrixSettingsPanel.SuspendLayout();
-            this.microQrSettingsPanel.SuspendLayout();
-            this.qrSettingsPanel.SuspendLayout();
             this.hanXinCodeSettingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -393,7 +398,7 @@ namespace BarcodeDemo.Controls
             0,
             0});
             this.minWidthNumericUpDown.Name = "minWidthNumericUpDown";
-            this.minWidthNumericUpDown.Size = new System.Drawing.Size(73, 20);
+            this.minWidthNumericUpDown.Size = new System.Drawing.Size(118, 20);
             this.minWidthNumericUpDown.TabIndex = 21;
             this.minWidthNumericUpDown.Value = new decimal(new int[] {
             3,
@@ -401,17 +406,6 @@ namespace BarcodeDemo.Controls
             0,
             0});
             this.minWidthNumericUpDown.ValueChanged += new System.EventHandler(this.minWidthNumericUpDown_ValueChanged);
-            // 
-            // setWidthButton
-            // 
-            this.setWidthButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setWidthButton.Location = new System.Drawing.Point(183, 0);
-            this.setWidthButton.Name = "setWidthButton";
-            this.setWidthButton.Size = new System.Drawing.Size(70, 22);
-            this.setWidthButton.TabIndex = 22;
-            this.setWidthButton.Text = "Width...";
-            this.setWidthButton.UseVisualStyleBackColor = true;
-            this.setWidthButton.Click += new System.EventHandler(this.setWidthButton_Click);
             // 
             // label10
             // 
@@ -447,7 +441,7 @@ namespace BarcodeDemo.Controls
             0,
             0});
             this.paddingNumericUpDown.Name = "paddingNumericUpDown";
-            this.paddingNumericUpDown.Size = new System.Drawing.Size(152, 20);
+            this.paddingNumericUpDown.Size = new System.Drawing.Size(50, 20);
             this.paddingNumericUpDown.TabIndex = 25;
             this.paddingNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -878,9 +872,9 @@ namespace BarcodeDemo.Controls
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(2, 37);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(62, 13);
+            this.label28.Size = new System.Drawing.Size(114, 13);
             this.label28.TabIndex = 31;
-            this.label28.Text = "Symbol size";
+            this.label28.Text = "Symbol model and size";
             // 
             // label29
             // 
@@ -1362,17 +1356,6 @@ namespace BarcodeDemo.Controls
             this.label9.TabIndex = 31;
             this.label9.Text = "A/D multiplier (x0.1)";
             // 
-            // linearBarcodeHeightButton
-            // 
-            this.linearBarcodeHeightButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linearBarcodeHeightButton.Location = new System.Drawing.Point(172, 30);
-            this.linearBarcodeHeightButton.Name = "linearBarcodeHeightButton";
-            this.linearBarcodeHeightButton.Size = new System.Drawing.Size(73, 23);
-            this.linearBarcodeHeightButton.TabIndex = 29;
-            this.linearBarcodeHeightButton.Text = "Height...";
-            this.linearBarcodeHeightButton.UseVisualStyleBackColor = true;
-            this.linearBarcodeHeightButton.Click += new System.EventHandler(this.setHeightButton_Click);
-            // 
             // linearBarcodeTypeComboBox
             // 
             this.linearBarcodeTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1389,7 +1372,7 @@ namespace BarcodeDemo.Controls
             // 
             this.linearBarcodeHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.linearBarcodeHeight.Location = new System.Drawing.Point(102, 31);
+            this.linearBarcodeHeight.Location = new System.Drawing.Point(114, 31);
             this.linearBarcodeHeight.Maximum = new decimal(new int[] {
             4096,
             0,
@@ -1401,7 +1384,7 @@ namespace BarcodeDemo.Controls
             0,
             0});
             this.linearBarcodeHeight.Name = "linearBarcodeHeight";
-            this.linearBarcodeHeight.Size = new System.Drawing.Size(63, 20);
+            this.linearBarcodeHeight.Size = new System.Drawing.Size(108, 20);
             this.linearBarcodeHeight.TabIndex = 28;
             this.linearBarcodeHeight.Value = new decimal(new int[] {
             10,
@@ -1469,13 +1452,23 @@ namespace BarcodeDemo.Controls
             // 
             this.barcodeWidthPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.barcodeWidthPanel.Controls.Add(this.label44);
             this.barcodeWidthPanel.Controls.Add(this.label7);
             this.barcodeWidthPanel.Controls.Add(this.minWidthNumericUpDown);
-            this.barcodeWidthPanel.Controls.Add(this.setWidthButton);
             this.barcodeWidthPanel.Location = new System.Drawing.Point(7, 193);
             this.barcodeWidthPanel.Name = "barcodeWidthPanel";
             this.barcodeWidthPanel.Size = new System.Drawing.Size(255, 21);
             this.barcodeWidthPanel.TabIndex = 31;
+            // 
+            // label44
+            // 
+            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(228, 5);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(18, 13);
+            this.label44.TabIndex = 37;
+            this.label44.Text = "px";
             // 
             // subsetBarcodeValueButton
             // 
@@ -1492,6 +1485,7 @@ namespace BarcodeDemo.Controls
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.quietZoneButton);
             this.mainPanel.Controls.Add(this.barcodeGroupsTabControl);
             this.mainPanel.Controls.Add(this.encodingInfoComboBox);
             this.mainPanel.Controls.Add(this.encodingInfoCheckBox);
@@ -1525,6 +1519,17 @@ namespace BarcodeDemo.Controls
             this.mainPanel.Size = new System.Drawing.Size(265, 530);
             this.mainPanel.TabIndex = 34;
             // 
+            // quietZoneButton
+            // 
+            this.quietZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.quietZoneButton.Location = new System.Drawing.Point(167, 236);
+            this.quietZoneButton.Name = "quietZoneButton";
+            this.quietZoneButton.Size = new System.Drawing.Size(95, 22);
+            this.quietZoneButton.TabIndex = 37;
+            this.quietZoneButton.Text = "Quiet Zone...";
+            this.quietZoneButton.UseVisualStyleBackColor = true;
+            this.quietZoneButton.Click += new System.EventHandler(this.quietZoneButton_Click);
+            // 
             // barcodeGroupsTabControl
             // 
             this.barcodeGroupsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1541,6 +1546,7 @@ namespace BarcodeDemo.Controls
             // 
             // linearBarcodesTabPage
             // 
+            this.linearBarcodesTabPage.Controls.Add(this.label45);
             this.linearBarcodesTabPage.Controls.Add(this.code16KEncodeingModePanel);
             this.linearBarcodesTabPage.Controls.Add(this.rssExpandedStackedSegmentPerRowPanel);
             this.linearBarcodesTabPage.Controls.Add(this.code16KRowsPanel);
@@ -1551,7 +1557,6 @@ namespace BarcodeDemo.Controls
             this.linearBarcodesTabPage.Controls.Add(this.rssLinkageFlagPanel);
             this.linearBarcodesTabPage.Controls.Add(this.linearBarcodeTypeComboBox);
             this.linearBarcodesTabPage.Controls.Add(this.enableTelepenNumericModePanel);
-            this.linearBarcodesTabPage.Controls.Add(this.linearBarcodeHeightButton);
             this.linearBarcodesTabPage.Controls.Add(this.useOptionalCheckSumPanel);
             this.linearBarcodesTabPage.Controls.Add(this.postalADMiltiplierPanel);
             this.linearBarcodesTabPage.Controls.Add(this.australianPostCustomInfoPanel);
@@ -1564,6 +1569,16 @@ namespace BarcodeDemo.Controls
             this.linearBarcodesTabPage.TabIndex = 0;
             this.linearBarcodesTabPage.Text = "1D";
             this.linearBarcodesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label45
+            // 
+            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(227, 38);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(18, 13);
+            this.label45.TabIndex = 38;
+            this.label45.Text = "px";
             // 
             // code16KEncodeingModePanel
             // 
@@ -1632,7 +1647,6 @@ namespace BarcodeDemo.Controls
             // barcodes2DTabPage
             // 
             this.barcodes2DTabPage.Controls.Add(this.twoDimensionalBarcodeComboBox);
-            this.barcodes2DTabPage.Controls.Add(this.hanXinCodeSettingsPanel);
             this.barcodes2DTabPage.Controls.Add(this.microQrSettingsPanel);
             this.barcodes2DTabPage.Controls.Add(this.qrSettingsPanel);
             this.barcodes2DTabPage.Controls.Add(this.microPDF417SettingsPanel);
@@ -1640,6 +1654,7 @@ namespace BarcodeDemo.Controls
             this.barcodes2DTabPage.Controls.Add(this.aztecSettingsPanel);
             this.barcodes2DTabPage.Controls.Add(this.maxiCodeSettingsPanel);
             this.barcodes2DTabPage.Controls.Add(this.dataMatrixSettingsPanel);
+            this.barcodes2DTabPage.Controls.Add(this.hanXinCodeSettingsPanel);
             this.barcodes2DTabPage.Location = new System.Drawing.Point(4, 22);
             this.barcodes2DTabPage.Name = "barcodes2DTabPage";
             this.barcodes2DTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1659,6 +1674,86 @@ namespace BarcodeDemo.Controls
             this.twoDimensionalBarcodeComboBox.Size = new System.Drawing.Size(239, 21);
             this.twoDimensionalBarcodeComboBox.TabIndex = 29;
             this.twoDimensionalBarcodeComboBox.SelectedIndexChanged += new System.EventHandler(this.twoDimensionalBarcodeComboBox_SelectedIndexChanged);
+            // 
+            // microQrSettingsPanel
+            // 
+            this.microQrSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.microQrSettingsPanel.Controls.Add(this.microQRDataMaskPatternComboBox);
+            this.microQrSettingsPanel.Controls.Add(this.label43);
+            this.microQrSettingsPanel.Controls.Add(this.microQrECCLevelComboBox);
+            this.microQrSettingsPanel.Controls.Add(this.microQrEncodingModeComboBox);
+            this.microQrSettingsPanel.Controls.Add(this.microQrSymbolSizeComboBox);
+            this.microQrSettingsPanel.Controls.Add(this.label32);
+            this.microQrSettingsPanel.Controls.Add(this.label31);
+            this.microQrSettingsPanel.Controls.Add(this.label30);
+            this.microQrSettingsPanel.Location = new System.Drawing.Point(3, 31);
+            this.microQrSettingsPanel.Name = "microQrSettingsPanel";
+            this.microQrSettingsPanel.Size = new System.Drawing.Size(245, 180);
+            this.microQrSettingsPanel.TabIndex = 28;
+            this.microQrSettingsPanel.Visible = false;
+            // 
+            // microQRDataMaskPatternComboBox
+            // 
+            this.microQRDataMaskPatternComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.microQRDataMaskPatternComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.microQRDataMaskPatternComboBox.FormattingEnabled = true;
+            this.microQRDataMaskPatternComboBox.Location = new System.Drawing.Point(128, 88);
+            this.microQRDataMaskPatternComboBox.Name = "microQRDataMaskPatternComboBox";
+            this.microQRDataMaskPatternComboBox.Size = new System.Drawing.Size(114, 21);
+            this.microQRDataMaskPatternComboBox.TabIndex = 39;
+            this.microQRDataMaskPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.microQRDataMaskPatternComboBox_SelectedIndexChanged);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(3, 92);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(94, 13);
+            this.label43.TabIndex = 38;
+            this.label43.Text = "Data mask pattern";
+            // 
+            // qrSettingsPanel
+            // 
+            this.qrSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.qrSettingsPanel.Controls.Add(this.qrDataMaskPatternComboBox);
+            this.qrSettingsPanel.Controls.Add(this.label42);
+            this.qrSettingsPanel.Controls.Add(this.label29);
+            this.qrSettingsPanel.Controls.Add(this.qrECCLevelComboBox);
+            this.qrSettingsPanel.Controls.Add(this.label28);
+            this.qrSettingsPanel.Controls.Add(this.qrSymbolSizeComboBox);
+            this.qrSettingsPanel.Controls.Add(this.label27);
+            this.qrSettingsPanel.Controls.Add(this.qrEncodingModeComboBox);
+            this.qrSettingsPanel.Location = new System.Drawing.Point(4, 31);
+            this.qrSettingsPanel.Name = "qrSettingsPanel";
+            this.qrSettingsPanel.Size = new System.Drawing.Size(245, 183);
+            this.qrSettingsPanel.TabIndex = 32;
+            this.qrSettingsPanel.Visible = false;
+            // 
+            // qrDataMaskPatternComboBox
+            // 
+            this.qrDataMaskPatternComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.qrDataMaskPatternComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qrDataMaskPatternComboBox.FormattingEnabled = true;
+            this.qrDataMaskPatternComboBox.Location = new System.Drawing.Point(127, 88);
+            this.qrDataMaskPatternComboBox.Name = "qrDataMaskPatternComboBox";
+            this.qrDataMaskPatternComboBox.Size = new System.Drawing.Size(114, 21);
+            this.qrDataMaskPatternComboBox.TabIndex = 37;
+            this.qrDataMaskPatternComboBox.SelectedIndexChanged += new System.EventHandler(this.qrDataMaskPatternComboBox_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(2, 92);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(94, 13);
+            this.label42.TabIndex = 36;
+            this.label42.Text = "Data mask pattern";
             // 
             // microPDF417SettingsPanel
             // 
@@ -1750,67 +1845,6 @@ namespace BarcodeDemo.Controls
             this.dataMatrixSettingsPanel.TabIndex = 24;
             this.dataMatrixSettingsPanel.Visible = false;
             // 
-            // microQrSettingsPanel
-            // 
-            this.microQrSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.microQrSettingsPanel.Controls.Add(this.microQrECCLevelComboBox);
-            this.microQrSettingsPanel.Controls.Add(this.microQrEncodingModeComboBox);
-            this.microQrSettingsPanel.Controls.Add(this.microQrSymbolSizeComboBox);
-            this.microQrSettingsPanel.Controls.Add(this.label32);
-            this.microQrSettingsPanel.Controls.Add(this.label31);
-            this.microQrSettingsPanel.Controls.Add(this.label30);
-            this.microQrSettingsPanel.Location = new System.Drawing.Point(3, 31);
-            this.microQrSettingsPanel.Name = "microQrSettingsPanel";
-            this.microQrSettingsPanel.Size = new System.Drawing.Size(245, 180);
-            this.microQrSettingsPanel.TabIndex = 28;
-            this.microQrSettingsPanel.Visible = false;
-            // 
-            // qrSettingsPanel
-            // 
-            this.qrSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.qrSettingsPanel.Controls.Add(this.label29);
-            this.qrSettingsPanel.Controls.Add(this.qrECCLevelComboBox);
-            this.qrSettingsPanel.Controls.Add(this.label28);
-            this.qrSettingsPanel.Controls.Add(this.qrSymbolSizeComboBox);
-            this.qrSettingsPanel.Controls.Add(this.label27);
-            this.qrSettingsPanel.Controls.Add(this.qrEncodingModeComboBox);
-            this.qrSettingsPanel.Location = new System.Drawing.Point(4, 31);
-            this.qrSettingsPanel.Name = "qrSettingsPanel";
-            this.qrSettingsPanel.Size = new System.Drawing.Size(245, 183);
-            this.qrSettingsPanel.TabIndex = 32;
-            this.qrSettingsPanel.Visible = false;
-            // 
-            // encodingInfoComboBox
-            // 
-            this.encodingInfoComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.encodingInfoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.encodingInfoComboBox.Enabled = false;
-            this.encodingInfoComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.encodingInfoComboBox.FormattingEnabled = true;
-            this.encodingInfoComboBox.Location = new System.Drawing.Point(111, 26);
-            this.encodingInfoComboBox.Name = "encodingInfoComboBox";
-            this.encodingInfoComboBox.Size = new System.Drawing.Size(152, 21);
-            this.encodingInfoComboBox.TabIndex = 35;
-            this.encodingInfoComboBox.SelectedIndexChanged += new System.EventHandler(this.encodingInfoComboBox_SelectedIndexChanged);
-            // 
-            // encodingInfoCheckBox
-            // 
-            this.encodingInfoCheckBox.AutoSize = true;
-            this.encodingInfoCheckBox.Enabled = false;
-            this.encodingInfoCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
-            this.encodingInfoCheckBox.Location = new System.Drawing.Point(7, 29);
-            this.encodingInfoCheckBox.Name = "encodingInfoCheckBox";
-            this.encodingInfoCheckBox.Size = new System.Drawing.Size(91, 17);
-            this.encodingInfoCheckBox.TabIndex = 34;
-            this.encodingInfoCheckBox.Text = "Encoding info";
-            this.encodingInfoCheckBox.UseVisualStyleBackColor = true;
-            this.encodingInfoCheckBox.CheckedChanged += new System.EventHandler(this.encodingInfoCheckBox_CheckedChanged);
-            // 
             // hanXinCodeSettingsPanel
             // 
             this.hanXinCodeSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1840,14 +1874,14 @@ namespace BarcodeDemo.Controls
             this.hanXinCodeECCLevelComboBox.TabIndex = 23;
             this.hanXinCodeECCLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.hanXinCodeECCLevelComboBox_SelectedIndexChanged);
             // 
-            // hanXinCodeEncodeingModeComboBox
+            // hanXinCodeEncodingModeComboBox
             // 
             this.hanXinCodeEncodingModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.hanXinCodeEncodingModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hanXinCodeEncodingModeComboBox.FormattingEnabled = true;
             this.hanXinCodeEncodingModeComboBox.Location = new System.Drawing.Point(128, 6);
-            this.hanXinCodeEncodingModeComboBox.Name = "hanXinCodeEncodeingModeComboBox";
+            this.hanXinCodeEncodingModeComboBox.Name = "hanXinCodeEncodingModeComboBox";
             this.hanXinCodeEncodingModeComboBox.Size = new System.Drawing.Size(114, 21);
             this.hanXinCodeEncodingModeComboBox.TabIndex = 21;
             this.hanXinCodeEncodingModeComboBox.SelectedIndexChanged += new System.EventHandler(this.hanXinCodeEncodingModeComboBox_SelectedIndexChanged);
@@ -1890,6 +1924,33 @@ namespace BarcodeDemo.Controls
             this.label41.Size = new System.Drawing.Size(104, 13);
             this.label41.TabIndex = 20;
             this.label41.Text = "Error correction level";
+            // 
+            // encodingInfoComboBox
+            // 
+            this.encodingInfoComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.encodingInfoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.encodingInfoComboBox.Enabled = false;
+            this.encodingInfoComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.encodingInfoComboBox.FormattingEnabled = true;
+            this.encodingInfoComboBox.Location = new System.Drawing.Point(111, 26);
+            this.encodingInfoComboBox.Name = "encodingInfoComboBox";
+            this.encodingInfoComboBox.Size = new System.Drawing.Size(152, 21);
+            this.encodingInfoComboBox.TabIndex = 35;
+            this.encodingInfoComboBox.SelectedIndexChanged += new System.EventHandler(this.encodingInfoComboBox_SelectedIndexChanged);
+            // 
+            // encodingInfoCheckBox
+            // 
+            this.encodingInfoCheckBox.AutoSize = true;
+            this.encodingInfoCheckBox.Enabled = false;
+            this.encodingInfoCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.encodingInfoCheckBox.Location = new System.Drawing.Point(7, 29);
+            this.encodingInfoCheckBox.Name = "encodingInfoCheckBox";
+            this.encodingInfoCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.encodingInfoCheckBox.TabIndex = 34;
+            this.encodingInfoCheckBox.Text = "Encoding info";
+            this.encodingInfoCheckBox.UseVisualStyleBackColor = true;
+            this.encodingInfoCheckBox.CheckedChanged += new System.EventHandler(this.encodingInfoCheckBox_CheckedChanged);
             // 
             // BarcodeWriterSettingsControl
             // 
@@ -1938,6 +1999,10 @@ namespace BarcodeDemo.Controls
             this.code16KEncodeingModePanel.ResumeLayout(false);
             this.code16KRowsPanel.ResumeLayout(false);
             this.barcodes2DTabPage.ResumeLayout(false);
+            this.microQrSettingsPanel.ResumeLayout(false);
+            this.microQrSettingsPanel.PerformLayout();
+            this.qrSettingsPanel.ResumeLayout(false);
+            this.qrSettingsPanel.PerformLayout();
             this.microPDF417SettingsPanel.ResumeLayout(false);
             this.microPDF417SettingsPanel.PerformLayout();
             this.pdf417SettingsPanel.ResumeLayout(false);
@@ -1948,10 +2013,6 @@ namespace BarcodeDemo.Controls
             this.maxiCodeSettingsPanel.PerformLayout();
             this.dataMatrixSettingsPanel.ResumeLayout(false);
             this.dataMatrixSettingsPanel.PerformLayout();
-            this.microQrSettingsPanel.ResumeLayout(false);
-            this.microQrSettingsPanel.PerformLayout();
-            this.qrSettingsPanel.ResumeLayout(false);
-            this.qrSettingsPanel.PerformLayout();
             this.hanXinCodeSettingsPanel.ResumeLayout(false);
             this.hanXinCodeSettingsPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -1976,13 +2037,11 @@ namespace BarcodeDemo.Controls
         private System.Windows.Forms.NumericUpDown valueFontSizeNumericUpDown;
         private System.Windows.Forms.NumericUpDown valueGapNumericUpDown;
         private System.Windows.Forms.NumericUpDown minWidthNumericUpDown;
-        private System.Windows.Forms.Button setWidthButton;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown paddingNumericUpDown;
         private System.Windows.Forms.NumericUpDown widthAdjustNumericUpDown;
         private System.Windows.Forms.ComboBox code128ModeComboBox;
-        private System.Windows.Forms.Button linearBarcodeHeightButton;
         private System.Windows.Forms.ComboBox linearBarcodeTypeComboBox;
         private System.Windows.Forms.NumericUpDown linearBarcodeHeight;
         private System.Windows.Forms.Label label17;
@@ -2092,5 +2151,12 @@ namespace BarcodeDemo.Controls
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ComboBox qrDataMaskPatternComboBox;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.ComboBox microQRDataMaskPatternComboBox;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button quietZoneButton;
     }
 }

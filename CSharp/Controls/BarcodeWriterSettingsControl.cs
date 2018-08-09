@@ -13,21 +13,27 @@ using Vintasoft.Barcode.SymbologySubsets.RoyalMailMailmark;
 
 namespace BarcodeDemo.Controls
 {
+    /// <summary>
+    /// A control that allows to edit setting of barcode writer.
+    /// </summary>
     public partial class BarcodeWriterSettingsControl : UserControl
     {
 
         #region Fields
 
-        float _lastWidth = 6;
-        UnitOfMeasure _lastWidthUnits = UnitOfMeasure.Centimeters;
-
-        float _lastHeight = 3;
-        UnitOfMeasure _lastHeightUnits = UnitOfMeasure.Centimeters;
-
+        /// <summary>
+        /// GS1 application identifier values.
+        /// </summary>
         GS1ApplicationIdentifierValue[] _GS1ApplicationIdentifierValues;
 
+        /// <summary>
+        /// The Mailmark CMDM value item.
+        /// </summary>
         MailmarkCmdmValueItem _mailmarkCmdmValueItem = new MailmarkCmdmValueItem();
 
+        /// <summary>
+        /// The PPN barcode value.
+        /// </summary>
         PpnBarcodeValue _ppnBarcodeValue = new PpnBarcodeValue();
 
         #endregion
@@ -36,6 +42,9 @@ namespace BarcodeDemo.Controls
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BarcodeWriterSettingsControl"/> class.
+        /// </summary>
         public BarcodeWriterSettingsControl()
         {
             InitializeComponent();
@@ -91,6 +100,7 @@ namespace BarcodeDemo.Controls
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ISSNPlus2);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ISSNPlus5);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.Interleaved2of5);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.Interleaved2of5ChecksumISO16390);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.OPC);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.DeutschePostIdentcode);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.DeutschePostLeitcode);
@@ -204,7 +214,12 @@ namespace BarcodeDemo.Controls
             qrSymbolSizeComboBox.Items.Add(QRSymbolVersion.Undefined);
             for (int i = 1; i <= 40; i++)
                 qrSymbolSizeComboBox.Items.Add((QRSymbolVersion)i);
+            for (int i = 101; i <= 114; i++)
+                qrSymbolSizeComboBox.Items.Add((QRSymbolVersion)i);
             AddEnumValues(qrECCLevelComboBox, typeof(QRErrorCorrectionLevel));
+            qrDataMaskPatternComboBox.Items.Add("Auto");
+            for (int i = 0; i < 8; i++)
+                qrDataMaskPatternComboBox.Items.Add(i);
 
 
             // Micro QR Code
@@ -217,6 +232,9 @@ namespace BarcodeDemo.Controls
             microQrECCLevelComboBox.Items.Add(QRErrorCorrectionLevel.L);
             microQrECCLevelComboBox.Items.Add(QRErrorCorrectionLevel.M);
             microQrECCLevelComboBox.Items.Add(QRErrorCorrectionLevel.Q);
+            microQRDataMaskPatternComboBox.Items.Add("Auto");
+            for (int i = 0; i < 4; i++)
+                microQRDataMaskPatternComboBox.Items.Add(i);
 
             // MaxiCode
             maxiCodeEncodingModeComboBox.Items.Add(MaxiCodeEncodingMode.Mode2);
@@ -292,7 +310,7 @@ namespace BarcodeDemo.Controls
             }
         }
 
-        private WriterSettings _barcodeWriterSettings = null;
+        private WriterSettings _barcodeWriterSettings = new WriterSettings();
         /// <summary>
         /// Gest or sets a writer settings.
         /// </summary>
@@ -344,6 +362,10 @@ namespace BarcodeDemo.Controls
                         qrEncodingModeComboBox.SelectedItem = value.QREncodingMode;
                         qrSymbolSizeComboBox.SelectedItem = value.QRSymbol;
                         qrECCLevelComboBox.SelectedItem = value.QRErrorCorrectionLevel;
+                        if (value.QRMaskPattern == -1)
+                            qrDataMaskPatternComboBox.SelectedIndex = 0;
+                        else
+                            qrDataMaskPatternComboBox.SelectedItem = value.QRMaskPattern;
                         microQrEncodingModeComboBox.SelectedItem = value.QREncodingMode;
                         microQrSymbolSizeComboBox.SelectedItem = value.QRSymbol;
                         microQrECCLevelComboBox.SelectedItem = value.QRErrorCorrectionLevel;
@@ -358,6 +380,10 @@ namespace BarcodeDemo.Controls
                         microPDF417EncodingModeComboBox.SelectedItem = value.MicroPDF417EncodingMode;
                         microPDF417SymbolSizeComboBox.SelectedItem = value.MicroPDF417Symbol;
                         microPED417RowHeightNumericUpDown.Value = value.MicroPDF417RowHeight;
+                        if (value.QRMaskPattern == -1)
+                            microQRDataMaskPatternComboBox.SelectedIndex = 0;
+                        else
+                            microQRDataMaskPatternComboBox.SelectedItem = value.QRMaskPattern;
                         rss14StackedOmni.Checked = value.RSS14StackedOmnidirectional;
                         rssExpandedStackedSegmentPerRow.SelectedItem = value.RSSExpandedStackedSegmentPerRow;
                         rssLinkageFlag.Checked = value.RSSLinkageFlag;
@@ -416,7 +442,6 @@ namespace BarcodeDemo.Controls
                 _canChangeBarcodeSize = value;
                 barcodeWidthPanel.Visible = value;
                 linearBarcodeHeight.Visible = value;
-                linearBarcodeHeightButton.Visible = value;
                 linearBarcodeHeightLabel.Visible = value;
             }
         }
@@ -440,6 +465,9 @@ namespace BarcodeDemo.Controls
 
         #region INTERNAL
 
+        /// <summary>
+        /// Updates the barcode writer settings.
+        /// </summary>
         internal void UpdateBarcodeWriterSettings()
         {
             if (barcodeWidthPanel.Visible)
@@ -484,6 +512,15 @@ namespace BarcodeDemo.Controls
         {
             if (barcodeWidthPanel.Visible)
                 BarcodeWriterSettings.MinWidth = (int)minWidthNumericUpDown.Value;
+        }
+
+        private void quietZoneButton_Click(object sender, EventArgs e)
+        {
+            using (QuietZoneEditorForm form = new QuietZoneEditorForm())
+            {
+                form.Settings = BarcodeWriterSettings;
+                form.ShowDialog();
+            }
         }
 
         private void paddingNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -741,37 +778,6 @@ namespace BarcodeDemo.Controls
                     (float)valueFontSizeNumericUpDown.Value);
         }
 
-        private void setHeightButton_Click(object sender, EventArgs e)
-        {
-            GetSizeForm getSize = new GetSizeForm("Height", _lastHeight, (int)BarcodeWriterSettings.Resolution, _lastHeightUnits);
-            if (getSize.ShowDialog() == DialogResult.OK)
-            {
-
-                BarcodeWriterSettings.BeginInit();
-                BarcodeWriterSettings.Resolution = getSize.Resolution;
-                BarcodeWriterSettings.SetHeight(getSize.Value, getSize.Units);
-                BarcodeWriterSettings.EndInit();
-
-                linearBarcodeHeight.Value = Math.Max(BarcodeWriterSettings.Height, linearBarcodeHeight.Minimum);
-                _lastHeight = getSize.Value;
-                _lastHeightUnits = getSize.Units;
-            }
-        }
-
-        private void setWidthButton_Click(object sender, EventArgs e)
-        {
-            GetSizeForm getSize = new GetSizeForm("Width", _lastWidth, (int)BarcodeWriterSettings.Resolution, _lastWidthUnits);
-            if (getSize.ShowDialog() == DialogResult.OK)
-            {
-                BarcodeWriterSettings.BeginInit();
-                BarcodeWriterSettings.Resolution = getSize.Resolution;
-                BarcodeWriterSettings.SetWidth(getSize.Value, getSize.Units);
-                BarcodeWriterSettings.EndInit();
-
-                _lastWidth = getSize.Value;
-                _lastWidthUnits = getSize.Units;
-            }
-        }
 
         private void barcodeGroupsTabPages_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -997,9 +1003,17 @@ namespace BarcodeDemo.Controls
                         break;
                     case BarcodeType.QR:
                         qrSettingsPanel.Visible = true;
+                        if (qrDataMaskPatternComboBox.SelectedIndex == 0)
+                            BarcodeWriterSettings.QRMaskPattern = -1;
+                        else
+                            BarcodeWriterSettings.QRMaskPattern = (int)qrDataMaskPatternComboBox.SelectedItem;
                         break;
                     case BarcodeType.MicroQR:
                         microQrSettingsPanel.Visible = true;
+                        if (microQRDataMaskPatternComboBox.SelectedIndex == 0)
+                            BarcodeWriterSettings.QRMaskPattern = -1;
+                        else
+                            BarcodeWriterSettings.QRMaskPattern = (int)microQRDataMaskPatternComboBox.SelectedItem;
                         break;
                     case BarcodeType.PDF417:
                         pdf417SettingsPanel.Visible = true;
@@ -1154,7 +1168,7 @@ namespace BarcodeDemo.Controls
 
         private void datamatrixSymbolSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (BarcodeWriterSettings == null)
+            if (datamatrixSymbolSizeComboBox.SelectedItem == null)
                 return;
             DataMatrixSymbolType oldValue = BarcodeWriterSettings.DataMatrixSymbol;
             try
@@ -1208,10 +1222,32 @@ namespace BarcodeDemo.Controls
             BarcodeWriterSettings.QRErrorCorrectionLevel = (QRErrorCorrectionLevel)qrECCLevelComboBox.SelectedItem;
         }
 
+        private void qrDataMaskPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (qrDataMaskPatternComboBox.SelectedItem != null)
+            {
+                if (qrDataMaskPatternComboBox.SelectedIndex == 0)
+                    BarcodeWriterSettings.QRMaskPattern = -1;
+                else
+                    BarcodeWriterSettings.QRMaskPattern = (int)qrDataMaskPatternComboBox.SelectedItem;
+            }
+        }
+
         #endregion
 
 
         #region MicroQR
+
+        private void microQRDataMaskPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (microQRDataMaskPatternComboBox.SelectedItem != null)
+            {
+                if (microQRDataMaskPatternComboBox.SelectedIndex == 0)
+                    BarcodeWriterSettings.QRMaskPattern = -1;
+                else
+                    BarcodeWriterSettings.QRMaskPattern = (int)microQRDataMaskPatternComboBox.SelectedItem;
+            }
+        }
 
         private void microQrEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {

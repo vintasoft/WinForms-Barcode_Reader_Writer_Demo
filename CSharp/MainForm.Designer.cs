@@ -71,7 +71,6 @@ namespace BarcodeDemo
             this.readerTools = new System.Windows.Forms.Panel();
             this.expectedBarcodesSlaveEditor = new BarcodeDemo.ParameterSlaveEditorControl();
             this.scanIntervalSlaveEditor = new BarcodeDemo.ParameterSlaveEditorControl();
-            this.readerErodeCheckBox = new System.Windows.Forms.CheckBox();
             this.showProgressCheckBox = new System.Windows.Forms.CheckBox();
             this.showImageProcessingCheckBox = new System.Windows.Forms.CheckBox();
             this.automaticRecognitionCheckBox = new System.Windows.Forms.CheckBox();
@@ -80,8 +79,6 @@ namespace BarcodeDemo
             this.zoomImageCheckBox = new System.Windows.Forms.CheckBox();
             this.highThresholdGroupBox = new System.Windows.Forms.GroupBox();
             this.thresholdMaxTrackBar = new System.Windows.Forms.TrackBar();
-            this.removePeasCheckBox = new System.Windows.Forms.CheckBox();
-            this.invertColorsCheckBox = new System.Windows.Forms.CheckBox();
             this.readBarcodesButton = new System.Windows.Forms.Button();
             this.thresholdGroupBox = new System.Windows.Forms.GroupBox();
             this.thresholdMinTrackBar = new System.Windows.Forms.TrackBar();
@@ -93,17 +90,27 @@ namespace BarcodeDemo
             this.thresholdIterationsTrackBar = new System.Windows.Forms.TrackBar();
             this.thresholdMethodIterationRadioButton = new System.Windows.Forms.RadioButton();
             this.thresholdMethodManualRadioButton = new System.Windows.Forms.RadioButton();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveImageFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSVGImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.setImageSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetImageSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.barcodeDesignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetBarcodeDesignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSvgFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -394,7 +401,7 @@ namespace BarcodeDemo
             this.demoVersionRestrictionsGroupBox.Controls.Add(this.unregistredRestrictionsLabel);
             this.demoVersionRestrictionsGroupBox.Location = new System.Drawing.Point(525, 100);
             this.demoVersionRestrictionsGroupBox.Name = "demoVersionRestrictionsGroupBox";
-            this.demoVersionRestrictionsGroupBox.Size = new System.Drawing.Size(240, 67);
+            this.demoVersionRestrictionsGroupBox.Size = new System.Drawing.Size(237, 67);
             this.demoVersionRestrictionsGroupBox.TabIndex = 28;
             this.demoVersionRestrictionsGroupBox.TabStop = false;
             this.demoVersionRestrictionsGroupBox.Text = "Unregistered version restrictions";
@@ -407,7 +414,7 @@ namespace BarcodeDemo
             this.unregistredRestrictionsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.unregistredRestrictionsLabel.Location = new System.Drawing.Point(3, 16);
             this.unregistredRestrictionsLabel.Name = "unregistredRestrictionsLabel";
-            this.unregistredRestrictionsLabel.Size = new System.Drawing.Size(234, 48);
+            this.unregistredRestrictionsLabel.Size = new System.Drawing.Size(231, 48);
             this.unregistredRestrictionsLabel.TabIndex = 29;
             this.unregistredRestrictionsLabel.Text = "Barcode value in evaluation version will be replaced to the \"*DEMO*\" string for Q" +
                 "R, RSS(GS1) and Intelligent Mail barcodes.";
@@ -531,7 +538,7 @@ namespace BarcodeDemo
             // clearWriterImageButton
             // 
             this.clearWriterImageButton.Enabled = false;
-            this.clearWriterImageButton.Location = new System.Drawing.Point(2, 113);
+            this.clearWriterImageButton.Location = new System.Drawing.Point(2, 112);
             this.clearWriterImageButton.Name = "clearWriterImageButton";
             this.clearWriterImageButton.Size = new System.Drawing.Size(167, 29);
             this.clearWriterImageButton.TabIndex = 4;
@@ -542,9 +549,9 @@ namespace BarcodeDemo
             // saveWriterImageButton
             // 
             this.saveWriterImageButton.Enabled = false;
-            this.saveWriterImageButton.Location = new System.Drawing.Point(2, 78);
+            this.saveWriterImageButton.Location = new System.Drawing.Point(2, 77);
             this.saveWriterImageButton.Name = "saveWriterImageButton";
-            this.saveWriterImageButton.Size = new System.Drawing.Size(168, 29);
+            this.saveWriterImageButton.Size = new System.Drawing.Size(167, 29);
             this.saveWriterImageButton.TabIndex = 2;
             this.saveWriterImageButton.Text = "Save as...";
             this.saveWriterImageButton.UseVisualStyleBackColor = true;
@@ -553,7 +560,7 @@ namespace BarcodeDemo
             // readBarcodeFromWriterImageButton
             // 
             this.readBarcodeFromWriterImageButton.Enabled = false;
-            this.readBarcodeFromWriterImageButton.Location = new System.Drawing.Point(2, 42);
+            this.readBarcodeFromWriterImageButton.Location = new System.Drawing.Point(2, 41);
             this.readBarcodeFromWriterImageButton.Name = "readBarcodeFromWriterImageButton";
             this.readBarcodeFromWriterImageButton.Size = new System.Drawing.Size(167, 30);
             this.readBarcodeFromWriterImageButton.TabIndex = 1;
@@ -586,15 +593,12 @@ namespace BarcodeDemo
             // 
             this.readerTools.Controls.Add(this.expectedBarcodesSlaveEditor);
             this.readerTools.Controls.Add(this.scanIntervalSlaveEditor);
-            this.readerTools.Controls.Add(this.readerErodeCheckBox);
             this.readerTools.Controls.Add(this.showProgressCheckBox);
             this.readerTools.Controls.Add(this.showImageProcessingCheckBox);
             this.readerTools.Controls.Add(this.automaticRecognitionCheckBox);
             this.readerTools.Controls.Add(this.fileListGroupBox);
             this.readerTools.Controls.Add(this.zoomImageCheckBox);
             this.readerTools.Controls.Add(this.highThresholdGroupBox);
-            this.readerTools.Controls.Add(this.removePeasCheckBox);
-            this.readerTools.Controls.Add(this.invertColorsCheckBox);
             this.readerTools.Controls.Add(this.readBarcodesButton);
             this.readerTools.Controls.Add(this.thresholdGroupBox);
             this.readerTools.Controls.Add(this.progressGroupBox);
@@ -630,16 +634,6 @@ namespace BarcodeDemo
             this.scanIntervalSlaveEditor.TickFrequency = 1;
             this.scanIntervalSlaveEditor.Title = "Scan interval";
             this.scanIntervalSlaveEditor.Value = 5;
-            // 
-            // readerErodeCheckBox
-            // 
-            this.readerErodeCheckBox.Location = new System.Drawing.Point(598, 120);
-            this.readerErodeCheckBox.Name = "readerErodeCheckBox";
-            this.readerErodeCheckBox.Size = new System.Drawing.Size(62, 17);
-            this.readerErodeCheckBox.TabIndex = 29;
-            this.readerErodeCheckBox.Text = "Erode";
-            this.readerErodeCheckBox.UseVisualStyleBackColor = true;
-            this.readerErodeCheckBox.CheckedChanged += new System.EventHandler(this.readerErode_CheckedChanged);
             // 
             // showProgressCheckBox
             // 
@@ -734,28 +728,6 @@ namespace BarcodeDemo
             this.thresholdMaxTrackBar.TickFrequency = 25;
             this.thresholdMaxTrackBar.Value = 150;
             this.thresholdMaxTrackBar.ValueChanged += new System.EventHandler(this.thresholdMaxTrackBar_ValueChanged);
-            // 
-            // removePeasCheckBox
-            // 
-            this.removePeasCheckBox.Checked = true;
-            this.removePeasCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.removePeasCheckBox.Location = new System.Drawing.Point(666, 113);
-            this.removePeasCheckBox.Name = "removePeasCheckBox";
-            this.removePeasCheckBox.Size = new System.Drawing.Size(106, 17);
-            this.removePeasCheckBox.TabIndex = 16;
-            this.removePeasCheckBox.Text = "Remove \"peas\"";
-            this.removePeasCheckBox.UseVisualStyleBackColor = true;
-            this.removePeasCheckBox.CheckedChanged += new System.EventHandler(this.removePeas_CheckedChanged);
-            // 
-            // invertColorsCheckBox
-            // 
-            this.invertColorsCheckBox.Location = new System.Drawing.Point(666, 129);
-            this.invertColorsCheckBox.Name = "invertColorsCheckBox";
-            this.invertColorsCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.invertColorsCheckBox.TabIndex = 14;
-            this.invertColorsCheckBox.Text = "Invert colors";
-            this.invertColorsCheckBox.UseVisualStyleBackColor = true;
-            this.invertColorsCheckBox.CheckedChanged += new System.EventHandler(this.invertColor_CheckedChanged);
             // 
             // readBarcodesButton
             // 
@@ -886,15 +858,16 @@ namespace BarcodeDemo
             this.thresholdMethodManualRadioButton.UseVisualStyleBackColor = true;
             this.thresholdMethodManualRadioButton.CheckedChanged += new System.EventHandler(this.thresholdMethodManualRadioButton_CheckedChanged);
             // 
-            // saveFileDialog1
+            // saveImageFileDialog
             // 
-            this.saveFileDialog1.DefaultExt = "png";
-            this.saveFileDialog1.Filter = "PNG (*.png)|*.png";
+            this.saveImageFileDialog.DefaultExt = "png";
+            this.saveImageFileDialog.Filter = "PNG (*.png)|*.png";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.writerToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -907,7 +880,7 @@ namespace BarcodeDemo
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.closeToolStripMenuItem,
-            this.toolStripSeparator1,
+            this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -929,10 +902,10 @@ namespace BarcodeDemo
             this.closeToolStripMenuItem.Text = "Close Image";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeImageButton_Click);
             // 
-            // toolStripSeparator1
+            // toolStripSeparator3
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(188, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -941,6 +914,74 @@ namespace BarcodeDemo
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // writerToolStripMenuItem
+            // 
+            this.writerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveImageAsToolStripMenuItem,
+            this.saveSVGImageAsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.setImageSizeToolStripMenuItem,
+            this.resetImageSizeToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.barcodeDesignToolStripMenuItem,
+            this.resetBarcodeDesignToolStripMenuItem});
+            this.writerToolStripMenuItem.Name = "writerToolStripMenuItem";
+            this.writerToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.writerToolStripMenuItem.Text = "Writer";
+            // 
+            // saveImageAsToolStripMenuItem
+            // 
+            this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
+            this.saveImageAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.saveImageAsToolStripMenuItem.Text = "Save As Image...";
+            this.saveImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveImageButton_Click);
+            // 
+            // saveSVGImageAsToolStripMenuItem
+            // 
+            this.saveSVGImageAsToolStripMenuItem.Name = "saveSVGImageAsToolStripMenuItem";
+            this.saveSVGImageAsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.saveSVGImageAsToolStripMenuItem.Text = "Save As SVG File...";
+            this.saveSVGImageAsToolStripMenuItem.Click += new System.EventHandler(this.saveSVGImageAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            // 
+            // setImageSizeToolStripMenuItem
+            // 
+            this.setImageSizeToolStripMenuItem.Name = "setImageSizeToolStripMenuItem";
+            this.setImageSizeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.setImageSizeToolStripMenuItem.Text = "Set Image Size...";
+            this.setImageSizeToolStripMenuItem.Click += new System.EventHandler(this.setWriterImageSizeButton_Click);
+            // 
+            // resetImageSizeToolStripMenuItem
+            // 
+            this.resetImageSizeToolStripMenuItem.Name = "resetImageSizeToolStripMenuItem";
+            this.resetImageSizeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.resetImageSizeToolStripMenuItem.Text = "Reset Image Size";
+            this.resetImageSizeToolStripMenuItem.Click += new System.EventHandler(this.resetBarcodeImageSizeButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            // 
+            // barcodeDesignToolStripMenuItem
+            // 
+            this.barcodeDesignToolStripMenuItem.Name = "barcodeDesignToolStripMenuItem";
+            this.barcodeDesignToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.barcodeDesignToolStripMenuItem.Text = "Barcode Design...";
+            this.barcodeDesignToolStripMenuItem.Click += new System.EventHandler(this.barcodeDesignToolStripMenuItem_Click);
+            // 
+            // resetBarcodeDesignToolStripMenuItem
+            // 
+            this.resetBarcodeDesignToolStripMenuItem.Name = "resetBarcodeDesignToolStripMenuItem";
+            this.resetBarcodeDesignToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.resetBarcodeDesignToolStripMenuItem.Text = "Reset Barcode Design";
+            this.resetBarcodeDesignToolStripMenuItem.Click += new System.EventHandler(this.resetBarcodeDesignToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -954,9 +995,14 @@ namespace BarcodeDemo
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // saveSvgFileDialog
+            // 
+            this.saveSvgFileDialog.DefaultExt = "svg";
+            this.saveSvgFileDialog.Filter = "SVG (*.svg)|*.svg";
             // 
             // MainForm
             // 
@@ -1029,8 +1075,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.Panel readerTools;
         private System.Windows.Forms.Button readBarcodesButton;
         private System.Windows.Forms.CheckBox showImageProcessingCheckBox;
-        private System.Windows.Forms.CheckBox invertColorsCheckBox;
-        private System.Windows.Forms.CheckBox removePeasCheckBox;
         internal System.Windows.Forms.GroupBox thresholdGroupBox;
         internal System.Windows.Forms.TrackBar thresholdMinTrackBar;
         private System.Windows.Forms.Panel panel6;
@@ -1065,7 +1109,7 @@ namespace BarcodeDemo
         private System.Windows.Forms.Button saveWriterImageButton;
         private System.Windows.Forms.Button readBarcodeFromWriterImageButton;
         private System.Windows.Forms.Button clearWriterImageButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveImageFileDialog;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.Label barcodeWriterErrorText;
@@ -1076,7 +1120,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.GroupBox progressGroupBox;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox showProgressCheckBox;
-        private System.Windows.Forms.CheckBox readerErodeCheckBox;
         private System.Windows.Forms.Button resetSettingsButton;
         private BarcodeTypesReaderSettingsControl readerBarcodeTypes;
         private AdvancedReaderSettingsControl advancedReaderSettings;
@@ -1092,12 +1135,22 @@ namespace BarcodeDemo
         private BarcodeDemo.Controls.BarcodeWriterSettingsControl barcodeWriterSettingsControl1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setImageSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetImageSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barcodeDesignToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem resetBarcodeDesignToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem saveSVGImageAsToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveSvgFileDialog;
     }
 }
 

@@ -7,13 +7,16 @@ using Vintasoft.Barcode;
 namespace BarcodeDemo
 {
     /// <summary>
-    /// Represents a base class of a parameter editor.
+    /// A base class for controls that allow to change a single parameter.
     /// </summary>
     public partial class ParameterEditorControl : ReaderSettingsEditorControl
     {
 
         #region Fields
 
+        /// <summary>
+        /// Indicates that value can be set.
+        /// </summary>
         bool _setValueEnabled = true;
 
         #endregion
@@ -22,6 +25,9 @@ namespace BarcodeDemo
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterEditorControl"/> class.
+        /// </summary>
         public ParameterEditorControl()
         {
             InitializeComponent();
@@ -114,11 +120,17 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Returns the value as a string.
+        /// </summary>
         public virtual string GetValueAsString()
         {
             return Value.ToString();
         }
 
+        /// <summary>
+        /// Called when value is changed.
+        /// </summary>
         protected virtual void OnValueChanged()
         {
             Value = valueTrackBar.Value;
@@ -127,12 +139,18 @@ namespace BarcodeDemo
                 ValueChanged(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Called when the barcode reader settings is changed.
+        /// </summary>
         protected override void OnBarcodeReaderSettingsChanged(EventArgs e)
         {
             base.OnBarcodeReaderSettingsChanged(e);
             OnValueChanged();
         }
 
+        /// <summary>
+        /// Updates the User Interface.
+        /// </summary>
         public override void UpdateUI()
         {
             _setValueEnabled = false;            
@@ -141,6 +159,9 @@ namespace BarcodeDemo
             _setValueEnabled = true;
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the valueTrackBar control.
+        /// </summary>
         private void valueTrackBar_ValueChanged(object sender, EventArgs e)
         {
             if (_setValueEnabled)
@@ -153,6 +174,9 @@ namespace BarcodeDemo
 
         #region Events
 
+        /// <summary>
+        /// Occurs when parameter value is changed.
+        /// </summary>
         public event EventHandler ValueChanged;
 
         #endregion

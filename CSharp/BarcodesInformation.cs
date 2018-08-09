@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Text;
+
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.SymbologySubsets;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// Provides information about supported barcodes.
+    /// </summary>
     public class BarcodesInformation
     {
 
@@ -16,7 +20,7 @@ namespace BarcodeDemo
         const string ExtendedASCIISymbols = ", extended ASCII symbols(128..255)";
         const string Digits = "digits 0-9";
         const string LettersAZ = "letters A-Z(upper case only)";
-        const string CheckSumOptional = NewLine + NewLine + "It has optional Checksum!";
+        const string CheckSumOptional = NewLine + NewLine + "It has optional checksum!";
         const string NoCheckSum = NewLine + NewLine + "There is no checksum!";
         const string MinMaxForPostal = NewLine + NewLine + "Barcode must contain min 5 and max 40 digits.";
 
@@ -28,12 +32,15 @@ namespace BarcodeDemo
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes the <see cref="BarcodesInformation"/> class.
+        /// </summary>
         static BarcodesInformation()
         {
             StringBuilder text = new StringBuilder();
 
             // Code128
-            text.Length = 0; 
+            text.Length = 0;
             text.Append("Code 128 symbology has been widely implemented in many applications where a relatively large amount of data must be encoded in a relatively small amount of space. It's a very effective, high-density barcode. Supported modes: A, B, C(auto detect).");
             text.Append(AllowableCharacters);
             text.Append(ASCIISymbols);
@@ -45,7 +52,7 @@ namespace BarcodeDemo
             text.Append(" 2. <FNC2> - FNC2 flag" + NewLine);
             text.Append(" 3. <FNC3> - FNC3 flag" + NewLine);
             text.Append(" 4. <FNC4> - FNC4 flag (shift to extended ASCII table)" + NewLine);
-            _info.Add(BarcodeType.Code128,  text.ToString());
+            _info.Add(BarcodeType.Code128, text.ToString());
 
             // GS1-128 
             text.Length = 0;
@@ -96,7 +103,7 @@ namespace BarcodeDemo
             // Code32
             text.Length = 0;
             text.Append("Code 32 (Italian Pharmacode, Codice 32 Pharmacode) is subset of Code 39 symbology, encodes 8 digits and one check digit.");
-            text.Append(AllowableCharacters); 
+            text.Append(AllowableCharacters);
             text.Append(Digits);
             _info.Add(BarcodeSymbologySubsets.Code32, text.ToString());
 
@@ -120,7 +127,7 @@ namespace BarcodeDemo
             text.Length = 0;
             text.Append("PZN (Pharmazentralnummer, Pharma-Zentral-Nummer, Code PZN, CodePZN, PZN7, PZN8) is subset of Code 39 symbology, used for distribution of pharmaceutical or health care products in Germany.");
             text.Append(AllowableCharacters);
-            text.Append("0..9"+NewLine);
+            text.Append("0..9" + NewLine);
             text.Append("Value must contain 6 (PZN7) or 7 (PZN8) digits.");
             _info.Add(BarcodeSymbologySubsets.PZN, text.ToString());
 
@@ -134,9 +141,9 @@ namespace BarcodeDemo
 
             // EAN13
             text.Length = 0;
-            text.Append("EAN-13 symbology, based upon the UPC-A standard."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
+            text.Append("EAN-13 symbology, based upon the UPC-A standard.");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
             text.Append(". Value must contain 12 digits.");
             _info.Add(BarcodeType.EAN13, text.ToString());
 
@@ -159,8 +166,8 @@ namespace BarcodeDemo
             // EAN8
             text.Length = 0;
             text.Append("EAN-8, based upon the UPC-A standard.");
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
             text.Append(". Value must contain 7 digits.");
             _info.Add(BarcodeType.EAN8, text.ToString());
 
@@ -251,8 +258,7 @@ namespace BarcodeDemo
             text.Append(Digits);
             text.Append(". Value must contain 13 (ISBN13) or 10 (ISBN10) digits and five digits add-on.");
             _info.Add(BarcodeSymbologySubsets.ISBNPlus5, text.ToString());
-
-
+            
             // ISMN
             text.Length = 0;
             text.Append("ISMN is subset of EAN13 symbology, encodes International Standard Music Number. For ISMN13 barcodes the first four digits must be 9790. ");
@@ -311,9 +317,9 @@ namespace BarcodeDemo
 
             // UPCA
             text.Length = 0;
-            text.Append("UPC-A symbology. "); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
+            text.Append("UPC-A symbology. ");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
             text.Append(". Value must contain 12 digits.");
             _info.Add(BarcodeType.UPCA, text.ToString());
 
@@ -335,10 +341,10 @@ namespace BarcodeDemo
 
             // UPCE
             text.Length = 0;
-            text.Append("UPC-E is a variation of UPC-A, UPC-E is more compact than UPC-A because \"extra\" zeros are eliminated."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append(". Value must contain 6, 10 or 12 digits.");            
+            text.Append("UPC-E is a variation of UPC-A, UPC-E is more compact than UPC-A because \"extra\" zeros are eliminated.");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(". Value must contain 6, 10 or 12 digits.");
             _info.Add(BarcodeType.UPCE, text.ToString());
 
             // UPCEPlus2
@@ -359,19 +365,19 @@ namespace BarcodeDemo
 
             // Code93
             text.Length = 0;
-            text.Append("Code 93 symbology was designed to complement and improve Code 39. "); 
-            text.Append(AllowableCharacters); 
-            text.Append(LettersAZ); 
-            text.Append(", "); 
-            text.Append(Digits); 
+            text.Append("Code 93 symbology was designed to complement and improve Code 39. ");
+            text.Append(AllowableCharacters);
+            text.Append(LettersAZ);
+            text.Append(", ");
+            text.Append(Digits);
             text.Append(", space, '-', '+', '.', '$', '/', '%'.");
-            _info.Add(BarcodeType.Code93, text.ToString()); 
+            _info.Add(BarcodeType.Code93, text.ToString());
 
             // Code11
             text.Length = 0;
-            text.Append("Code 11 symbology was developed as high-density numeric-only symbology. "); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
+            text.Append("Code 11 symbology was developed as high-density numeric-only symbology. ");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
             text.Append(" and dash symbol '-'.");
             _info.Add(BarcodeType.Code11, text.ToString());
 
@@ -384,9 +390,9 @@ namespace BarcodeDemo
 
             // Codabar
             text.Length = 0;
-            text.Append("Codabar was developed in 1972 by Pitney Biwes Inc."); 
-            text.Append(AllowableCharacters); text.Append(Digits); 
-            text.Append(", '-', '$', ':', '/', '.', '+'. Start/Stop characters: A,B,C,D."); 
+            text.Append("Codabar was developed in 1972 by Pitney Biwes Inc.");
+            text.Append(AllowableCharacters); text.Append(Digits);
+            text.Append(", '-', '$', ':', '/', '.', '+'. Start/Stop characters: A,B,C,D.");
             text.Append(NoCheckSum);
             _info.Add(BarcodeType.Codabar, text.ToString());
 
@@ -394,8 +400,8 @@ namespace BarcodeDemo
             text.Length = 0;
             text.Append("Standard 2 of 5 is a low-density numeric symbology developed in the 1960s.");
             text.Append(AllowableCharacters);
-            text.Append(Digits); 
-            text.Append("."); 
+            text.Append(Digits);
+            text.Append(".");
             text.Append(CheckSumOptional);
             _info.Add(BarcodeType.Standard2of5, text.ToString());
 
@@ -432,7 +438,6 @@ namespace BarcodeDemo
             text.Append("Value must contain 18 digits.");
             _info.Add(BarcodeSymbologySubsets.SwissPostParcel, text.ToString());
 
-
             // ITF-14 
             text.Length = 0;
             text.Append("ITF-14 is subset of Interleaved 2 of 5 symbology, encodes value in GS1 System data format with GTIN('01') application idetifier." + NewLine);
@@ -465,8 +470,8 @@ namespace BarcodeDemo
 
             // Telepen
             text.Length = 0;
-            text.Append("Telepen is a compact barcode symbology developed in 1972. Double density in numeric only mode."); 
-            text.Append(AllowableCharacters); 
+            text.Append("Telepen is a compact barcode symbology developed in 1972. Double density in numeric only mode.");
+            text.Append(AllowableCharacters);
             text.Append(ASCIISymbols);
             text.Append(".");
             _info.Add(BarcodeType.Telepen, text.ToString());
@@ -480,20 +485,20 @@ namespace BarcodeDemo
 
             // Pharmacode
             text.Length = 0;
-            text.Append("Pharmacode is a barcode standard, used in the pharmaceutical industry as a packing control system. Pharmacode can contains only a single integer from 16 to 131069.");
+            text.Append("Pharmacode is a barcode standard, used in the pharmaceutical industry as a packing control system. Pharmacode can contains only a single integer from 8 to 131069.");
             _info.Add(BarcodeType.Pharmacode, text.ToString());
 
             // AustralianPost
             text.Length = 0;
-            text.Append("Australian Post 4-State symbology."); 
-            text.Append(AllowableCharacters); 
+            text.Append("Australian Post 4-State symbology.");
+            text.Append(AllowableCharacters);
             text.Append(Digits);
             text.Append(".\n\nValue must contain at least 10 digits.\nFirst two digits can be 11, 87, 45, 92, 59, 62, 44.");
             _info.Add(BarcodeType.AustralianPost, text.ToString());
 
             // IntelligentMail
             text.Length = 0;
-            text.Append("Intelligent Mail postal symbology."); 
+            text.Append("Intelligent Mail postal symbology.");
             text.Append(AllowableCharacters);
             text.Append(Digits);
             text.Append(".\n\nValue must contain 20, 25, 29 or 31 digits. Second digit must be 0-4.");
@@ -501,30 +506,30 @@ namespace BarcodeDemo
 
             // Planet
             text.Length = 0;
-            text.Append("Planet postal symbology."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append("."); 
+            text.Append("Planet postal symbology.");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(".");
             text.Append(MinMaxForPostal);
             _info.Add(BarcodeType.Planet, text.ToString());
 
             // Postnet
             text.Length = 0;
-            text.Append("Postnet postal symbology."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append("."); 
+            text.Append("Postnet postal symbology.");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(".");
             text.Append(MinMaxForPostal);
             _info.Add(BarcodeType.Postnet, text.ToString());
 
             // RoyalMail
             text.Length = 0;
-            text.Append("RoyalMail postal symbology."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append(", "); 
-            text.Append(LettersAZ); 
-            text.Append("."); 
+            text.Append("RoyalMail postal symbology.");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(", ");
+            text.Append(LettersAZ);
+            text.Append(".");
             text.Append(MinMaxForPostal);
             _info.Add(BarcodeType.RoyalMail, text.ToString());
 
@@ -538,7 +543,7 @@ namespace BarcodeDemo
             text.Append(".");
             text.Append(MinMaxForPostal);
             _info.Add(BarcodeType.DutchKIX, text.ToString());
-            
+
             // Mailmark 4-state C
             text.Length = 0;
             text.AppendLine("Royal Mail Mailmark 4-state barcode C symbology.");
@@ -554,24 +559,24 @@ namespace BarcodeDemo
             text.AppendLine("Value format see in 'Royal Mail Mailmark barcode definition document v3.0'");
             text.AppendLine("Value example: '11000000000000000XY11     ', '41038422416563762EF61AH8T ', '11224689598765432EC1V9HQ6W'");
             _info.Add(BarcodeType.Mailmark4StateL, text.ToString());
-            
+
             // RSS14
             text.Length = 0;
-            text.Append("RSS-14 barcode symbology (ISO 24724)."); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append("."); 
-            text.Append("Value must contain 13 digits."); 
+            text.Append("RSS-14 barcode symbology (ISO 24724).");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(".");
+            text.Append("Value must contain 13 digits.");
             text.Append(NewLine);
-            text.Append("RSS-14:"); 
+            text.Append("RSS-14:");
             text.Append(NewLine);
-            text.Append("  Minimum Symbol Height: 33X"); 
-            text.Append(NewLine); 
-            text.Append("RSS-14 Truncated:"); 
-            text.Append(NewLine); 
-            text.Append("  Minimum Symbol Height: 13X"); 
-            text.Append(NewLine); 
-            text.Append("  Maximum Symbol Height: 33X"); 
+            text.Append("  Minimum Symbol Height: 33X");
+            text.Append(NewLine);
+            text.Append("RSS-14 Truncated:");
+            text.Append(NewLine);
+            text.Append("  Minimum Symbol Height: 13X");
+            text.Append(NewLine);
+            text.Append("  Maximum Symbol Height: 33X");
             _info.Add(BarcodeType.RSS14, text.ToString());
 
             // GS1DataBar
@@ -634,74 +639,73 @@ namespace BarcodeDemo
             text.Append("The QR barcode symbology subset with barcode values, which are compressed as defined in Adobe XFA Specification.");
             _info.Add(BarcodeSymbologySubsets.XFACompressedQRCode, text.ToString());
 
-
             // RSS14Stacked
             text.Length = 0;
-            text.Append("RSS-14 Stacked (2 rows) barcode symbology (ISO 24724). "); 
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
-            text.Append("."); 
-            text.Append("Value must contain 13 digits."); 
-            text.Append(NewLine); 
-            text.Append("RSS-14 Stacked:"); 
-            text.Append(NewLine); 
-            text.Append("  Minimum Symbol Height: 13X"); 
-            text.Append(NewLine); 
-            text.Append("RSS-14 Stacked Omnidirectional:"); 
-            text.Append(NewLine); 
-            text.Append("  Minimum Symbol Height: 69X"); 
+            text.Append("RSS-14 Stacked (2 rows) barcode symbology (ISO 24724). ");
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
+            text.Append(".");
+            text.Append("Value must contain 13 digits.");
+            text.Append(NewLine);
+            text.Append("RSS-14 Stacked:");
+            text.Append(NewLine);
+            text.Append("  Minimum Symbol Height: 13X");
+            text.Append(NewLine);
+            text.Append("RSS-14 Stacked Omnidirectional:");
+            text.Append(NewLine);
+            text.Append("  Minimum Symbol Height: 69X");
             _info.Add(BarcodeType.RSS14Stacked, text.ToString());
 
             // RSSLimited
             text.Length = 0;
             text.Append("RSS Limited barcode symbology (ISO 24724). ");
-            text.Append(AllowableCharacters); 
-            text.Append(Digits); 
+            text.Append(AllowableCharacters);
+            text.Append(Digits);
             text.Append(".");
-            text.Append("Value must contain 13 digits."); 
-            text.Append(NewLine); 
-            text.Append("  Minimum Symbol Height: 10X"); 
+            text.Append("Value must contain 13 digits.");
+            text.Append(NewLine);
+            text.Append("  Minimum Symbol Height: 10X");
             _info.Add(BarcodeType.RSSLimited, text.ToString());
 
             // RSSExpanded
             text.Length = 0;
-            text.Append("RSS Expanded barcode symbology (ISO 24724)."); 
-            text.Append(AllowableCharacters); 
+            text.Append("RSS Expanded barcode symbology (ISO 24724).");
+            text.Append(AllowableCharacters);
             text.Append(ASCIISymbols);
-            text.Append(""); 
+            text.Append("");
             text.Append(NewLine);
             text.Append("  Minimum Symbol Height: 34X");
             text.Append(NewLine);
-            text.Append(" - Special symbols: "); 
-            text.Append(NewLine); 
-            text.Append(" 1. <FNC1> - FNC1 flag"); 
+            text.Append(" - Special symbols: ");
+            text.Append(NewLine);
+            text.Append(" 1. <FNC1> - FNC1 flag");
             _info.Add(BarcodeType.RSSExpanded, text.ToString());
 
             // RSSExpandedStacked
             text.Length = 0;
             text.Append("RSS Expanded Stacked(2-11 rows) barcode symbology (ISO 24724).");
             text.Append(AllowableCharacters); text.Append(ASCIISymbols);
-            text.Append(NewLine); 
+            text.Append(NewLine);
             text.Append("  Minimum Symbol Height: 71X(2 row) - 404X(11 row)");
             text.Append(NewLine);
             text.Append(" - Special symbols: ");
-            text.Append(NewLine); 
-            text.Append(" 1. <FNC1> - FNC1 flag");            
+            text.Append(NewLine);
+            text.Append(" 1. <FNC1> - FNC1 flag");
             _info.Add(BarcodeType.RSSExpandedStacked, text.ToString());
 
             // Aztec
             text.Length = 0;
-            text.Append("Aztec is a two-dimensional barcode symbology."); 
+            text.Append("Aztec is a two-dimensional barcode symbology.");
             text.Append(NewLine);
-            text.Append(" - ISO/IEC 24778:2008(E)"); 
-            text.Append(NewLine); 
-            text.Append(" - Text/Byte modes"); 
-            text.Append(NewLine); 
+            text.Append(" - ISO/IEC 24778:2008(E)");
+            text.Append(NewLine);
+            text.Append(" - Text/Byte modes");
+            text.Append(NewLine);
             text.Append(" - Reed-Solomon error detection and correction (0%..99%)");
-            text.Append(NewLine); 
-            text.Append(NewLine); 
-            text.Append(" - Special symbols: "); 
-            text.Append(NewLine); 
+            text.Append(NewLine);
+            text.Append(NewLine);
+            text.Append(" - Special symbols: ");
+            text.Append(NewLine);
             text.Append(" 1. <FNC1> - FNC1 flag");
             text.Append(NewLine);
             text.Append(" 2. <ECInnnnnn> - ECI character (n=0..9)");
@@ -711,59 +715,61 @@ namespace BarcodeDemo
 
             // DataMatrix
             text.Length = 0;
-            text.Append("Data Matrix is a two-dimensional barcode symbology."); 
-            text.Append(NewLine); 
-            text.Append(" - ISO/IEC 16022:2006(E)"); 
-            text.Append(NewLine); 
-            text.Append(" - Three data encoding modes:"); 
-            text.Append(NewLine); 
-            text.Append(" 1. Alphanumeric(up to 2335 characters)"); 
-            text.Append(NewLine); 
+            text.Append("Data Matrix is a two-dimensional barcode symbology.");
+            text.Append(NewLine);
+            text.Append(" - ISO/IEC 16022:2006(E)");
+            text.Append(NewLine);
+            text.Append(" - Three data encoding modes:");
+            text.Append(NewLine);
+            text.Append(" 1. Alphanumeric(up to 2335 characters)");
+            text.Append(NewLine);
             text.Append(" 2. Byte(up to 1555 bytes)");
-            text.Append(NewLine); 
-            text.Append(" 3. Numeric(up to 3116 digits)"); 
-            text.Append(NewLine); 
-            text.Append(" - Reed-Solomon error detection and correction"); 
+            text.Append(NewLine);
+            text.Append(" 3. Numeric(up to 3116 digits)");
+            text.Append(NewLine);
+            text.Append(" - Reed-Solomon error detection and correction");
             text.Append(NewLine);
             text.Append(NewLine);
-            text.Append(" - Special symbols: "); 
-            text.Append(NewLine); 
-            text.Append(" 1. <FNC1> - FNC1 flag"); 
-            text.Append(NewLine); 
+            text.Append(" - Special symbols: ");
+            text.Append(NewLine);
+            text.Append(" 1. <FNC1> - FNC1 flag");
+            text.Append(NewLine);
             text.Append(" 2. <ECInnnnnn> - ECI character (n=0..9)");
             text.Append(NewLine);
             text.Append(" 3. <SA_n_m> - Structured Append character (n - symbol position, m - symbol count). See DataMatrixStructureAppendCharacter class.");
             text.Append(NewLine);
             text.Append(" 4. <MACRO_05> - Macro05 flag");
-            text.Append(NewLine); 
+            text.Append(NewLine);
             text.Append(" 5. <MACRO_06> - Macro06 flag");
             text.Append(NewLine);
-            text.Append(" 6. <READER_PROGRAMMING> - Reader Programming character");            
-            _info.Add(BarcodeType.DataMatrix, text.ToString()); 
+            text.Append(" 6. <READER_PROGRAMMING> - Reader Programming character");
+            _info.Add(BarcodeType.DataMatrix, text.ToString());
 
             // QR
             text.Length = 0;
-            text.Append("QR Code is a two-dimensional barcode symbology."); 
-            text.Append(NewLine); 
-            text.Append(" - ISO/IEC 18004:2006(E)"); 
+            text.Append("QR Code is a two-dimensional barcode symbology.");
             text.Append(NewLine);
-            text.Append(" - Four data encoding modes:"); 
+            text.Append(" - ISO/IEC 18004:2006(E)");
+            text.Append(NewLine);
+            text.Append(" - Four data encoding modes:");
             text.Append(NewLine);
             text.Append(" 1. Alphanumeric(up to 4296 characters)");
             text.Append(NewLine);
-            text.Append(" 2. Byte(up to 2953 bytes)"); 
-            text.Append(NewLine); 
-            text.Append(" 3. Numeric(up to 7089 digits)"); 
+            text.Append(" 2. Byte(up to 2953 bytes)");
+            text.Append(NewLine);
+            text.Append(" 3. Numeric(up to 7089 digits)");
             text.Append(NewLine);
             text.Append(" 4. Kanji(up to 1817 characters)");
             text.Append(NewLine);
             text.Append(" - Reed-Solomon error detection and correction(4 levels)");
             text.Append(NewLine);
-            text.Append(NewLine); 
+            text.Append(" - Supports QR Code Model 1 (AIM ITS/97-001)");
+            text.Append(NewLine);
+            text.Append(NewLine);
             text.Append(" - Special symbols: ");
             text.Append(NewLine);
             text.Append(" 1. <FNC1> - FNC1 flag");
-            text.Append(NewLine); 
+            text.Append(NewLine);
             text.Append(" 2. <ECInnnnnn> - ECI character (n=0..9)");
             text.Append(NewLine);
             text.Append(" 3. <SA_n_m> - Structured Append character (n - symbol position, m - symbol count). See QRStructureAppendCharacter class.");
@@ -807,17 +813,17 @@ namespace BarcodeDemo
             text.Append(NewLine);
             text.Append(" 2. <SA_n_m> - Structured Append character (n - symbol position, m - symbol count).");
             text.Append(NewLine);
-            _info.Add(BarcodeType.MaxiCode, text.ToString()); 
+            _info.Add(BarcodeType.MaxiCode, text.ToString());
 
             // PDF417
             text.Length = 0;
-            text.Append("PDF417 is a two-dimensional barcode symbology."); 
+            text.Append("PDF417 is a two-dimensional barcode symbology.");
             text.Append(NewLine);
             text.Append(" - ISO/IEC 15438:2006(E)");
-            text.Append(NewLine); 
+            text.Append(NewLine);
             text.Append(" - Three data encoding modes:");
             text.Append(NewLine);
-            text.Append(" 1. Alphanumeric(up to 1850 characters)"); 
+            text.Append(" 1. Alphanumeric(up to 1850 characters)");
             text.Append(NewLine);
             text.Append(" 2. Byte(up to 1108 bytes)");
             text.Append(NewLine);
@@ -826,8 +832,8 @@ namespace BarcodeDemo
             text.Append(" - Reed-Solomon error detection and correction(9 levels)");
             text.Append(NewLine);
             text.Append(NewLine);
-            text.Append(" - Special symbols: "); 
-            text.Append(NewLine); 
+            text.Append(" - Special symbols: ");
+            text.Append(NewLine);
             text.Append(" 1. <ECInnnnnn> - ECI character (n=0..9)");
             text.Append(NewLine);
             text.Append(" 2. <SA_n_m> - Structured Append character (n - symbol position, m - symbol count). See PDF417StructureAppendCharacter class.");
@@ -836,7 +842,7 @@ namespace BarcodeDemo
             text.Append(NewLine);
             text.Append(" 4. <LINKAGE_EANUCC> - linkage flag to EAN.UCC linear component");
             text.Append(NewLine);
-            text.Append(" 5. <READER_PROGRAMMING> - Reader Programming character");            
+            text.Append(" 5. <READER_PROGRAMMING> - Reader Programming character");
             _info.Add(BarcodeType.PDF417, text.ToString());
 
             // PDF417Compact
@@ -884,8 +890,7 @@ namespace BarcodeDemo
             text.Length = 0;
             text.Append("PPN (IFA PPN-Code, Pharmacy Product Number) is subset of DataMatrix symbology, encodes Pharmacy Product Number (PPN) and additional data.");
             _info.Add(BarcodeSymbologySubsets.PPN, text.ToString());
-
-
+            
             // Code 16K
             text.Length = 0;
             text.Append("Code 16K is a stacked linear, variable length symbology capable of encoding up to 144 numeric or 77 alphabetic characters.");
@@ -937,7 +942,6 @@ namespace BarcodeDemo
             text.Append(" 1. <ECInnnnnn> - ECI character (n=0..9)");
             text.Append(NewLine);
             _info.Add(BarcodeType.HanXinCode, text.ToString());
-
         }
 
         #endregion
@@ -946,6 +950,10 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Returns the information about specified barcode type.
+        /// </summary>
+        /// <param name="barcodeType">Type of the barcode.</param>
         public static string GetInformation(BarcodeType barcodeType)
         {
             if (_info.ContainsKey(barcodeType))
@@ -953,6 +961,10 @@ namespace BarcodeDemo
             return "";
         }
 
+        /// <summary>
+        /// Returns the information about specified barcode symbology subset.
+        /// </summary>
+        /// <param name="barcodeSubset">The barcode subset.</param>
         public static string GetInformation(BarcodeSymbologySubset barcodeSubset)
         {
             if (_info.ContainsKey(barcodeSubset))

@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that allows to set size of barcode image.
+    /// </summary>
     public partial class GetSizeForm : Form
     {
 
         #region Constructors
 
-        public GetSizeForm(string variable, float value, int dpi, UnitOfMeasure units)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetSizeForm"/> class.
+        /// </summary>
+        public GetSizeForm()
         {
             InitializeComponent();
-            cbUnits.Items.Add(UnitOfMeasure.Pixels);
-            cbUnits.Items.Add(UnitOfMeasure.Inches);
-            cbUnits.Items.Add(UnitOfMeasure.Centimeters);
-            cbUnits.Items.Add(UnitOfMeasure.Millimeters);
-            cbUnits.SelectedItem = units;
-            variableValue.Text = value.ToString(CultureInfo.InvariantCulture);
-            dpiValue.Value = dpi;
-            Text = string.Format(Text, variable);
-            labelSize.Text = string.Format(labelSize.Text, variable);
-            _dpi = dpi;
-            _value = value;
-            _units = units;
+            unitsValueEditor.Items.Add(UnitOfMeasure.Pixels);
+            unitsValueEditor.Items.Add(UnitOfMeasure.Inches);
+            unitsValueEditor.Items.Add(UnitOfMeasure.Centimeters);
+            unitsValueEditor.Items.Add(UnitOfMeasure.Millimeters);
+            unitsValueEditor.SelectedItem = UnitOfMeasure.Pixels;
         }
-
-
 
         #endregion
 
@@ -35,48 +33,86 @@ namespace BarcodeDemo
 
         #region Properties
 
-        float _value;
-        internal float Value
+        /// <summary>
+        /// Gets or sets an image width, in units.
+        /// </summary>
+        public float WidthValue
         {
             get
             {
-                return _value;
+                string value = widthValueEditor.Text.Replace(',', '.');
+                return float.Parse(value, CultureInfo.InvariantCulture);
+            }
+            set
+            {
+                widthValueEditor.Text = value.ToString(CultureInfo.InvariantCulture);
             }
         }
 
-        int _dpi;
-        internal int Resolution
+        /// <summary>
+        /// Gets or sets an image height, in units.
+        /// </summary>
+        public float HeightValue
         {
             get
             {
-                return _dpi;
+                string value = heightValueEditor.Text.Replace(',', '.');
+                return float.Parse(value, CultureInfo.InvariantCulture);
+            }
+            set
+            {
+                heightValueEditor.Text = value.ToString(CultureInfo.InvariantCulture);
             }
         }
 
-        UnitOfMeasure _units;
-        internal UnitOfMeasure Units
+        /// <summary>
+        /// Gets or sets the unit of measure of width and height.
+        /// </summary>
+        public UnitOfMeasure UnitsValue
         {
             get
             {
-                return _units;
+                return (UnitOfMeasure)unitsValueEditor.SelectedItem;
+            }
+            set
+            {
+                unitsValueEditor.SelectedItem = value;
             }
         }
 
-        #endregion 
+        /// <summary>
+        /// Gets or sets an image resolution.
+        /// </summary>
+        public float ResolutionValue
+        {
+            get
+            {
+                return (float)resolutionValueEditor.Value;
+            }
+            set
+            {
+                resolutionValueEditor.Value = (int)Math.Round(value);
+            }
+        }
+
+        #endregion
 
 
 
         #region Methods
 
+        /// <summary>
+        /// Closes this dialog with "OK" dialog result.
+        /// </summary>
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            _units = (UnitOfMeasure)cbUnits.SelectedItem;
-            _dpi = (int)dpiValue.Value;
-            _value = float.Parse(variableValue.Text.Replace(',', '.'), CultureInfo.InvariantCulture);
             DialogResult = DialogResult.OK;
             Close();
         }
 
+        /// <summary>
+        /// Closes this dialog with "Cancel" dialog result.
+        /// </summary>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

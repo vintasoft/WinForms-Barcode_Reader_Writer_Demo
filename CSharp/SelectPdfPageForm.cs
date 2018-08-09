@@ -2,17 +2,28 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that allows to select a page in PDF document.
+    /// </summary>
     public partial class SelectPdfPageForm : Form
     {
 
         #region Fields
 
-        string _labelText;
-        bool _selected;
+        /// <summary>
+        /// The format string of information label.
+        /// </summary>
+        string _labelFromatString;
+
+        /// <summary>
+        /// Indicates that PDF page can be selected.
+        /// </summary>
+        bool _pageSelected;
 
         #endregion
 
@@ -20,10 +31,13 @@ namespace BarcodeDemo
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectPdfPageForm"/> class.
+        /// </summary>
         public SelectPdfPageForm()
         {
             InitializeComponent();
-            _labelText = label1.Text;
+            _labelFromatString = label1.Text;
         }
 
         #endregion
@@ -32,19 +46,30 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Handles the FormClosing event of this form.
+        /// </summary>
         private void FormPdfPageSelect_FormClosing(object sender, FormClosingEventArgs e)
         {
             Visible = false;
             e.Cancel = true;
         }
 
+        /// <summary>
+        /// Closes this form.
+        /// </summary>
         private void selectButton_Click(object sender, EventArgs e)
         {
-            _selected = true;
+            _pageSelected = true;
             Close();
         }
 
 
+        /// <summary>
+        /// Gets the image from PDF page with specified index.
+        /// </summary>
+        /// <param name="viewer">The PDF viewer.</param>
+        /// <param name="pageIndex">Index of the page.</param>
         private Image GetImageFromPage(PdfImageViewer viewer, int pageIndex)
         {
             string[] names = viewer.GetImageNames(pageIndex);
@@ -95,6 +120,10 @@ namespace BarcodeDemo
             return result;
         }
 
+        /// <summary>
+        /// Selects the image from PDF document.
+        /// </summary>
+        /// <param name="pdfFileName">Name of the PDF file.</param>
         public Image SelectImage(string pdfFileName)
         {
             PdfImageViewer viewer;
@@ -129,11 +158,11 @@ namespace BarcodeDemo
                     return GetImageFromPage(viewer, 0);
                 }
 
-                label1.Text = string.Format(_labelText, pages.Items.Count);
+                label1.Text = string.Format(_labelFromatString, pages.Items.Count);
 
-                _selected = false;
+                _pageSelected = false;
                 ShowDialog();
-                if (_selected)
+                if (_pageSelected)
                 {
                     Image result = GetImageFromPage(viewer, (int)pages.SelectedItem - 1);
                     return result;

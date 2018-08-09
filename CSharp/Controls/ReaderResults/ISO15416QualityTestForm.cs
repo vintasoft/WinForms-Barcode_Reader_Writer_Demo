@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.QualityTests;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that allows to see the results of ISO15416 quality test.
+    /// </summary>
     public partial class ISO15416QualityTestForm : Form
     {
 
@@ -30,12 +34,24 @@ namespace BarcodeDemo
 
         #region Contstructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISO15416QualityTestForm"/> class.
+        /// </summary>
         public ISO15416QualityTestForm()
         {
             InitializeComponent();
         }
 
-        public ISO15416QualityTestForm(BarcodeInfo1D info, Image barcodeImage, bool invertBarcodeImage)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISO15416QualityTestForm"/> class.
+        /// </summary>
+        /// <param name="info">The barcode information.</param>
+        /// <param name="barcodeImage">The barcode image.</param>
+        /// <param name="invertImageColors">Indicates that image colors are inverted.</param>
+        public ISO15416QualityTestForm(
+            BarcodeInfo1D info,
+            Image barcodeImage,
+            bool invertBarcodeImage)
             : this()
         {
             _test = new ISO15416QualityTest(info, barcodeImage, invertBarcodeImage);
@@ -43,13 +59,17 @@ namespace BarcodeDemo
             UpdateUI();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISO15416QualityTestForm"/> class.
+        /// </summary>
+        /// <param name="test">The quality test.</param>
         public ISO15416QualityTestForm(ISO15416QualityTest test)
             : this()
         {
             _test = test;
 
             UpdateUI();
-        }        
+        }
 
         #endregion
 
@@ -59,21 +79,33 @@ namespace BarcodeDemo
 
         #region Event handlers
 
+        /// <summary>
+        /// Closes this dialog.
+        /// </summary>
         private void okButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Updates information about selected scan reflectance profile.
+        /// </summary>
         private void infoTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTextDisplay();
         }
 
+        /// <summary>
+        /// Updates information about selected scan reflectance profile.
+        /// </summary>
         private void analysisRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTextDisplay();
         }
 
+        /// <summary>
+        /// Updates information about selected scan reflectance profile.
+        /// </summary>
         private void imageRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTextDisplay();
@@ -83,7 +115,7 @@ namespace BarcodeDemo
 
 
         /// <summary>
-        /// Updates user interface.
+        /// Updates the user interface.
         /// </summary>
         private void UpdateUI()
         {
@@ -136,7 +168,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Gets a color of specified grade.
+        /// Returns a color of specified grade.
         /// </summary>
         private Color GetGradeColor(ISO15416QualityGrade grade)
         {
@@ -162,25 +194,25 @@ namespace BarcodeDemo
         {
             StringBuilder sb = new StringBuilder();
             float fontSize;
-            // If summary information is displayed.
+            // if summary information is displayed
             if (displayTypeComboBox.SelectedIndex == 0)
             {
                 analysisRadioButton.Enabled = false;
                 rawDataRadioButton.Enabled = false;
                 fontSize = 9.75f;
 
-                // Overall symbol grade.
+                // overall symbol grade
                 sb.AppendLine(string.Format("Overall symbol grade: {0:f2} ({1})", _test.OverallSymbolGradeValue, _test.OverallSymbolGrade));
                 sb.AppendLine();
 
-                // Check DifferentDecodedValues flag.
+                // check DifferentDecodedValues flag
                 if (_test.DifferentDecodedValues)
                 {
                     sb.Append("Attention! Scan reflectance profiles has different decoded barcode values!");
                     sb.AppendLine();
                 }
 
-                // Draw line that contains all profiles grade.
+                // draw a line that contains all profiles grade
                 sb.AppendLine("Scan reflectance profiles grades:");
                 if (_test.SymbolComponentQualityTests.Length == 1)
                 {
@@ -202,7 +234,7 @@ namespace BarcodeDemo
                 }
                 sb.AppendLine();
 
-                // Append analysis of all scan reflectance profiles.
+                // append analysis of all scan reflectance profiles
                 sb.AppendLine("Scan reflectance profiles analysis:");
                 sb.AppendLine();
                 if (_test.SymbolComponentQualityTests.Length == 1)
@@ -227,14 +259,14 @@ namespace BarcodeDemo
                         for (int i = 0; i < test.ScanReflectanceProfiles.Length; i++)
                         {
                             ISO15416ScanReflectanceProfile profile = test.ScanReflectanceProfiles[i];
-                            sb.AppendLine(string.Format("Symbol component {0}, profile {1}:", j+1, i + 1));
+                            sb.AppendLine(string.Format("Symbol component {0}, profile {1}:", j + 1, i + 1));
                             sb.AppendLine(GetProfileInfo(profile));
                         }
                     }
                 }
                 testResults.Font = new Font(testResults.Font.FontFamily, 9.75f);
             }
-            // If information about single profile is displayed.
+            // if information about single profile is displayed
             else
             {
                 int index = displayTypeComboBox.SelectedIndex - 1;
@@ -243,14 +275,14 @@ namespace BarcodeDemo
                 rawDataRadioButton.Enabled = true;
                 if (analysisRadioButton.Checked)
                 {
-                    // Append profile analysis.
+                    // append profile analysis
                     fontSize = 9.75f;
                     sb.AppendLine(string.Format("Profile {0} analysis:", index + 1));
                     sb.AppendLine(GetProfileInfo(profile));
                 }
                 else
                 {
-                    // Append RAW data graph.
+                    // append RAW data graph
                     fontSize = 3f;
                     sb.Append(GetProfileRawData(profile));
                 }
@@ -260,7 +292,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Gets the text information about specified scan reflectance profile.
+        /// Returns the text information about specified scan reflectance profile.
         /// </summary>
         private string GetProfileInfo(ISO15416ScanReflectanceProfile profile)
         {
@@ -283,25 +315,33 @@ namespace BarcodeDemo
             AppendParametrInfo(sb, "Defects", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Defects), profile.DefectsGrade);
             if (profile.DecodabilityGrade != ISO15416QualityGrade.Unavailable)
                 AppendParametrInfo(sb, "Decodability", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Decodability), profile.DecodabilityGrade);
-            AppendParametrInfo(sb, "Left", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Defects), ISO15416QualityGrade.Unavailable);
             AppendParametrInfo(sb, "Scan grade (profile grade)", ((int)profile.ScanGrade).ToString(), profile.ScanGrade);
             return sb.ToString();
         }
 
         /// <summary>
         /// Appends information about parameter of 
-        /// scan reflectance profile to specified string builder.
+        /// scan reflectance profile to the specified string builder.
         /// </summary>
-        private void AppendParametrInfo(StringBuilder sb, string name, string value, ISO15416QualityGrade grade)
+        private void AppendParametrInfo(
+            StringBuilder sb,
+            string name,
+            string value,
+            ISO15416QualityGrade grade)
         {
             AppendParametrInfo(sb, name, value, grade, "");
         }
 
         /// <summary>
         /// Appends information about parameter of 
-        /// scan reflectance profile to specified string builder.
+        /// scan reflectance profile to the specified string builder.
         /// </summary>
-        private void AppendParametrInfo(StringBuilder sb, string name, string value, ISO15416QualityGrade grade, string comment)
+        private void AppendParametrInfo(
+            StringBuilder sb,
+            string name,
+            string value,
+            ISO15416QualityGrade grade,
+            string comment)
         {
             string gradeText;
             if (grade == ISO15416QualityGrade.Unavailable)
@@ -328,16 +368,16 @@ namespace BarcodeDemo
             StringBuilder sb = new StringBuilder();
             double[] reflectanceData = profile.ReflectanceData;
 
-            // Global Threshold.
+            // global threshold
             int globalThreshold = (int)Math.Round(100 - profile.GlobalThreshold);
 
-            // Draw decode label (top-left corner).
+            // draw a decode label (top-left corner)
             if (profile.Decode)
                 sb.Append("+");
             else
                 sb.Append(" ");
 
-            // Draw first line: binarized reflectance data using global thresold.
+            // draw the first line: binarized reflectance data using global thresold
             for (int x = 0; x < reflectanceData.Length; x++)
             {
                 if (reflectanceData[x] > profile.GlobalThreshold)
@@ -352,39 +392,37 @@ namespace BarcodeDemo
             // Y-axis: inverted reflectance
             // X-axis: barcode line.
 
-            // Foreach Y:
+            // for each Y
             for (int y = 100; y >= 0; y--)
             {
                 StringBuilder line = new StringBuilder();
-                
-                // Draw element of Y-axis.
-                line.Append("|");  
 
-                // For each X for current Y
+                // draw element of Y-axis
+                line.Append("|");
+
+                // for each X for current Y
                 for (int x = 0; x < reflectanceData.Length; x++)
                 {
-                    // Draw element of X-axis:
-                    // If current inverted reflectance > Y then
+                    // draw element of X-axis:
                     if (Math.Round(100 - reflectanceData[x]) > y)
                     {
-                        // Draw filled cell.
+                        // draw filled cell
                         if (y == globalThreshold)
                             line.Append('|');
                         else
                             line.Append('#');
                     }
-                    // If Y == GlobalThreshold then
                     else if (y == globalThreshold)
-                        // Draw Global Threshold marker.
+                        // draw the global threshold marker
                         line.Append('-');
                     else
-                        // Draw empty cell.
+                        // draw an empty cell
                         line.Append(' ');
                 }
                 sb.AppendLine(line.ToString());
             }
 
-            // Draw X-axis.
+            // draw X-axis
             for (int x = 0; x < reflectanceData.Length + 1; x++)
                 sb.Append("_");
 

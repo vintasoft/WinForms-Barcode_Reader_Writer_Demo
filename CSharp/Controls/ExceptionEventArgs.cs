@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BarcodeDemo
 {
@@ -9,15 +7,23 @@ namespace BarcodeDemo
     /// </summary>
     public class ExceptionEventArgs: EventArgs
     {
+        
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExceptionEventArgs"/> class.
         /// </summary>
         /// <param name="ex">The exception.</param>
         public ExceptionEventArgs(Exception ex)
-        {
+        {            
             _exception = ex;
         }
 
+        #endregion
+
+
+
+        #region Methods
 
         Exception _exception;
         /// <summary>
@@ -30,6 +36,9 @@ namespace BarcodeDemo
                 return _exception;
             }
         }
+
+        #endregion
+
     }
 
 }

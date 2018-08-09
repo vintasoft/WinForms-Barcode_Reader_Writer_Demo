@@ -2,14 +2,18 @@
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.QualityTests;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that allows to see the results of ISO15415 quality test.
+    /// </summary>
     public partial class ISO15415QualityTestForm : Form
     {
-        
+
         #region Fields
 
         ISO15415QualityTest _test;
@@ -20,9 +24,19 @@ namespace BarcodeDemo
 
         #region Constructors
 
-        public ISO15415QualityTestForm(BarcodeInfo2D barcodeInfo, Image barcodeImage, bool invertImageColors)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISO15415QualityTestForm"/> class.
+        /// </summary>
+        /// <param name="barcodeInfo">The barcode information.</param>
+        /// <param name="barcodeImage">The barcode image.</param>
+        /// <param name="invertImageColors">Determines when image colors is inverted.</param>
+        public ISO15415QualityTestForm(
+            BarcodeInfo2D barcodeInfo,
+            Image barcodeImage,
+            bool invertImageColors)
         {
             InitializeComponent();
+
             ISO15415QualityTest test = new ISO15415QualityTest(barcodeInfo, barcodeImage, invertImageColors);
             _test = test;
 
@@ -35,7 +49,7 @@ namespace BarcodeDemo
 
             string decodeValue = "Passed";
             if (test.DecodeGrade == ISO15415QualityGrade.F)
-                decodeValue = "Falied";
+                decodeValue = "Failed";
             AddRow("Decode", float.MinValue, decodeValue, test.DecodeGrade);
 
             AddRow("Unused Error Correction", test.UnusedErrorCorrection, "%", test.UnusedErrorCorrectionGrade);
@@ -127,6 +141,9 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Adds the row to the parameters table.
+        /// </summary>
         private void AddRow(string name, double value, string units, ISO15415QualityGrade grade)
         {
             int index = dataGridView.Rows.Count;
@@ -134,11 +151,11 @@ namespace BarcodeDemo
             dataGridView.Rows[index].Cells[0].Value = name;
             string gradeValue;
             if (grade == ISO15415QualityGrade.Unavailable)
-                gradeValue = "Unavailable";                
+                gradeValue = "Unavailable";
             else
                 gradeValue = string.Format("{0} ({1})", (int)grade, grade);
             if (grade != ISO15415QualityGrade.Unavailable || value != float.MinValue)
-            {                
+            {
                 if (value != float.MinValue)
                 {
                     string val;
@@ -156,37 +173,51 @@ namespace BarcodeDemo
             dataGridView.Rows[index].Cells[2].Value = gradeValue;
         }
 
+        /// <summary>
+        /// Shows the quality test of start pattern.
+        /// </summary>
         private void startPatternButton_Click(object sender, EventArgs e)
         {
             using (ISO15416QualityTestForm form = new ISO15416QualityTestForm(_test.StartPatternTest))
                 form.ShowDialog();
         }
 
+        /// <summary>
+        /// Shows the quality test of center pattern.
+        /// </summary>
         private void centerPatternButton_Click(object sender, EventArgs e)
         {
             using (ISO15416QualityTestForm form = new ISO15416QualityTestForm(_test.CenterPatternTest))
                 form.ShowDialog();
         }
-        
+
+        /// <summary>
+        /// Shows the quality test of stop pattern.
+        /// </summary>
         private void stopPatternButton_Click(object sender, EventArgs e)
         {
             using (ISO15416QualityTestForm form = new ISO15416QualityTestForm(_test.StopPatternTest))
                 form.ShowDialog();
         }
 
-
+        /// <summary>
+        /// Shows the quality test of barcode symbol.
+        /// </summary>
         private void barcodeSymbolButton_Click(object sender, EventArgs e)
         {
             using (ISO15416QualityTestForm form = new ISO15416QualityTestForm(_test.SymbolIso15416QualityTest))
                 form.ShowDialog();
         }
 
+        /// <summary>
+        /// Closes this dialog.
+        /// </summary>
         private void okButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        #endregion     
-      
+        #endregion
+
     }
 }

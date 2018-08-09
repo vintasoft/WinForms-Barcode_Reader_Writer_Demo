@@ -3,22 +3,33 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that shows information about application.
+    /// </summary>
     public partial class AboutBoxForm : Form
     {
-        
+
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AboutBoxForm"/> class.
+        /// </summary>
         public AboutBoxForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AboutBoxForm"/> class.
+        /// </summary>
+        /// <param name="productPrefix">The product prefix.</param>
         public AboutBoxForm(string productPrefix)
-            :this()
+            : this()
         {
             nameLabel.Text = string.Format(nameLabel.Text, AssemblyTitle, AssemblyShortVersion);
             imagingSDKVersionLabel.Text = string.Format(imagingSDKVersionLabel.Text, AssemblyVersion);
@@ -32,12 +43,14 @@ namespace BarcodeDemo
 
         #region Properties
 
+        /// <summary>
+        /// Gets the assembly title.
+        /// </summary>
         [Browsable(false)]
         public string AssemblyTitle
         {
             get
             {
-
                 object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
@@ -51,6 +64,9 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Gets the assembly version.
+        /// </summary>
         [Browsable(false)]
         public string AssemblyVersion
         {
@@ -60,6 +76,9 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Gets the assembly short version.
+        /// </summary>
         [Browsable(false)]
         public string AssemblyShortVersion
         {
@@ -68,12 +87,12 @@ namespace BarcodeDemo
                 Version ver = Assembly.GetAssembly(typeof(IBarcodeInfo)).GetName().Version;
                 return string.Format("{0}.{1}", ver.Major, ver.Minor);
             }
-        }     
+        }
 
         #endregion
 
-        
-        
+
+
         #region Methods
 
         protected override void OnLoad(EventArgs e)

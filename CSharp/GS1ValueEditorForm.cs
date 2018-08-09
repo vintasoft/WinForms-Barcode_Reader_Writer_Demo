@@ -1,19 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using Vintasoft.Barcode.GS1;
-using System.Drawing;
 
 namespace BarcodeDemo
 {
+    /// <summary>
+    /// A form that allows to edit the GS1 barcode value.
+    /// </summary>
     public partial class GS1ValueEditorForm : Form
     {
 
         #region Fields
 
+        /// <summary>
+        /// Indicates that dialog is opened in read-only mode.
+        /// </summary>
         bool _readOnly = false;
-        bool _existsAISelected = false;
+
+        /// <summary>
+        /// Collection of identifier values.
+        /// </summary>
         List<GS1ApplicationIdentifierValue> _identifierValuesList = new List<GS1ApplicationIdentifierValue>();
 
         #endregion
@@ -22,8 +32,15 @@ namespace BarcodeDemo
 
         #region Constructors
 
-
-        public GS1ValueEditorForm(GS1ApplicationIdentifierValue[] gs1ApplicationIdentifierValues, bool readOnly)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GS1ValueEditorForm"/> class.
+        /// </summary>
+        /// <param name="gs1ApplicationIdentifierValues">The GS1 application
+        /// identifier values.</param>
+        /// <param name="readOnly">Indicates that dialog must be opened in read-only mode.</param>
+        public GS1ValueEditorForm(
+            GS1ApplicationIdentifierValue[] gs1ApplicationIdentifierValues,
+            bool readOnly)
         {
             InitializeComponent();
             addButton.Visible = !readOnly;
@@ -50,7 +67,7 @@ namespace BarcodeDemo
             }
             setDataValueButton.Enabled = !readOnly;
             ShowPrintableValue();
-            ShowAI();
+            ShowAIList();
         }
 
         #endregion
@@ -60,6 +77,9 @@ namespace BarcodeDemo
         #region Properties
 
         GS1ApplicationIdentifierValue[] _GS1ApplicationIdentifierValues;
+        /// <summary>
+        /// Gets the GS1 application identifier values.
+        /// </summary>
         public GS1ApplicationIdentifierValue[] GS1ApplicationIdentifierValues
         {
             get
@@ -68,27 +88,29 @@ namespace BarcodeDemo
             }
         }
 
-
         #endregion
 
 
 
         #region Methods
 
+        /// <summary>
+        /// Updates information about data format.
+        /// </summary>
         private void aiNumberComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_existsAISelected)
-            {
-                GS1ApplicationIdentifier ai = GS1ApplicationIdentifiers.ApplicationIdentifiers[aiNumberComboBox.SelectedIndex];
-                aiDataContentLabel.Text = ai.DataContent;
-                string format = ai.Format;
-                if (ai.IsContainsDecimalPoint)
-                    format += " (with decimal point)";
-                aiDataFormatLabel.Text = format;
-                aiValueTextBox.Text = "";
-            }
+            GS1ApplicationIdentifier ai = GS1ApplicationIdentifiers.ApplicationIdentifiers[aiNumberComboBox.SelectedIndex];
+            aiDataContentLabel.Text = ai.DataContent;
+            string format = ai.Format;
+            if (ai.IsContainsDecimalPoint)
+                format += " (with decimal point)";
+            aiDataFormatLabel.Text = format;
+            aiValueTextBox.Text = "";
         }
 
+        /// <summary>
+        /// Sets the current AI number.
+        /// </summary>
         private void aiListDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (aiListDataGridView.Rows[e.RowIndex].Cells[0].Value != null)
@@ -98,11 +120,17 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Add new AI data.
+        /// </summary>
         private void addButton_Click(object sender, EventArgs e)
         {
-            AddAI(GS1ApplicationIdentifiers.ApplicationIdentifiers[aiNumberComboBox.SelectedIndex].ApplicationIdentifier, aiValueTextBox.Text);
+            AddNewAI(GS1ApplicationIdentifiers.ApplicationIdentifiers[aiNumberComboBox.SelectedIndex].ApplicationIdentifier, aiValueTextBox.Text);
         }
 
+        /// <summary>
+        /// Sets value of current AI.
+        /// </summary>
         private void setButton_Click(object sender, EventArgs e)
         {
             if (aiListDataGridView.Rows.Count > 0 && aiListDataGridView.SelectedRows.Count > 0)
@@ -123,9 +151,13 @@ namespace BarcodeDemo
                 aiListDataGridView.Rows[index].Cells[0].Value = ai.ApplicationIdentifier.ApplicationIdentifier;
                 aiListDataGridView.Rows[index].Cells[1].Value = ai.ApplicationIdentifier.DataTitle;
                 aiListDataGridView.Rows[index].Cells[2].Value = ai.Value;
+                ShowPrintableValue();
             }
         }
 
+        /// <summary>
+        /// Deletes the selected AI.
+        /// </summary>
         private void deleteButton_Click(object sender, EventArgs e)
         {
             if (aiListDataGridView.Rows.Count > 0 && aiListDataGridView.SelectedRows.Count > 0)
@@ -137,6 +169,9 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Closes this dialog with "OK" dialog result.
+        /// </summary>
         private void okButton_Click(object sender, EventArgs e)
         {
             if (SetPrintableValue())
@@ -146,13 +181,20 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Closes this dialog with "Cancel" dialog result.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
 
-
-        private void ShowAI()
+        /// <summary>
+        /// Shows the list of AI.
+        /// </summary>
+        private void ShowAIList()
         {
             if (_GS1ApplicationIdentifierValues.Length == 0)
             {
@@ -165,6 +207,10 @@ namespace BarcodeDemo
             }
         }
 
+        /// <summary>
+        /// Adds the AI to the visual table.
+        /// </summary>
+        /// <param name="value">The value.</param>
         private void AddAIToTable(GS1ApplicationIdentifierValue value)
         {
             int index = aiListDataGridView.Rows.Count;
@@ -174,14 +220,19 @@ namespace BarcodeDemo
             aiListDataGridView.Rows[index].Cells[2].Value = value.Value;
         }
 
-        private void AddAI(string number, string value)
+        /// <summary>
+        /// Adds the new AI with value to AI list.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <param name="value">The value.</param>
+        private void AddNewAI(string number, string value)
         {
             GS1ApplicationIdentifierValue ai = null;
             try
             {
                 ai = new GS1ApplicationIdentifierValue(GS1ApplicationIdentifiers.FindApplicationIdentifier(number), value);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -191,6 +242,9 @@ namespace BarcodeDemo
             AddAIToTable(ai);
         }
 
+        /// <summary>
+        /// Shows the printable value.
+        /// </summary>
         private void ShowPrintableValue()
         {
             StringBuilder sb = new StringBuilder();
@@ -199,6 +253,9 @@ namespace BarcodeDemo
             gs1BarcodePrintableValueTextBox.Text = sb.ToString();
         }
 
+        /// <summary>
+        /// Sets the printable value.
+        /// </summary>
         private bool SetPrintableValue()
         {
             try
@@ -207,7 +264,7 @@ namespace BarcodeDemo
                 _identifierValuesList.Clear();
                 _identifierValuesList.AddRange(values);
                 aiListDataGridView.Rows.Clear();
-                ShowAI();
+                ShowAIList();
             }
             catch (Exception ex)
             {
@@ -217,12 +274,15 @@ namespace BarcodeDemo
             return true;
         }
 
+        /// <summary>
+        /// Sets the printable value.
+        /// </summary>
         private void setPrintableValueButton_Click(object sender, EventArgs e)
         {
             SetPrintableValue();
         }
 
         #endregion
-   
+
     }
 }

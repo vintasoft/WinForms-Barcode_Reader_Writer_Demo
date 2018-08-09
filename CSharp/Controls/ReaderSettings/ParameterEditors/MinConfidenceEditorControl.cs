@@ -1,13 +1,16 @@
 ﻿namespace BarcodeDemo
 {
     /// <summary>
-    /// Represents an editor control of ReaderSettings.MinConfidence parameter.
+    /// A control that allows to change the ReaderSettings.MinConfidence parameter.
     /// </summary>
     public class MinConfidenceEditorControl: ParameterEditorControl
     {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MinConfidenceEditorControl"/> class.
+        /// </summary>
         public MinConfidenceEditorControl()
         {
             Minimum = 0;
@@ -45,17 +48,25 @@
 
         #region Methods
 
+        /// <summary>
+        /// Returns the value as a string.
+        /// </summary>
+        /// <returns></returns>
         public override string GetValueAsString()
         {
             string template = "{0}%";
             if (Value == 0)
                 template = "0% - show all barcodes";
             else
+            {
                 if (Value == 100)
                     template = "{0}% show recognized(no read errors) barcodes";
                 else
+                {
                     if (Value >= 95)
                         template = "{0}% - show recognized barcodes";
+                }
+            }
             return string.Format(template, Value);
         }
 
