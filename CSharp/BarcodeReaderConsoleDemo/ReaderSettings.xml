@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<ReaderSettings>
+  <SearchQRModel1>True</SearchQRModel1>
+  <AutomaticRecognition>True</AutomaticRecognition>
+  <Code128UseFnc4ShiftToExtendedAsciiTable>True</Code128UseFnc4ShiftToExtendedAsciiTable>
+  <CollectTestInformation>True</CollectTestInformation>
+  <DataMatrixLPatternMaxErasures>2</DataMatrixLPatternMaxErasures>
+  <DataMatrixMinCellSize>2</DataMatrixMinCellSize>
+  <MatrixBarcodeMaxCellSize>15</MatrixBarcodeMaxCellSize>
+  <EnableTelepenNumericMode>False</EnableTelepenNumericMode>
+  <Erode>False</Erode>
+  <ExpectedBarcodes>1</ExpectedBarcodes>
+  <InvertImageColors>False</InvertImageColors>
+  <MaximalThreadsCount>4</MaximalThreadsCount>
+  <MinConfidence>95</MinConfidence>
+  <OptionalCheckSum>False</OptionalCheckSum>
+  <RemovePeas>False</RemovePeas>
+  <ScanBarcodeTypes>Codabar, Code11, Code128, Standard2of5, Interleaved2of5, Code39, Code93, RSS14Stacked, RSSExpandedStacked, UPCE, Telepen, Postnet, Planet, RoyalMail, AustralianPost, PDF417, PDF417Compact, EAN13, EAN8Plus5, UPCAPlus2, DataMatrix, QR, IntelligentMail, RSS14, RSSLimited, RSSExpanded, Aztec, Pharmacode, MSI, MicroQR, MaxiCode, DutchKIX, MicroPDF417, Mailmark4StateC, Mailmark4StateL, IATA2of5, Matrix2of5, Code16K, HanXinCode</ScanBarcodeTypes>
+  <ScanBarcodeSymbologySubsets>
+    <GS1_128BarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataBarBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataBarExpandedBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataBarExpandedStackedBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataBarLimitedBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataBarStackedBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1QRBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1DataMatrixBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <GS1AztecBarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <MailmarkCmdmType7BarcodeSymbology namespace="SymbologySubsets.RoyalMailMailmark" />
+    <MailmarkCmdmType9BarcodeSymbology namespace="SymbologySubsets.RoyalMailMailmark" />
+    <MailmarkCmdmType29BarcodeSymbology namespace="SymbologySubsets.RoyalMailMailmark" />
+    <Code32BarcodeSymbology namespace="SymbologySubsets" />
+    <VinSymbology namespace="SymbologySubsets" />
+    <PznBarcodeSymbology namespace="SymbologySubsets" />
+    <Code39ExtendedBarcodeSymbology namespace="SymbologySubsets" />
+    <OpcBarcodeSymbology namespace="SymbologySubsets" />
+    <Itf14BarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <DeutschePostIdentcodeBarcodeSymbology namespace="SymbologySubsets" />
+    <DeutschePostLeitcodeBarcodeSymbology namespace="SymbologySubsets" />
+    <Sscc18BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan13BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan13Plus5BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan13Plus2BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan8BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan8Plus5BarcodeSymbology namespace="SymbologySubsets" />
+    <Jan8Plus2BarcodeSymbology namespace="SymbologySubsets" />
+    <IsbnBarcodeSymbology namespace="SymbologySubsets" />
+    <IsbnPlus5BarcodeSymbology namespace="SymbologySubsets" />
+    <IsbnPlus2BarcodeSymbology namespace="SymbologySubsets" />
+    <IsmnBarcodeSymbology namespace="SymbologySubsets" />
+    <IsmnPlus5BarcodeSymbology namespace="SymbologySubsets" />
+    <IsmnPlus2BarcodeSymbology namespace="SymbologySubsets" />
+    <IssnBarcodeSymbology namespace="SymbologySubsets" />
+    <IssnPlus5BarcodeSymbology namespace="SymbologySubsets" />
+    <IssnPlus2BarcodeSymbology namespace="SymbologySubsets" />
+    <SwissPostParcelBarcodeSymbology namespace="SymbologySubsets" />
+    <PpnBarcodeSymbology namespace="SymbologySubsets" />
+    <EanVelocityBarcodeSymbology namespace="SymbologySubsets" />
+    <NumlyNumberBarcodeSymbology namespace="SymbologySubsets" />
+    <FedExGround96BarcodeSymbology namespace="SymbologySubsets.GS1" />
+    <VicsBolBarcodeSymbology namespace="SymbologySubsets" />
+    <VicsScacProBarcodeSymbology namespace="SymbologySubsets" />
+    <DhlAwbBarcodeSymbology namespace="SymbologySubsets" />
+    <XFACompressedAztecBarcodeSymbology namespace="SymbologySubsets.XFACompressed" />
+    <XFACompressedDataMatrixBarcodeSymbology namespace="SymbologySubsets.XFACompressed" />
+    <XFACompressedPDF417BarcodeSymbology namespace="SymbologySubsets.XFACompressed" />
+    <XFACompressedQRCodeBarcodeSymbology namespace="SymbologySubsets.XFACompressed" />
+    <AamvaBarcodeSymbology namespace="SymbologySubsets.AAMVA" />
+    <Interleaved2of5ChecksumISO16390 namespace="SymbologySubsets" />
+  </ScanBarcodeSymbologySubsets>
+  <ScanDirection>Horizontal, Vertical</ScanDirection>
+  <ScanInterval>5</ScanInterval>
+  <SearchDistortedDataMatrixBarcodes>True</SearchDistortedDataMatrixBarcodes>
+  <SearchDistortedQRBarcodes>True</SearchDistortedQRBarcodes>
+  <Threshold>510</Threshold>
+  <ThresholdIterations>8</ThresholdIterations>
+  <ThresholdMax>600</ThresholdMax>
+  <ThresholdMin>300</ThresholdMin>
+  <ThresholdMode>Automatic</ThresholdMode>
+  <MSIChecksum>Mod10</MSIChecksum>
+  <UnknownLinearMinBars>16</UnknownLinearMinBars>
+  <UnknownLinearMaxBars>128</UnknownLinearMaxBars>
+  <UnknownLinearMaxBarWide>4</UnknownLinearMaxBarWide>
+  <UnknownLinearMinScanlines>8</UnknownLinearMinScanlines>
+  <BarcodeCharacteristics>Undefinded</BarcodeCharacteristics>
+  <QRMaxAxialNonuniformity>0.37</QRMaxAxialNonuniformity>
+  <PharmacodeMaxHeight>50</PharmacodeMaxHeight>
+  <PharmacodeMinHeight>5</PharmacodeMinHeight>
+  <PharmacodeMinPadding>6</PharmacodeMinPadding>
+</ReaderSettings>
