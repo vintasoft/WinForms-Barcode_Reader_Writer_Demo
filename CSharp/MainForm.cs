@@ -6,13 +6,14 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.GS1;
-using Vintasoft.Barcode.SymbologySubsets;
 using Vintasoft.Barcode.BarcodeStructure;
-using System.Collections.Generic;
+using Vintasoft.Barcode.SymbologySubsets;
+using Vintasoft.Barcode.SymbologySubsets.AAMVA;
 
 namespace BarcodeDemo
 {
@@ -58,11 +59,14 @@ namespace BarcodeDemo
         /// </summary>
         SelectPdfPageForm _selectPdfPageForm = new SelectPdfPageForm();
 
-
         /// <summary>
         /// Name of the file from which the barcode reader source image is loaded.
         /// </summary>
         string _fileName = null;
+        /// <summary>
+        /// The source image stream.
+        /// </summary>
+        Stream _barcodeReaderSourceStream = null;
         /// <summary>
         /// The source image, loaded from file or received from barcode writer,
         /// in which the barcode reader searches the barcodes.
@@ -351,6 +355,7 @@ namespace BarcodeDemo
 
                 directoryPath = Path.GetDirectoryName(directoryPath);
                 directoryPath = Path.GetDirectoryName(directoryPath);
+                directoryPath = Path.GetDirectoryName(directoryPath);
                 directoryPath = Path.Combine(directoryPath, "Images");
                 return directoryPath;
             }
@@ -377,6 +382,26 @@ namespace BarcodeDemo
             InitBarcodeReaderSettingsUI(_barcodeReader.Settings);
             UpdateVisibilityOfDemoVersionRestrictionGroupBox();
             CloseBarcodeReaderImage();
+
+            // process command line of the application
+            string[] appArgs = Environment.GetCommandLineArgs();
+            if (appArgs.Length > 0)
+            {
+                if (appArgs.Length == 2)
+                {
+                    try
+                    {
+                        OpenBarcodeReaderImageFromFile(appArgs[1]);
+
+                        // set the current working directory as directory where the opened file is located
+                        CurrentDirectory = Path.GetDirectoryName(Path.GetFullPath(appArgs[1]));
+                    }
+                    catch
+                    {
+                        CloseBarcodeReaderImage();
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -642,7 +667,7 @@ namespace BarcodeDemo
             try
             {
                 // check that file is not used by another process
-                using (Stream tempStream = File.Open(_fileName, FileMode.Open))
+                using (Stream tempStream = File.OpenRead(_fileName))
                 {
                 }
 
@@ -657,7 +682,8 @@ namespace BarcodeDemo
                 else
                 {
                     // load image from image file
-                    _barcodeReaderImage = Image.FromFile(_fileName);
+                    _barcodeReaderSourceStream = File.OpenRead(_fileName);
+                    _barcodeReaderImage = Image.FromStream(_barcodeReaderSourceStream);
                 }
                 // if image is not loaded
                 if (_barcodeReaderImage == null)
@@ -730,9 +756,11 @@ namespace BarcodeDemo
             if (_barcodeReaderImage != null && _barcodeReaderSourceImage != writerPictureBox.Image)
             {
                 if (_barcodeReaderSourceImage != _barcodeReaderImage)
-                {
+                {                    
                     _barcodeReaderSourceImage.Dispose();
                     _barcodeReaderSourceImage = null;
+                    _barcodeReaderSourceStream.Dispose();
+                    _barcodeReaderSourceStream = null;
                 }
                 _barcodeReaderImage.Dispose();
                 _barcodeReaderImage = null;
@@ -1359,6 +1387,7 @@ namespace BarcodeDemo
 
             try
             {
+                barcodeReaderPictureBox.Enabled = false;
                 _barcodeRecognitionResults = _barcodeReader.ReadBarcodes(_barcodeReaderImage);
 
                 StructuredAppendBarcodeInfo[] reconstructedBarcodes = StructuredAppendBarcodeInfo.ReconstructFrom(_barcodeRecognitionResults);
@@ -1378,6 +1407,10 @@ namespace BarcodeDemo
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 outputTextRichTextBox.Text = "";
                 return;
+            }
+            finally
+            {
+                barcodeReaderPictureBox.Enabled = true;
             }
 
             if (readBarcodesButton.Text == "Stop")
@@ -1622,9 +1655,36 @@ namespace BarcodeDemo
 
             if (info is BarcodeSubsetInfo)
             {
-                value = string.Format("{0}{1}Base value: {2}",
-                    RemoveSpecialCharacters(value), Environment.NewLine,
-                    RemoveSpecialCharacters(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value));
+                if (info is AamvaBarcodeInfo)
+                {
+                    AamvaBarcodeValue aamvaValue = ((AamvaBarcodeInfo)info).AamvaValue;
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine();
+                    sb.AppendLine(string.Format("Issuer identification number: {0}", aamvaValue.Header.IssuerIdentificationNumber));
+                    sb.AppendLine(string.Format("File type: {0}", aamvaValue.Header.FileType));
+                    sb.AppendLine(string.Format("AAMVA Version number: {0} ({1})", aamvaValue.Header.VersionLevel, (int)aamvaValue.Header.VersionLevel));
+                    sb.AppendLine(string.Format("Jurisdiction Version number: {0}", aamvaValue.Header.JurisdictionVersionNumber));
+                    sb.AppendLine();
+                    foreach (AamvaSubfile subfile in aamvaValue.Subfiles)
+                    {
+                        sb.AppendLine(string.Format("[{0}] subfile:", subfile.SubfileType));
+                        foreach (AamvaDataElement dataElement in subfile.DataElements)
+                        {
+                            if (dataElement.Identifier.VersionLevel != AamvaVersionLevel.Undefined)
+                                sb.Append(string.Format("  [{0}] {1}:", dataElement.Identifier.ID, dataElement.Identifier.Description));
+                            else
+                                sb.Append(string.Format("  [{0}]:", dataElement.Identifier.ID));
+                            sb.AppendLine(string.Format(" {0}", dataElement.Value));
+                        }
+                    }
+                    value = sb.ToString();
+                }
+                else
+                {
+                    value = string.Format("{0}{1}Base value: {2}",
+                        RemoveSpecialCharacters(value), Environment.NewLine,
+                        RemoveSpecialCharacters(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value));
+                }
             }
             else
             {
@@ -1821,7 +1881,7 @@ namespace BarcodeDemo
                 return;
             _barcodeWriting = true;
             try
-            {
+            {                
                 if (barcodeWriterSettingsControl1.SelectedBarcodeSubset != null)
                     if (!barcodeWriterSettingsControl1.EncodeValue())
                         return;
@@ -1833,7 +1893,7 @@ namespace BarcodeDemo
                     {
                         // generate "design" barcode use barcode render
                         if (_barcodeImageWidth > 0 && _barcodeImageHeigth > 0)
-                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;
+                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;                        
                         writerPictureBox.Image = _barcodeRenderer.GetBarcodeAsBitmap(
                             _barcodeWriter, _barcodeImageWidth, _barcodeImageHeigth, _barcodeImageSizeUnits);
                         barcodeRendered = true;
