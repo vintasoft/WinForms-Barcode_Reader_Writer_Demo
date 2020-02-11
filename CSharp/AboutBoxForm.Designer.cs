@@ -58,6 +58,7 @@ namespace BarcodeDemo
             this.vintasoftLogoPictureBox.Location = new System.Drawing.Point(4, 4);
             this.vintasoftLogoPictureBox.Name = "vintasoftLogoPictureBox";
             this.vintasoftLogoPictureBox.Size = new System.Drawing.Size(114, 100);
+            this.vintasoftLogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.vintasoftLogoPictureBox.TabIndex = 12;
             this.vintasoftLogoPictureBox.TabStop = false;
             this.vintasoftLogoPictureBox.Click += new System.EventHandler(this.vintasoftLogoPictureBox_Click);
@@ -141,8 +142,8 @@ namespace BarcodeDemo
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.imagingSDKVersionLabel);
             this.panel1.Controls.Add(this.label6);
@@ -205,8 +206,8 @@ namespace BarcodeDemo
             // 
             // nameLabel
             // 
-            this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nameLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.nameLabel.Location = new System.Drawing.Point(5, 7);
             this.nameLabel.Name = "nameLabel";
@@ -217,9 +218,9 @@ namespace BarcodeDemo
             // 
             // decriptionRichTextBox
             // 
-            this.decriptionRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.decriptionRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.decriptionRichTextBox.Location = new System.Drawing.Point(5, 45);
             this.decriptionRichTextBox.Name = "decriptionRichTextBox";
             this.decriptionRichTextBox.ReadOnly = true;

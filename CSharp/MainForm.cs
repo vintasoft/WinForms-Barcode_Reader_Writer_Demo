@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -173,7 +174,7 @@ namespace BarcodeDemo
 
             _barcodeReader.Progress += new EventHandler<BarcodeReaderProgressEventArgs>(BarcodeReader_RecognizeProgress);
 
-            _barcodeReader.Settings.CollectTestInformation = true;            
+            _barcodeReader.Settings.CollectTestInformation = true;
 
             readerBarcodeTypes.SettingsChanged += new EventHandler(ReaderBarcodeTypes_SettingsChanged);
 
@@ -290,6 +291,7 @@ namespace BarcodeDemo
 
         /// <summary>
         /// Shows 'About' dialog.
+        /// </summary>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (AboutBoxForm aboutDialog = new AboutBoxForm("vsbarcode-dotnet"))
@@ -1777,9 +1779,15 @@ namespace BarcodeDemo
                 WriteBarcode();
                 if (saveSvgFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    if (BarcodeGlobalSettings.IsDemoVersion)
+                    {
+                        MessageBox.Show("The evaluation version adds noise to the barcode image.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     string svgFile = _barcodeWriter.GetBarcodeAsSvgFile();
                     File.WriteAllText(saveSvgFileDialog.FileName, svgFile);
-                    System.Diagnostics.Process.Start(saveSvgFileDialog.FileName);
+                    ProcessStartInfo processInfo = new ProcessStartInfo(saveSvgFileDialog.FileName);
+                    processInfo.UseShellExecute = true;
+                    Process.Start(processInfo);
                 }
             }
         }
@@ -1829,6 +1837,10 @@ namespace BarcodeDemo
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
+                    if (BarcodeGlobalSettings.IsDemoVersion)
+                    {
+                        MessageBox.Show("The evaluation version adds noise to the barcode image.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     _barcodeImageWidth = form.WidthValue;
                     _barcodeImageHeigth = form.HeightValue;
                     _barcodeImageSizeUnits = form.UnitsValue;

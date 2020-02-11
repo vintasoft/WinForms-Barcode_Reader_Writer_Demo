@@ -258,7 +258,7 @@ namespace BarcodeDemo
             text.Append(Digits);
             text.Append(". Value must contain 13 (ISBN13) or 10 (ISBN10) digits and five digits add-on.");
             _info.Add(BarcodeSymbologySubsets.ISBNPlus5, text.ToString());
-            
+
             // ISMN
             text.Length = 0;
             text.Append("ISMN is subset of EAN13 symbology, encodes International Standard Music Number. For ISMN13 barcodes the first four digits must be 9790. ");
@@ -639,6 +639,104 @@ namespace BarcodeDemo
             text.Append("The QR barcode symbology subset with barcode values, which are compressed as defined in Adobe XFA Specification.");
             _info.Add(BarcodeSymbologySubsets.XFACompressedQRCode, text.ToString());
 
+            // ISBT 128
+            text.Length = 0;
+            text.Append("ISBT 128 barcode symbology. ISBT 128 is a global standard for identification, labeling and information transfer of medical products of human origin. Format of barcode value is defined in ISBT 128 Standard Technical Specification.");
+            text.Append(NewLine);
+            text.Append("Example value:");
+            text.Append(NewLine);
+            text.Append("=A99991712345800");
+            _info.Add(BarcodeSymbologySubsets.ISBT128, text.ToString());
+
+            // ISBT 128 Data Matrix
+            text.Length = 0;
+            text.Append("ISBT 128 Data Matrix barcode symbology. ISBT 128 is a global standard for identification, labeling and information transfer of medical products of human origin. Format of barcode value is defined in ISBT 128 Standard Technical Specification.");
+            text.Append(NewLine);
+            text.Append("Example value:");
+            text.Append(NewLine);
+            text.Append("=+03004=A99991500000125=<M0001013&>0160012359");
+            _info.Add(BarcodeSymbologySubsets.ISBT128DataMatrix, text.ToString());
+
+            // HIBC LIC 139
+            text.Length = 0;
+            text.Append("HIBC LIC 39 barcode symbology is used by Labelers of health care products for identification purposes. Format of barcode value is defined in ANSI/HIBC 2.6.");
+            text.Append(NewLine);
+            text.Append("Example values:");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71G");
+            text.Append(NewLine);
+            text.Append("+$$52001510X3GD");
+            _info.Add(BarcodeSymbologySubsets.HIBCLIC39, text.ToString());
+
+            // HIBC LIC 128
+            text.Length = 0;
+            text.Append("HIBC LIC 128 barcode symbology is used by Labelers of health care products for identification purposes. Format of barcode value is defined in ANSI/HIBC 2.6.");
+            text.Append(NewLine);
+            text.Append("Example values:");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71G");
+            text.Append(NewLine);
+            text.Append("+$$52001510X3GD");
+            _info.Add(BarcodeSymbologySubsets.HIBCLIC128, text.ToString());
+
+            // HIBC LIC Aztec Code
+            text.Length = 0;
+            text.Append("HIBC LIC Aztec Code barcode symbology is used by Labelers of health care products for identification purposes. Format of barcode value is defined in ANSI/HIBC 2.6.");
+            text.Append(NewLine);
+            text.Append("Example values:");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71G");
+            text.Append(NewLine);
+            text.Append("+$$52001510X3GD");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71/$$52001510X3C");
+            text.Append(NewLine);
+            text.Append("+A99912345/$10X3/16D20111231/14D202001313");
+            text.Append(NewLine);
+            text.Append("+A99912345/$$52001510X3/16D20111212/S77DEFG457");
+            text.Append(NewLine);
+            text.Append("+A99912349/$10X3/16D20111231/14D20200131/Q500Z");
+            _info.Add(BarcodeSymbologySubsets.HIBCLICAztecCode, text.ToString());
+
+            // HIBC LIC Data Matrix
+            text.Length = 0;
+            text.Append("HIBC LIC Data Matrix barcode symbology is used by Labelers of health care products for identification purposes. Format of barcode value is defined in ANSI/HIBC 2.6.");
+            text.Append(NewLine);
+            text.Append("Example values:");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71G");
+            text.Append(NewLine);
+            text.Append("+$$52001510X3GD");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71/$$52001510X3C");
+            text.Append(NewLine);
+            text.Append("+A99912345/$10X3/16D20111231/14D202001313");
+            text.Append(NewLine);
+            text.Append("+A99912345/$$52001510X3/16D20111212/S77DEFG457");
+            text.Append(NewLine);
+            text.Append("+A99912349/$10X3/16D20111231/14D20200131/Q500Z");
+            _info.Add(BarcodeSymbologySubsets.HIBCLICDataMatrix, text.ToString());
+
+
+            // HIBC LIC QR Code
+            text.Length = 0;
+            text.Append("HIBC LIC QR Code barcode symbology is used by Labelers of health care products for identification purposes. Format of barcode value is defined in ANSI/HIBC 2.6.");
+            text.Append(NewLine);
+            text.Append("Example values:");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71G");
+            text.Append(NewLine);
+            text.Append("+$$52001510X3GD");
+            text.Append(NewLine);
+            text.Append("+A123BJC5D6E71/$$52001510X3C");
+            text.Append(NewLine);
+            text.Append("+A99912345/$10X3/16D20111231/14D202001313");
+            text.Append(NewLine);
+            text.Append("+A99912345/$$52001510X3/16D20111212/S77DEFG457");
+            text.Append(NewLine);
+            text.Append("+A99912349/$10X3/16D20111231/14D20200131/Q500Z");
+            _info.Add(BarcodeSymbologySubsets.HIBCLICQRCode, text.ToString());
+
             // RSS14Stacked
             text.Length = 0;
             text.Append("RSS-14 Stacked (2 rows) barcode symbology (ISO 24724). ");
@@ -890,7 +988,7 @@ namespace BarcodeDemo
             text.Length = 0;
             text.Append("PPN (IFA PPN-Code, Pharmacy Product Number) is subset of DataMatrix symbology, encodes Pharmacy Product Number (PPN) and additional data.");
             _info.Add(BarcodeSymbologySubsets.PPN, text.ToString());
-            
+
             // Code 16K
             text.Length = 0;
             text.Append("Code 16K is a stacked linear, variable length symbology capable of encoding up to 144 numeric or 77 alphabetic characters.");

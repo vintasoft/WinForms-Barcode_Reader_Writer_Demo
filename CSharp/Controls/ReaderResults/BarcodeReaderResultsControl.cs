@@ -8,7 +8,9 @@ using System.Windows.Forms;
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.GS1;
-
+using Vintasoft.Barcode.SymbologySubsets.AAMVA;
+using Vintasoft.Barcode.SymbologySubsets.Hibc;
+using Vintasoft.Barcode.SymbologySubsets.Isbt128;
 
 namespace BarcodeDemo
 {
@@ -372,7 +374,7 @@ namespace BarcodeDemo
             info.ShowNonDataFlagsInValue = showNonDataFlagsCheckBox.Checked;
 
             string infoValue;
-            if (InterpretEciCharacters)
+            if (InterpretEciCharacters && info.ValueItems != null)
                 infoValue = EciCharacterDecoder.Decode(info.ValueItems);
             else
                 infoValue = info.Value;
@@ -504,6 +506,109 @@ namespace BarcodeDemo
                     sb.Append(string.Format("{0} value: ", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
                     sb.Append(Environment.NewLine);
                     sb.Append(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
+                    barcodeValueTextBox.Text = sb.ToString();
+                }
+                else if (info is AamvaBarcodeInfo)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    AamvaBarcodeInfo aamvaBarcode = (AamvaBarcodeInfo)info;
+                    sb.AppendLine(string.Format("Issuer identification number: {0}", aamvaBarcode.IssuerIdentificationNumber));
+                    sb.AppendLine(string.Format("File type: {0}", aamvaBarcode.AamvaValue.Header.FileType));
+                    sb.AppendLine(string.Format("AAMVA Version number: {0} ({1})", aamvaBarcode.VersionLevel, (int)aamvaBarcode.VersionLevel));
+                    sb.AppendLine(string.Format("Jurisdiction Version number: {0}", aamvaBarcode.JurisdictionVersionNumber));
+                    sb.AppendLine();
+                    foreach (AamvaSubfile subfile in aamvaBarcode.Subfiles)
+                    {
+                        sb.AppendLine(string.Format("[{0}] subfile:", subfile.SubfileType));
+                        foreach (AamvaDataElement dataElement in subfile.DataElements)
+                        {
+                            if (dataElement.Identifier.VersionLevel != AamvaVersionLevel.Undefined)
+                            {
+                                sb.Append(string.Format("  [{0}](v{1}) {2}:", dataElement.Identifier.ID, (int)dataElement.Identifier.VersionLevel, dataElement.Identifier.Description));
+                            }
+                            else
+                            {
+                                sb.Append(string.Format("  [{0}]:", dataElement.Identifier.ID));
+                            }
+                            sb.AppendLine(string.Format(" {0}", dataElement.Value));
+                        }
+                    }
+                    barcodeValueTextBox.Text = sb.ToString();
+                }
+                else if (info is IsbtBarcodeInfo)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    IsbtDataValue[] value = ((IsbtBarcodeInfo)info).IsbtValue.DataValues;
+                    foreach (IsbtDataValue dataValue in value)
+                    {
+                        sb.AppendLine(string.Format("{0} ({1}): {2}", dataValue.DataStructure.Name, dataValue.DataStructure.Number, dataValue.DataContent));
+                    }
+                    sb.AppendLine();
+                    sb.AppendLine(string.Format("{0} base type value:", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
+                    sb.AppendLine(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
+
+                    barcodeValueTextBox.Text = sb.ToString();
+                }
+                else if (info is HibcLicBarcodeInfo)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    HibcLicValueItem value = ((HibcLicBarcodeInfo)info).HibcLicValue;
+
+                    if (value.PrimaryDataStructure != null && value.SecondaryDataStructure != null)
+                        sb.AppendLine("Data structure:   Primary + Secondary");
+                    else if (value.PrimaryDataStructure != null)
+                        sb.AppendLine("Data structure:   Primary");
+                    else
+                        sb.AppendLine("Data structure:   Secondary");
+
+                    if (value.PrimaryDataStructure != null)
+                    {
+                        sb.AppendLine(string.Format("LIC:              {0}", value.PrimaryDataStructure.Lic));
+                        sb.AppendLine(string.Format("Product ID:       {0}", value.PrimaryDataStructure.Pcn));
+                        sb.AppendLine(string.Format("Unit of Measure:  {0}", value.PrimaryDataStructure.UnitOfMeasureID));
+                    }
+
+                    if (value.SecondaryDataStructure != null)
+                    {
+                        if (value.SecondaryDataStructure.ExpiryDateString != null)
+                        {
+                            sb.AppendLine(string.Format("Expiry date:      {0} ({1}={2})",
+                                value.SecondaryDataStructure.ExpiryDate.ToShortDateString(),
+                                value.SecondaryDataStructure.ExpiryDateStringFormat, 
+                                value.SecondaryDataStructure.ExpiryDateString));
+                        }
+                        if (value.SecondaryDataStructure.LotNumber != null)
+                            sb.AppendLine(string.Format("Lot number:       {0}", value.SecondaryDataStructure.LotNumber));
+                        if (value.SecondaryDataStructure.SerialNumber != null)
+                            sb.AppendLine(string.Format("Serial number:    {0}", value.SecondaryDataStructure.SerialNumber));
+                        if (value.PrimaryDataStructure == null)
+                            sb.AppendLine(string.Format("Link character:   {0}", value.LinkCharacter));
+                    }
+
+                    if (value.AdditionalData != null)
+                    {
+                        foreach (HibcLicAdditionalDataStructure additionalData in value.AdditionalData)
+                        {
+                            if (additionalData is HibcLicSerialNumberAdditionalDataStructure)
+                                sb.AppendLine(string.Format("Serial number:    {0}", ((HibcLicSerialNumberAdditionalDataStructure)additionalData).SerialNumber));
+                            if (additionalData is HibcLicManufactureDateAdditionalDataStructure)
+                                sb.AppendLine(string.Format("Manufacture date: {0}", ((HibcLicManufactureDateAdditionalDataStructure)additionalData).ManufactureDate.ToShortDateString()));
+                            if (additionalData is HibcLicExpiryDateAdditionalDataStructure)
+                                sb.AppendLine(string.Format("Expiry date:      {0}", ((HibcLicExpiryDateAdditionalDataStructure)additionalData).ExpiryDate.ToShortDateString()));
+                            if (additionalData is HibcLicQuantityAdditionalDataStructure)
+                                sb.AppendLine(string.Format("Quantity:         {0}", ((HibcLicQuantityAdditionalDataStructure)additionalData).Quantity));
+                        }
+                    }
+
+                    sb.AppendLine(string.Format("Check character:  {0}", value.CheckCharacter));
+
+                    sb.AppendLine();
+                    sb.AppendLine(string.Format("{0} base type value:", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
+                    sb.AppendLine(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
+
                     barcodeValueTextBox.Text = sb.ToString();
                 }
                 else if (info is BarcodeSubsetInfo)

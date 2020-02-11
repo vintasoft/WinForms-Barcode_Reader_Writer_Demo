@@ -1,0 +1,251 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BarcodeDemo</RootNamespace>
+    <AssemblyName>BarcodeDemo</AssemblyName>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+
+    <EnableDefaultItems>false</EnableDefaultItems>
+
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>  
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>    
+
+    <Version>12.1.0.1</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEMO_VERSION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEMO_VERSION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Vintasoft.Barcode" Version="12.1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBoxForm.Designer.cs">
+      <DependentUpon>AboutBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BarcodeDesigner\BarcodeDesignerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarcodeDesigner\BarcodeDesignerForm.Designer.cs">
+      <DependentUpon>BarcodeDesignerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\BarcodeSimpleRenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\BarcodeStructureHighlightRenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\DotMatixBarcodeRenderer.cs" />
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\MatrixBarcodeRendererBase.cs" />
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\BarcodeMatixDotType.cs" />
+    <Compile Include="BarcodeDesigner\BarcodeRenderers\ConnectedMatixBarcodeRenderer.cs" />
+    <Compile Include="Controls\BarcodeStructureViewer.cs" />
+    <Compile Include="Controls\BarcodeWriterSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BarcodeWriterSettingsControl.Designer.cs">
+      <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExceptionEventArgs.cs" />
+    <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.Designer.cs">
+      <DependentUpon>AdvancedReaderSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BarcodesInformation.cs" />
+    <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.Designer.cs">
+      <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ExpectedBarcodesEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterSlaveEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ScanDirectionEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ScanDirectionEditorControl.Designer.cs">
+      <DependentUpon>ScanDirectionEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ScanIntervalEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15415QualityTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15415QualityTestForm.Designer.cs">
+      <DependentUpon>ISO15415QualityTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15416QualityTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\ISO15416QualityTestForm.Designer.cs">
+      <DependentUpon>ISO15416QualityTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.Designer.cs">
+      <DependentUpon>BarcodeTypesReaderSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\MaxThreadsCountEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\MinConfidenceEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FindFiles.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetSizeForm.Designer.cs">
+      <DependentUpon>GetSizeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GS1ValueEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GS1ValueEditorForm.Designer.cs">
+      <DependentUpon>GS1ValueEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.Designer.cs">
+      <DependentUpon>ParameterEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyGridForm.Designer.cs">
+      <DependentUpon>PropertyGridForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuietZoneEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuietZoneEditorForm.Designer.cs">
+      <DependentUpon>QuietZoneEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPdfPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPdfPageForm.Designer.cs">
+      <DependentUpon>SelectPdfPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectImageFrameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectImageFrameForm.Designer.cs">
+      <DependentUpon>SelectImageFrameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VintasoftBarcodeLicense.cs" />
+    <EmbeddedResource Include="AboutBoxForm.resx">
+      <DependentUpon>AboutBoxForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarcodeDesigner\BarcodeDesignerForm.resx">
+      <DependentUpon>BarcodeDesignerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BarcodeWriterSettingsControl.resx">
+      <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.resx">
+      <DependentUpon>AdvancedReaderSettingsControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\BarcodeReaderResultsControl.resx">
+      <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\ScanDirectionEditorControl.resx">
+      <DependentUpon>ScanDirectionEditorControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\ISO15415QualityTestForm.resx">
+      <DependentUpon>ISO15415QualityTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\ISO15416QualityTestForm.resx">
+      <DependentUpon>ISO15416QualityTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\BarcodeTypesReaderSettingsControl.resx">
+      <DependentUpon>BarcodeTypesReaderSettingsControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetSizeForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GetSizeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GS1ValueEditorForm.resx">
+      <DependentUpon>GS1ValueEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\ParameterEditors\ParameterEditorControl.resx">
+      <DependentUpon>ParameterEditorControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyGridForm.resx">
+      <DependentUpon>PropertyGridForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuietZoneEditorForm.resx">
+      <DependentUpon>QuietZoneEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPdfPageForm.resx">
+      <DependentUpon>SelectPdfPageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectImageFrameForm.resx">
+      <DependentUpon>SelectImageFrameForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="App.ico" />
+  </ItemGroup>
+</Project>

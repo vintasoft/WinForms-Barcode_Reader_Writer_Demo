@@ -151,8 +151,8 @@ namespace BarcodeDemo
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "All supported (*.pdf;*.bmp;*.jpg;*.jpeg;*.jpe;*.jfif;*.tif;*.tiff;*.png;*.gif;*.t" +
-                "ga;*.wmf;*.emf)|*.bmp;*.jpg;*.jpeg;*.jpe;*.jfif;*.tif;*.tiff;*.png;*.gif;*.tga;*" +
-                ".wmf;*.emf;*.pdf";
+    "ga;*.wmf;*.emf)|*.bmp;*.jpg;*.jpeg;*.jpe;*.jfif;*.tif;*.tiff;*.png;*.gif;*.tga;*" +
+    ".wmf;*.emf;*.pdf";
             // 
             // panel1
             // 
@@ -161,7 +161,7 @@ namespace BarcodeDemo
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 618);
+            this.panel1.Size = new System.Drawing.Size(784, 637);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -170,7 +170,7 @@ namespace BarcodeDemo
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(784, 470);
+            this.panel3.Size = new System.Drawing.Size(784, 489);
             this.panel3.TabIndex = 1;
             // 
             // panel6
@@ -179,7 +179,7 @@ namespace BarcodeDemo
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(784, 470);
+            this.panel6.Size = new System.Drawing.Size(784, 489);
             this.panel6.TabIndex = 2;
             // 
             // tabControl
@@ -192,7 +192,7 @@ namespace BarcodeDemo
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(784, 470);
+            this.tabControl.Size = new System.Drawing.Size(784, 489);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -202,7 +202,7 @@ namespace BarcodeDemo
             this.readerTabPage.Location = new System.Drawing.Point(4, 22);
             this.readerTabPage.Name = "readerTabPage";
             this.readerTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.readerTabPage.Size = new System.Drawing.Size(776, 444);
+            this.readerTabPage.Size = new System.Drawing.Size(776, 463);
             this.readerTabPage.TabIndex = 0;
             this.readerTabPage.Text = "Reader";
             this.readerTabPage.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@ namespace BarcodeDemo
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.outputTextRichTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(770, 438);
+            this.splitContainer1.Size = new System.Drawing.Size(770, 457);
             this.splitContainer1.SplitterDistance = 528;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -232,7 +232,7 @@ namespace BarcodeDemo
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(528, 438);
+            this.panel7.Size = new System.Drawing.Size(528, 457);
             this.panel7.TabIndex = 2;
             // 
             // panel8
@@ -243,7 +243,7 @@ namespace BarcodeDemo
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(528, 418);
+            this.panel8.Size = new System.Drawing.Size(528, 437);
             this.panel8.TabIndex = 3;
             // 
             // barcodeReaderPictureBox
@@ -254,15 +254,15 @@ namespace BarcodeDemo
             this.barcodeReaderPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.barcodeReaderPictureBox.TabIndex = 5;
             this.barcodeReaderPictureBox.TabStop = false;
-            this.barcodeReaderPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.barcodeReaderPictureBox_MouseMove);
             this.barcodeReaderPictureBox.Click += new System.EventHandler(this.barcodeReaderPictureBox_Click);
+            this.barcodeReaderPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.barcodeReaderPictureBox_MouseMove);
             // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.SystemColors.Control;
             this.panel9.Controls.Add(this.currentBarcodeInfo);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(0, 418);
+            this.panel9.Location = new System.Drawing.Point(0, 437);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(528, 20);
             this.panel9.TabIndex = 2;
@@ -283,7 +283,7 @@ namespace BarcodeDemo
             this.outputTextRichTextBox.Name = "outputTextRichTextBox";
             this.outputTextRichTextBox.ReadOnly = true;
             this.outputTextRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.outputTextRichTextBox.Size = new System.Drawing.Size(238, 438);
+            this.outputTextRichTextBox.Size = new System.Drawing.Size(238, 457);
             this.outputTextRichTextBox.TabIndex = 0;
             this.outputTextRichTextBox.Text = "";
             // 
@@ -294,7 +294,7 @@ namespace BarcodeDemo
             this.tpSettings.Controls.Add(this.GroupBox6);
             this.tpSettings.Location = new System.Drawing.Point(4, 22);
             this.tpSettings.Name = "tpSettings";
-            this.tpSettings.Size = new System.Drawing.Size(776, 444);
+            this.tpSettings.Size = new System.Drawing.Size(776, 463);
             this.tpSettings.TabIndex = 2;
             this.tpSettings.Text = "Reader settings";
             this.tpSettings.UseVisualStyleBackColor = true;
@@ -305,14 +305,14 @@ namespace BarcodeDemo
             this.advancedReaderSettings.InterpretEciCharacters = false;
             this.advancedReaderSettings.Location = new System.Drawing.Point(498, 0);
             this.advancedReaderSettings.Name = "advancedReaderSettings";
-            this.advancedReaderSettings.Size = new System.Drawing.Size(275, 244);
+            this.advancedReaderSettings.Size = new System.Drawing.Size(275, 258);
             this.advancedReaderSettings.TabIndex = 25;
             // 
             // readerBarcodeTypes
             // 
             this.readerBarcodeTypes.Location = new System.Drawing.Point(1, 0);
             this.readerBarcodeTypes.Name = "readerBarcodeTypes";
-            this.readerBarcodeTypes.Size = new System.Drawing.Size(492, 244);
+            this.readerBarcodeTypes.Size = new System.Drawing.Size(492, 258);
             this.readerBarcodeTypes.TabIndex = 24;
             // 
             // GroupBox6
@@ -324,7 +324,7 @@ namespace BarcodeDemo
             this.GroupBox6.Controls.Add(this.minConfidenceEditor);
             this.GroupBox6.Controls.Add(this.resetSettingsButton);
             this.GroupBox6.Controls.Add(this.demoVersionRestrictionsGroupBox);
-            this.GroupBox6.Location = new System.Drawing.Point(0, 243);
+            this.GroupBox6.Location = new System.Drawing.Point(4, 258);
             this.GroupBox6.Name = "GroupBox6";
             this.GroupBox6.Size = new System.Drawing.Size(773, 206);
             this.GroupBox6.TabIndex = 22;
@@ -334,7 +334,7 @@ namespace BarcodeDemo
             // scanIntervalEditor
             // 
             this.scanIntervalEditor.Location = new System.Drawing.Point(6, 17);
-            this.scanIntervalEditor.Maximum = 25;
+            this.scanIntervalEditor.Maximum = 30;
             this.scanIntervalEditor.Minimum = 1;
             this.scanIntervalEditor.Name = "scanIntervalEditor";
             this.scanIntervalEditor.Size = new System.Drawing.Size(240, 75);
@@ -417,7 +417,7 @@ namespace BarcodeDemo
             this.unregistredRestrictionsLabel.Size = new System.Drawing.Size(231, 48);
             this.unregistredRestrictionsLabel.TabIndex = 29;
             this.unregistredRestrictionsLabel.Text = "Barcode value in evaluation version will be replaced to the \"*DEMO*\" string for Q" +
-                "R, RSS(GS1) and Intelligent Mail barcodes.";
+    "R, RSS(GS1) and Intelligent Mail barcodes.";
             // 
             // tpResults
             // 
@@ -524,9 +524,9 @@ namespace BarcodeDemo
             // 
             // barcodeWriterBarcodeInformation
             // 
-            this.barcodeWriterBarcodeInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.barcodeWriterBarcodeInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.barcodeWriterBarcodeInformation.Location = new System.Drawing.Point(178, 3);
             this.barcodeWriterBarcodeInformation.Multiline = true;
             this.barcodeWriterBarcodeInformation.Name = "barcodeWriterBarcodeInformation";
@@ -604,7 +604,7 @@ namespace BarcodeDemo
             this.readerTools.Controls.Add(this.progressGroupBox);
             this.readerTools.Controls.Add(this.thresholdMethodGroupBox);
             this.readerTools.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.readerTools.Location = new System.Drawing.Point(0, 470);
+            this.readerTools.Location = new System.Drawing.Point(0, 489);
             this.readerTools.Name = "readerTools";
             this.readerTools.Size = new System.Drawing.Size(784, 148);
             this.readerTools.TabIndex = 0;
@@ -995,7 +995,7 @@ namespace BarcodeDemo
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1008,7 +1008,7 @@ namespace BarcodeDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 642);
+            this.ClientSize = new System.Drawing.Size(784, 661);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -1017,11 +1017,11 @@ namespace BarcodeDemo
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);

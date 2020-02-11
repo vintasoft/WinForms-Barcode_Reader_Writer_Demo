@@ -40,7 +40,7 @@ namespace BarcodeDemo.Controls
 
 
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarcodeWriterSettingsControl"/> class.
@@ -50,7 +50,7 @@ namespace BarcodeDemo.Controls
             InitializeComponent();
 
             // default GS1 value
-            _GS1ApplicationIdentifierValues = new GS1ApplicationIdentifierValue[] { 
+            _GS1ApplicationIdentifierValues = new GS1ApplicationIdentifierValue[] {
                 new GS1ApplicationIdentifierValue(
                     GS1ApplicationIdentifiers.FindApplicationIdentifier("01"),
                     "0123456789012C")
@@ -137,6 +137,9 @@ namespace BarcodeDemo.Controls
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DataBarExpanded);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DataBarExpandedStacked);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ITF14);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ISBT128);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLIC128);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLIC39);
 
             // sort supported barcode list
             object[] barcodes = new object[linearBarcodeTypeComboBox.Items.Count];
@@ -170,6 +173,10 @@ namespace BarcodeDemo.Controls
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.XFACompressedDataMatrix);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.XFACompressedPDF417);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.XFACompressedQRCode);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.ISBT128DataMatrix);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICAztecCode);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICDataMatrix);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICQRCode);
             twoDimensionalBarcodeComboBox.SelectedItem = BarcodeType.DataMatrix;
 
             // fonts
@@ -285,6 +292,10 @@ namespace BarcodeDemo.Controls
             for (int i = 1; i <= 84; i++)
                 hanXinCodeSymbolVersionComboBox.Items.Add((HanXinCodeSymbolVersion)i);
             AddEnumValues(hanXinCodeECCLevelComboBox, typeof(HanXinCodeErrorCorrectionLevel));
+
+            // Bearer Bar Style
+            AddEnumValues(bearerBarsComboBox, typeof(BearerBarStyle));
+            bearerBarsComboBox.SelectedItem = BearerBarStyle.None;
         }
 
         #endregion
@@ -394,6 +405,7 @@ namespace BarcodeDemo.Controls
                         hanXinCodeEncodingModeComboBox.SelectedItem = value.HanXinCodeEncodingMode;
                         hanXinCodeSymbolVersionComboBox.SelectedItem = value.HanXinCodeSymbol;
                         hanXinCodeECCLevelComboBox.SelectedItem = value.HanXinCodeErrorCorrectionLevel;
+                        UpdateUI();
                     }
                     else
                     {
@@ -632,8 +644,14 @@ namespace BarcodeDemo.Controls
             rssExpandedStackedSegmentPerRowPanel.Visible = false;
             code16KEncodeingModePanel.Visible = false;
             code16KRowsPanel.Visible = false;
+            encodingInfoCheckBox.Enabled = false;
+            bool bearerBarPanelVisible = bearerBarPanel.Visible;
+            bearerBarPanel.Visible = false;
+
+            BarcodeType barcodeType;
             if (SelectedBarcodeSubset == null)
             {
+                barcodeType = BarcodeWriterSettings.Barcode;
                 switch (BarcodeWriterSettings.Barcode)
                 {
                     case BarcodeType.MSI:
@@ -710,9 +728,9 @@ namespace BarcodeDemo.Controls
             }
             else
             {
+                barcodeType = SelectedBarcodeSubset.BaseType;
                 switch (SelectedBarcodeSubset.BaseType)
                 {
-
                     case BarcodeType.MSI:
                     case BarcodeType.Code11:
                     case BarcodeType.Codabar:
@@ -740,6 +758,25 @@ namespace BarcodeDemo.Controls
                 }
                 if (SelectedBarcodeSubset is Code39ExtendedBarcodeSymbology)
                     useOptionalCheckSumPanel.Visible = true;
+            }
+            if (barcodeType == BarcodeType.Standard2of5 ||
+                barcodeType == BarcodeType.Interleaved2of5 ||
+                barcodeType == BarcodeType.IATA2of5)
+            {
+                bearerBarPanel.Visible = true;
+            }
+            if (bearerBarPanelVisible != bearerBarPanel.Visible)
+            {
+                bearerBarsComboBox.SelectedItem = BearerBarStyle.None;
+                if (bearerBarPanel.Visible)
+                {
+                    bearerBarPaddingNumericUpDown.Value = 30;
+                    BarcodeWriterSettings.BearerBarWidth = (int)bearerBarWidthNumericUpDown.Value;
+                }
+                else
+                {
+                    bearerBarPaddingNumericUpDown.Value = 0;
+                }
             }
         }
 
@@ -773,9 +810,15 @@ namespace BarcodeDemo.Controls
 
         private void fontSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (fontSelector.SelectedItem != null)
-                BarcodeWriterSettings.ValueFont = new Font(fontSelector.SelectedItem.ToString(),
-                    (float)valueFontSizeNumericUpDown.Value);
+            try
+            {
+                if (fontSelector.SelectedItem != null)
+                    BarcodeWriterSettings.ValueFont = new Font(fontSelector.SelectedItem.ToString(),
+                        (float)valueFontSizeNumericUpDown.Value);
+            }
+            catch
+            {
+            }
         }
 
 
@@ -956,6 +999,39 @@ namespace BarcodeDemo.Controls
 
         #region Common
 
+        private void bearerBarsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BarcodeWriterSettings.BearerBars = (BearerBarStyle)bearerBarsComboBox.SelectedItem;
+            if (BarcodeWriterSettings.BearerBars == BearerBarStyle.None)
+            {
+                BarcodeWriterSettings.QuietZoneLeft = 0;
+                BarcodeWriterSettings.QuietZoneRight = 0;
+            }
+            else
+            {
+                BarcodeWriterSettings.QuietZoneLeft = (int)bearerBarPaddingNumericUpDown.Value;
+                BarcodeWriterSettings.QuietZoneRight = (int)bearerBarPaddingNumericUpDown.Value;
+            }
+        }
+
+        private void bearerBarWidthNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            BarcodeWriterSettings.BearerBarWidth = (int)bearerBarWidthNumericUpDown.Value;
+        }
+
+        private void bearerBarPaddingNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings.BearerBars == BearerBarStyle.None)
+            {
+                BarcodeWriterSettings.QuietZoneLeft = 0;
+                BarcodeWriterSettings.QuietZoneRight = 0;
+            }
+            else
+            {
+                BarcodeWriterSettings.QuietZoneLeft = (int)bearerBarPaddingNumericUpDown.Value;
+                BarcodeWriterSettings.QuietZoneRight = (int)bearerBarPaddingNumericUpDown.Value;
+            }
+        }
         private void useOptionalCheckSum_CheckedChanged(object sender, EventArgs e)
         {
             BarcodeWriterSettings.OptionalCheckSum = useOptionalCheckSum.Checked;

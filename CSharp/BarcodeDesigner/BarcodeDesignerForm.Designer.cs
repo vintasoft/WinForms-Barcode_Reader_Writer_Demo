@@ -37,7 +37,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.scaleTrackBar = new System.Windows.Forms.TrackBar();
             this.previewPanel = new System.Windows.Forms.Panel();
-            this.barcodeStructureControl1 = new Vintasoft.Barcode.BarcodeStructureViewer();
+            this.barcodeStructureControl1 = new BarcodeDemo.Controls.BarcodeStructureViewer();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -241,7 +241,7 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TrackBar scaleTrackBar;
-        private Vintasoft.Barcode.BarcodeStructureViewer barcodeStructureControl1;
+        private BarcodeDemo.Controls.BarcodeStructureViewer barcodeStructureControl1;
         private System.Windows.Forms.PropertyGrid barcodeRendererPropertyGrid;
         private System.Windows.Forms.ComboBox barcodeRendererComboBox;
     }

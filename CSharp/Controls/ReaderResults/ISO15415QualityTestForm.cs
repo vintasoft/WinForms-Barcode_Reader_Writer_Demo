@@ -37,7 +37,8 @@ namespace BarcodeDemo
         {
             InitializeComponent();
 
-            ISO15415QualityTest test = new ISO15415QualityTest(barcodeInfo, barcodeImage, invertImageColors);
+            ISO15415QualityTest test = new ISO15415QualityTest();
+            test.CalculateGrades(barcodeInfo, barcodeImage, invertImageColors);
             _test = test;
 
             if (test.StartPatternTestGrade != ISO15415QualityGrade.Unavailable)

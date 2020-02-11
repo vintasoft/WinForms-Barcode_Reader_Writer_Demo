@@ -40,12 +40,11 @@ namespace BarcodeDemo
         {
             get
             {
-                string value = widthValueEditor.Text.Replace(',', '.');
-                return float.Parse(value, CultureInfo.InvariantCulture);
+                return (float)widthValueEditor.Value;
             }
             set
             {
-                widthValueEditor.Text = value.ToString(CultureInfo.InvariantCulture);
+                widthValueEditor.Value = (decimal)value;
             }
         }
 
@@ -56,12 +55,11 @@ namespace BarcodeDemo
         {
             get
             {
-                string value = heightValueEditor.Text.Replace(',', '.');
-                return float.Parse(value, CultureInfo.InvariantCulture);
+                return (float)heightValueEditor.Value;
             }
             set
             {
-                heightValueEditor.Text = value.ToString(CultureInfo.InvariantCulture);
+                heightValueEditor.Value = (decimal)value;
             }
         }
 

@@ -31,15 +31,17 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelSize = new System.Windows.Forms.Label();
-            this.widthValueEditor = new System.Windows.Forms.TextBox();
             this.resolutionValueEditor = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.unitsValueEditor = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.heightValueEditor = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.widthValueEditor = new System.Windows.Forms.NumericUpDown();
+            this.heightValueEditor = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.resolutionValueEditor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthValueEditor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightValueEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -71,14 +73,6 @@
             this.labelSize.Size = new System.Drawing.Size(35, 13);
             this.labelSize.TabIndex = 2;
             this.labelSize.Text = "Width";
-            // 
-            // widthValueEditor
-            // 
-            this.widthValueEditor.Location = new System.Drawing.Point(90, 6);
-            this.widthValueEditor.Name = "widthValueEditor";
-            this.widthValueEditor.Size = new System.Drawing.Size(106, 20);
-            this.widthValueEditor.TabIndex = 3;
-            this.widthValueEditor.Text = "0";
             // 
             // resolutionValueEditor
             // 
@@ -129,14 +123,6 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "DPI";
             // 
-            // heightValueEditor
-            // 
-            this.heightValueEditor.Location = new System.Drawing.Point(90, 32);
-            this.heightValueEditor.Name = "heightValueEditor";
-            this.heightValueEditor.Size = new System.Drawing.Size(106, 20);
-            this.heightValueEditor.TabIndex = 9;
-            this.heightValueEditor.Text = "0";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -155,6 +141,32 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Units";
             // 
+            // widthValueEditor
+            // 
+            this.widthValueEditor.DecimalPlaces = 2;
+            this.widthValueEditor.Location = new System.Drawing.Point(90, 5);
+            this.widthValueEditor.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.widthValueEditor.Name = "widthValueEditor";
+            this.widthValueEditor.Size = new System.Drawing.Size(106, 20);
+            this.widthValueEditor.TabIndex = 11;
+            // 
+            // heightValueEditor
+            // 
+            this.heightValueEditor.DecimalPlaces = 2;
+            this.heightValueEditor.Location = new System.Drawing.Point(90, 31);
+            this.heightValueEditor.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.heightValueEditor.Name = "heightValueEditor";
+            this.heightValueEditor.Size = new System.Drawing.Size(106, 20);
+            this.heightValueEditor.TabIndex = 12;
+            // 
             // GetSizeForm
             // 
             this.AcceptButton = this.buttonOK;
@@ -162,14 +174,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(210, 159);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.heightValueEditor);
+            this.Controls.Add(this.widthValueEditor);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.unitsValueEditor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resolutionValueEditor);
-            this.Controls.Add(this.widthValueEditor);
             this.Controls.Add(this.labelSize);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -180,6 +192,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set image size";
             ((System.ComponentModel.ISupportInitialize)(this.resolutionValueEditor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthValueEditor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightValueEditor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,13 +204,13 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.TextBox widthValueEditor;
         private System.Windows.Forms.NumericUpDown resolutionValueEditor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox unitsValueEditor;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox heightValueEditor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown widthValueEditor;
+        private System.Windows.Forms.NumericUpDown heightValueEditor;
     }
 }
