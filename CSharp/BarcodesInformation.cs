@@ -843,6 +843,29 @@ namespace BarcodeDemo
             text.Append(" 6. <READER_PROGRAMMING> - Reader Programming character");
             _info.Add(BarcodeType.DataMatrix, text.ToString());
 
+            // DotCode
+            text.Length = 0;
+            text.Append("DotCode is a two-dimensional barcode symbology.");
+            text.Append(NewLine);
+            text.Append(" - AIM DotCode symbology specification (Rev. 4.0)");
+            text.Append(NewLine);
+            text.Append(" - DotCode encodes all ASCII characers and binary data");
+            text.Append(NewLine);
+            text.Append(" - Reed-Solomon error detection and correction");
+            text.Append(NewLine);
+            text.Append(" - Special symbols: ");
+            text.Append(NewLine);
+            text.Append(" 1. <FNC1> - FNC1 flag");
+            text.Append(NewLine);
+            text.Append(" 2. <ECInnnnnn> - ECI character (n=0..9)");
+            text.Append(NewLine);
+            text.Append(" 3. <SA_n_m> - Structured Append character (n - symbol position, m - symbol count). See DotCodeStructureAppendCharacter class.");
+            text.Append(NewLine);
+            text.Append(" 4. <SYMBOL_SEPARTION> - Symbol separationflag");
+            text.Append(NewLine);
+            text.Append(" 5. <READER_PROGRAMMING> - Reader Programming character");
+            _info.Add(BarcodeType.DotCode, text.ToString());
+
             // QR
             text.Length = 0;
             text.Append("QR Code is a two-dimensional barcode symbology.");

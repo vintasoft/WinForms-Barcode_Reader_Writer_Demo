@@ -1,4 +1,4 @@
-namespace BarcodeDemo
+﻿namespace BarcodeDemo
 {
     partial class BarcodeReaderResultsControl
     {
@@ -350,7 +350,7 @@ namespace BarcodeDemo
             // 
             // Number
             // 
-            this.Number.HeaderText = "�";
+            this.Number.HeaderText = "№";
             this.Number.Name = "Number";
             this.Number.ReadOnly = true;
             this.Number.Width = 30;

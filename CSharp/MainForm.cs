@@ -174,7 +174,7 @@ namespace BarcodeDemo
 
             _barcodeReader.Progress += new EventHandler<BarcodeReaderProgressEventArgs>(BarcodeReader_RecognizeProgress);
 
-            _barcodeReader.Settings.CollectTestInformation = true;
+            _barcodeReader.Settings.CollectTestInformation = true;            
 
             readerBarcodeTypes.SettingsChanged += new EventHandler(ReaderBarcodeTypes_SettingsChanged);
 
@@ -185,7 +185,7 @@ namespace BarcodeDemo
             barcodeWriterSettingsControl1.BarcodeWriterSettings = _barcodeWriter.Settings;
             _barcodeWriter.Settings.Changed += new EventHandler(WriterSettings_Changed);
 
-            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);
+            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);            
         }
 
         #endregion
@@ -295,7 +295,7 @@ namespace BarcodeDemo
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (AboutBoxForm aboutDialog = new AboutBoxForm("vsbarcode-dotnet"))
-                aboutDialog.ShowDialog();
+                aboutDialog.ShowDialog();            
         }
 
         #endregion
@@ -1022,7 +1022,7 @@ namespace BarcodeDemo
             readerBarcodeTypes.SetBarcodeReaderSettings(settings);
             advancedReaderSettings.SetBarcodeReaderSettings(settings);
             minConfidenceEditor.SetBarcodeReaderSettings(settings);
-            maxThreadsCountEditor.SetBarcodeReaderSettings(settings);
+            maxThreadCountEditor.SetBarcodeReaderSettings(settings);
             scanDirectionEditor.SetBarcodeReaderSettings(settings);
             expectedBarcodesEditor.SetBarcodeReaderSettings(settings);
             scanIntervalEditor.SetBarcodeReaderSettings(settings);
@@ -1059,6 +1059,7 @@ namespace BarcodeDemo
         private ReaderSettings GetDefaultReaderSettings()
         {
             ReaderSettings settings = new ReaderSettings();
+            settings.AutomaticRecognition = true;
             settings.ScanBarcodeTypes = BarcodeType.Code39 | BarcodeType.Code128 | BarcodeType.EAN13 | BarcodeType.UPCA;
             settings.ScanDirection = ScanDirection.LeftToRight | ScanDirection.RightToLeft | ScanDirection.BottomToTop | ScanDirection.TopToBottom;
             settings.ThresholdIterations = 8;
@@ -1066,7 +1067,7 @@ namespace BarcodeDemo
             settings.MinConfidence = 95;
             settings.SearchQRModel1Barcodes = true;
             int processorCount = Environment.ProcessorCount;
-            settings.MaximalThreadsCount = processorCount + processorCount / 2;
+            settings.MaximumThreadCount = processorCount + processorCount / 2;
             settings.CollectTestInformation = true;
             return settings;
         }
@@ -1390,6 +1391,7 @@ namespace BarcodeDemo
             try
             {
                 barcodeReaderPictureBox.Enabled = false;
+
                 _barcodeRecognitionResults = _barcodeReader.ReadBarcodes(_barcodeReaderImage);
 
                 StructuredAppendBarcodeInfo[] reconstructedBarcodes = StructuredAppendBarcodeInfo.ReconstructFrom(_barcodeRecognitionResults);
@@ -1765,7 +1767,10 @@ namespace BarcodeDemo
             if (saveImageFileDialog.ShowDialog() == DialogResult.OK)
             {
                 writerPictureBox.Image.Save(saveImageFileDialog.FileName);
-                System.Diagnostics.Process.Start(saveImageFileDialog.FileName);
+
+                ProcessStartInfo processInfo = new ProcessStartInfo(saveImageFileDialog.FileName);
+                processInfo.UseShellExecute = true;
+                Process.Start(processInfo);
             }
         }
 
@@ -1785,6 +1790,7 @@ namespace BarcodeDemo
                     }
                     string svgFile = _barcodeWriter.GetBarcodeAsSvgFile();
                     File.WriteAllText(saveSvgFileDialog.FileName, svgFile);
+
                     ProcessStartInfo processInfo = new ProcessStartInfo(saveSvgFileDialog.FileName);
                     processInfo.UseShellExecute = true;
                     Process.Start(processInfo);
@@ -1811,6 +1817,12 @@ namespace BarcodeDemo
             _barcodeReader.Settings.OptionalCheckSum = _barcodeWriter.Settings.OptionalCheckSum;
             _barcodeReader.Settings.AustralianPostCustomerInfoFormat = _barcodeWriter.Settings.AustralianPostCustomerInfoFormat;
             _barcodeReader.Settings.MSIChecksum = _barcodeWriter.Settings.MSIChecksum;
+            if (_barcodeWriter.Settings.Barcode == BarcodeType.DotCode)
+                if (_barcodeReader.Settings.ScanInterval > _barcodeWriter.Settings.MinWidth)
+                {
+                    _barcodeReader.Settings.ScanInterval = _barcodeWriter.Settings.MinWidth;
+                    scanIntervalEditor.UpdateUI();
+                }
             if (barcodeWriterSettingsControl1.SelectedBarcodeSubset != null)
             {
                 if (!_barcodeReader.Settings.ScanBarcodeSubsets.Contains(barcodeWriterSettingsControl1.SelectedBarcodeSubset))
@@ -1819,6 +1831,7 @@ namespace BarcodeDemo
             advancedReaderSettings.InterpretEciCharacters = barcodeWriterSettingsControl1.EncodeEciCharacter;
             readerBarcodeTypes.UpdateUI();
             advancedReaderSettings.UpdateUI();
+
 
             ReadBarcodes();
         }

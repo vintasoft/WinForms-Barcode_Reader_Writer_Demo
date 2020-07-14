@@ -185,6 +185,7 @@ namespace BarcodeDemo
             barcodePDF417CheckBox.Checked = ((scanBarcodeTypes & BarcodeType.PDF417) != 0) || ((scanBarcodeTypes & BarcodeType.PDF417Compact) != 0);
             barcodeMicroPDF417CheckBox.Checked = (scanBarcodeTypes & BarcodeType.MicroPDF417) != 0;
             barcodeDataMatrixCheckBox.Checked = (scanBarcodeTypes & BarcodeType.DataMatrix) != 0;
+            barcodeDotCodeCheckBox.Checked = (scanBarcodeTypes & BarcodeType.DotCode) != 0;
             barcodeQRCheckBox.Checked = (scanBarcodeTypes & BarcodeType.QR) != 0;
             barcodeMicroQRCheckBox.Checked = (scanBarcodeTypes & BarcodeType.MicroQR) != 0;
             barcodeMaxicodeCheckBox.Checked = (scanBarcodeTypes & BarcodeType.MaxiCode) != 0;
@@ -264,6 +265,7 @@ namespace BarcodeDemo
             barcodeAAMVACheckBox.Checked = false;
             barcodeIsbt128CheckBox.Checked = false;
             barcodeIsbt128DataMatrixCheckBox.Checked = false;
+            barcodeGs1DotCodeCheckBox.Checked = false;
             foreach (BarcodeSymbologySubset subset in BarcodeReaderSettings.ScanBarcodeSubsets)
             {
                 if (subset is GS1_128BarcodeSymbology)
@@ -284,6 +286,8 @@ namespace BarcodeDemo
                     barcodeGs1DataMatrixCheckBox.Checked = true;
                 if (subset is GS1AztecBarcodeSymbology)
                     barcodeGs1AztecCheckBox.Checked = true;
+                if (subset is GS1DotCodeBarcodeSymbology)
+                    barcodeGs1DotCodeCheckBox.Checked = true;
 
                 if (subset is HibcLic128BarcodeSymbology)
                     barcodeHibcLic128CheckBox.Checked = true;
@@ -492,6 +496,8 @@ namespace BarcodeDemo
                 scanBarcodeTypes |= BarcodeType.MicroPDF417;
             if (barcodeDataMatrixCheckBox.Checked)
                 scanBarcodeTypes |= BarcodeType.DataMatrix;
+            if (barcodeDotCodeCheckBox.Checked)
+                scanBarcodeTypes |= BarcodeType.DotCode;
             if (barcodeQRCheckBox.Checked)
                 scanBarcodeTypes |= BarcodeType.QR;
             if (barcodeMicroQRCheckBox.Checked)
@@ -652,6 +658,9 @@ namespace BarcodeDemo
 
             if (barcodeI25ChecksumIso16390.Checked)
                 BarcodeReaderSettings.ScanBarcodeSubsets.Add(BarcodeSymbologySubsets.Interleaved2of5ChecksumISO16390);
+
+            if (barcodeGs1DotCodeCheckBox.Checked)
+                BarcodeReaderSettings.ScanBarcodeSubsets.Add(BarcodeSymbologySubsets.GS1DotCode);
 
             BarcodeReaderSettings.UnknownLinearMaxBars = (int)unknownLinearMaxBarsNumericUpDown.Value;
             BarcodeReaderSettings.UnknownLinearMinBars = (int)unknownLinearMinBarsNumericUpDown.Value;

@@ -3,21 +3,21 @@
 namespace BarcodeDemo
 {
     /// <summary>
-    /// A control that allows to change the ReaderSettings.MaximalThreadsCount parameter.
+    /// A control that allows to change the ReaderSettings.MaximumThreadCount parameter.
     /// </summary>
-    public class MaxThreadsCountEditorControl: ParameterEditorControl
+    public class MaxThreadCountEditorControl: ParameterEditorControl
     {
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MaxThreadsCountEditorControl"/> class.
+        /// Initializes a new instance of the <see cref="MaxThreadCountEditorControl"/> class.
         /// </summary>
-        public MaxThreadsCountEditorControl()
+        public MaxThreadCountEditorControl()
         {
             Minimum = 1;
-            Maximum = Math.Max(Environment.ProcessorCount * 2, BarcodeReaderSettings.MaximalThreadsCount);
-            Value = BarcodeReaderSettings.MaximalThreadsCount;
+            Maximum = Math.Max(Environment.ProcessorCount * 2, BarcodeReaderSettings.MaximumThreadCount);
+            Value = BarcodeReaderSettings.MaximumThreadCount;
             Title = "Max threads count";
         }
 
@@ -34,12 +34,12 @@ namespace BarcodeDemo
         {
             get
             {
-                return Math.Min(Maximum, Math.Max(Minimum, BarcodeReaderSettings.MaximalThreadsCount));
+                return Math.Min(Maximum, Math.Max(Minimum, BarcodeReaderSettings.MaximumThreadCount));
             }
             set
             {
                 base.Value = value;
-                BarcodeReaderSettings.MaximalThreadsCount = base.Value;
+                BarcodeReaderSettings.MaximumThreadCount = base.Value;
             }
         }
 

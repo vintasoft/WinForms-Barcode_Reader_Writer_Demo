@@ -156,6 +156,7 @@ namespace BarcodeDemo.Controls
             // 2D
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.Aztec);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.DataMatrix);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.DotCode);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.PDF417);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.MicroPDF417);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.HanXinCode);
@@ -164,6 +165,7 @@ namespace BarcodeDemo.Controls
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeType.MaxiCode);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1Aztec);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DataMatrix);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DotCode);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1QR);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.MailmarkCmdmType7);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.MailmarkCmdmType9);
@@ -333,8 +335,7 @@ namespace BarcodeDemo.Controls
             }
             set
             {
-                _barcodeWriterSettings = value;
-
+                _barcodeWriterSettings = null;
                 if ((BarcodeGlobalSettings.SDKPackage & SDKPackage.Writer1D) != 0)
                 {
                     if (value != null)
@@ -405,12 +406,18 @@ namespace BarcodeDemo.Controls
                         hanXinCodeEncodingModeComboBox.SelectedItem = value.HanXinCodeEncodingMode;
                         hanXinCodeSymbolVersionComboBox.SelectedItem = value.HanXinCodeSymbol;
                         hanXinCodeECCLevelComboBox.SelectedItem = value.HanXinCodeErrorCorrectionLevel;
-                        UpdateUI();
+                        dotCodeRectangularModulesCheckBox.Checked = value.DotCodeRectangularModules;
+                        dotCodeWidthNumericUpDown.Value = value.DotCodeMatrixWidth;
+                        dotCodeHeightNumericUpDown.Value = value.DotCodeMatrixHeight;
+                        dotCodeAspectRatioNumericUpDown.Value = (int)Math.Round(10 * value.DotCodeMatrixWidthHeightRatio);
                     }
                     else
                     {
                         mainPanel.Enabled = false;
                     }
+
+                    _barcodeWriterSettings = value;
+                    UpdateUI();
                 }
             }
         }
@@ -517,7 +524,8 @@ namespace BarcodeDemo.Controls
 
         private void pixelFormatComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BarcodeWriterSettings.PixelFormat = (BarcodeImagePixelFormat)pixelFormatComboBox.SelectedItem;
+            if (BarcodeWriterSettings != null)
+                BarcodeWriterSettings.PixelFormat = (BarcodeImagePixelFormat)pixelFormatComboBox.SelectedItem;
         }
 
         private void minWidthNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -782,34 +790,42 @@ namespace BarcodeDemo.Controls
 
         private void linearBarcodeHeight_ValueChanged(object sender, EventArgs e)
         {
-            BarcodeWriterSettings.Height = (int)(linearBarcodeHeight.Value);
+            if (BarcodeWriterSettings != null)
+                BarcodeWriterSettings.Height = (int)(linearBarcodeHeight.Value);
         }
 
         private void valueAutoLetterSpacingCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            BarcodeWriterSettings.ValueAutoLetterSpacing = valueAutoLetterSpacingCheckBox.Checked;
+            if (BarcodeWriterSettings != null)
+                BarcodeWriterSettings.ValueAutoLetterSpacing = valueAutoLetterSpacingCheckBox.Checked;
         }
 
         private void valueVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            bool enabled = valueVisibleCheckBox.Checked;
-            valueAutoLetterSpacingCheckBox.Enabled = enabled;
-            valueGapNumericUpDown.Enabled = enabled;
-            valueFontSizeNumericUpDown.Enabled = enabled;
-            fontSelector.Enabled = enabled;
-            if (barcodeGroupsTabControl.SelectedTab == linearBarcodesTabPage)
-                BarcodeWriterSettings.ValueVisible = valueVisibleCheckBox.Checked;
-            else
-                BarcodeWriterSettings.Value2DVisible = valueVisibleCheckBox.Checked;
+            if (BarcodeWriterSettings != null)
+            {
+                bool enabled = valueVisibleCheckBox.Checked;
+                valueAutoLetterSpacingCheckBox.Enabled = enabled;
+                valueGapNumericUpDown.Enabled = enabled;
+                valueFontSizeNumericUpDown.Enabled = enabled;
+                fontSelector.Enabled = enabled;
+                if (barcodeGroupsTabControl.SelectedTab == linearBarcodesTabPage)
+                    BarcodeWriterSettings.ValueVisible = valueVisibleCheckBox.Checked;
+                else
+                    BarcodeWriterSettings.Value2DVisible = valueVisibleCheckBox.Checked;
+            }
         }
 
         private void valueGapNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            BarcodeWriterSettings.ValueGap = (int)valueGapNumericUpDown.Value;
+            if (BarcodeWriterSettings != null)
+                BarcodeWriterSettings.ValueGap = (int)valueGapNumericUpDown.Value;
         }
 
         private void fontSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
             try
             {
                 if (fontSelector.SelectedItem != null)
@@ -892,6 +908,10 @@ namespace BarcodeDemo.Controls
                     {
                         BarcodeWriterSettings.Barcode = BarcodeType.HanXinCode;
                     }
+                    else if (baseBarcodeType == BarcodeType.DotCode)
+                    {
+                        BarcodeWriterSettings.Barcode = BarcodeType.DotCode;
+                    }
 
                     valueVisibleCheckBox.Checked = BarcodeWriterSettings.Value2DVisible;
                 }
@@ -922,6 +942,7 @@ namespace BarcodeDemo.Controls
                     case BarcodeType.PDF417Compact:
                     case BarcodeType.MicroPDF417:
                     case BarcodeType.HanXinCode:
+                    case BarcodeType.DotCode:
                         canEncodeECI = true;
                         break;
                 }
@@ -1047,6 +1068,7 @@ namespace BarcodeDemo.Controls
             dataMatrixSettingsPanel.Visible = false;
             maxiCodeSettingsPanel.Visible = false;
             hanXinCodeSettingsPanel.Visible = false;
+            dotCodeSettingsPanel.Visible = false;
 
 
             BarcodeSymbologySubset barcodeSubset = twoDimensionalBarcodeComboBox.SelectedItem as BarcodeSymbologySubset;
@@ -1110,6 +1132,9 @@ namespace BarcodeDemo.Controls
                     case BarcodeType.MaxiCode:
                         maxiCodeSettingsPanel.Visible = true;
                         break;
+                    case BarcodeType.DotCode:
+                        dotCodeSettingsPanel.Visible = true;
+                        break;
                 }
                 EncodeValue();
             }
@@ -1128,6 +1153,9 @@ namespace BarcodeDemo.Controls
 
         private void msiChecksumComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MSIChecksum = (MSIChecksumType)msiChecksumComboBox.SelectedItem;
         }
 
@@ -1138,6 +1166,9 @@ namespace BarcodeDemo.Controls
 
         private void code128ModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.Code128EncodingMode = (Code128EncodingMode)code128ModeComboBox.SelectedItem;
         }
 
@@ -1148,6 +1179,9 @@ namespace BarcodeDemo.Controls
 
         private void enableTelepenNumericMode_CheckedChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.EnableTelepenNumericMode = enableTelepenNumericMode.Checked;
         }
 
@@ -1158,16 +1192,25 @@ namespace BarcodeDemo.Controls
 
         private void rssLinkageFlag_CheckedChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.RSSLinkageFlag = rssLinkageFlag.Checked;
         }
 
         private void rss14StackedOmni_CheckedChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.RSS14StackedOmnidirectional = rss14StackedOmni.Checked;
         }
 
         private void rssExpandedStackedSegmentPerRow_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.RSSExpandedStackedSegmentPerRow = (int)rssExpandedStackedSegmentPerRow.SelectedItem;
         }
 
@@ -1179,11 +1222,17 @@ namespace BarcodeDemo.Controls
 
         private void postalADMiltiplierNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.PostBarcodesADMultiplier = (double)postalADMiltiplierNumericUpDown.Value / 10.0;
         }
 
         private void australianPostCustomInfoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.AustralianPostCustomerInfoFormat = (AustralianPostCustomerInfoFormat)australianPostCustomInfoComboBox.SelectedItem;
         }
 
@@ -1194,6 +1243,9 @@ namespace BarcodeDemo.Controls
 
         private void aztecSymbolComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             AztecSymbolType oldValue = BarcodeWriterSettings.AztecSymbol;
             try
             {
@@ -1209,6 +1261,9 @@ namespace BarcodeDemo.Controls
 
         private void aztecLayersCountComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             int oldValue = BarcodeWriterSettings.AztecDataLayers;
             try
             {
@@ -1224,11 +1279,17 @@ namespace BarcodeDemo.Controls
 
         private void aztecEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.AztecEncodingMode = (AztecEncodingMode)aztecEncodingModeComboBox.SelectedItem;
         }
 
         private void aztecErrorCorrectionNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.AztecErrorCorrectionDataPercent = (double)aztecErrorCorrectionNumericUpDown.Value;
         }
 
@@ -1239,11 +1300,17 @@ namespace BarcodeDemo.Controls
 
         private void datamatrixEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.DataMatrixEncodingMode = (DataMatrixEncodingMode)datamatrixEncodingModeComboBox.SelectedItem;
         }
 
         private void datamatrixSymbolSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             if (datamatrixSymbolSizeComboBox.SelectedItem == null)
                 return;
             DataMatrixSymbolType oldValue = BarcodeWriterSettings.DataMatrixSymbol;
@@ -1266,6 +1333,9 @@ namespace BarcodeDemo.Controls
 
         private void qrEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             QREncodingMode oldValue = BarcodeWriterSettings.QREncodingMode;
             try
             {
@@ -1290,16 +1360,25 @@ namespace BarcodeDemo.Controls
 
         private void qrSymbolSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.QRSymbol = (QRSymbolVersion)qrSymbolSizeComboBox.SelectedItem;
         }
 
         private void qrECCLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.QRErrorCorrectionLevel = (QRErrorCorrectionLevel)qrECCLevelComboBox.SelectedItem;
         }
 
         private void qrDataMaskPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             if (qrDataMaskPatternComboBox.SelectedItem != null)
             {
                 if (qrDataMaskPatternComboBox.SelectedIndex == 0)
@@ -1316,6 +1395,9 @@ namespace BarcodeDemo.Controls
 
         private void microQRDataMaskPatternComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             if (microQRDataMaskPatternComboBox.SelectedItem != null)
             {
                 if (microQRDataMaskPatternComboBox.SelectedIndex == 0)
@@ -1327,11 +1409,17 @@ namespace BarcodeDemo.Controls
 
         private void microQrEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.QREncodingMode = (QREncodingMode)microQrEncodingModeComboBox.SelectedItem;
         }
 
         private void microQrSymbolSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             QRSymbolVersion oldValue = BarcodeWriterSettings.QRSymbol;
             try
             {
@@ -1347,6 +1435,9 @@ namespace BarcodeDemo.Controls
 
         private void microQrECCLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.QRErrorCorrectionLevel = (QRErrorCorrectionLevel)microQrECCLevelComboBox.SelectedItem;
         }
 
@@ -1357,11 +1448,17 @@ namespace BarcodeDemo.Controls
 
         private void maxiCodeResolutonNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MaxiCodeResolution = (double)maxiCodeResolutonNumericUpDown.Value;
         }
 
         private void maxiCodeEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             MaxiCodeEncodingMode oldValue = BarcodeWriterSettings.MaxiCodeEncodingMode;
             try
             {
@@ -1382,21 +1479,33 @@ namespace BarcodeDemo.Controls
 
         private void pdf417EncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.PDF417EncodingMode = (PDF417EncodingMode)pdf417EncodingModeComboBox.SelectedItem;
         }
 
         private void pdf417ErrorCorrectionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.PDF417ErrorCorrectionLevel = (PDF417ErrorCorrectionLevel)pdf417ErrorCorrectionComboBox.SelectedItem;
         }
 
         private void pdf417RowsNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.PDF417Rows = (int)pdf417RowsNumericUpDown.Value;
         }
 
         private void pdf417ColsNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             int oldValue = BarcodeWriterSettings.PDF417Columns;
             try
             {
@@ -1412,6 +1521,9 @@ namespace BarcodeDemo.Controls
 
         private void pdf417RowHeightNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.PDF417RowHeight = (int)pdf417RowHeightNumericUpDown.Value;
         }
 
@@ -1430,21 +1542,33 @@ namespace BarcodeDemo.Controls
 
         private void microPDF417EncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MicroPDF417EncodingMode = (PDF417EncodingMode)microPDF417EncodingModeComboBox.SelectedItem;
         }
 
         private void micropDF417SymbolSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MicroPDF417Symbol = (MicroPDF417SymbolType)microPDF417SymbolSizeComboBox.SelectedItem;
         }
 
         private void microPDF417ColumnsNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MicroPDF417Columns = (int)microPDF417ColumnsNumericUpDown.Value;
         }
 
         private void microPED417RowHeightNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.MicroPDF417RowHeight = (int)microPED417RowHeightNumericUpDown.Value;
         }
 
@@ -1455,11 +1579,17 @@ namespace BarcodeDemo.Controls
 
         private void code16KEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.Code16KEncodingMode = (Code128EncodingMode)code16KEncodingModeComboBox.SelectedItem;
         }
 
         private void code16KRowsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.Code16KRows = (int)code16KRowsComboBox.SelectedItem;
         }
 
@@ -1471,6 +1601,9 @@ namespace BarcodeDemo.Controls
 
         private void hanXinCodeEncodingModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             HanXinCodeEncodingMode oldValue = BarcodeWriterSettings.HanXinCodeEncodingMode;
             try
             {
@@ -1495,16 +1628,68 @@ namespace BarcodeDemo.Controls
 
         private void hanXinCodeSymbolVersionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.HanXinCodeSymbol = (HanXinCodeSymbolVersion)hanXinCodeSymbolVersionComboBox.SelectedItem;
         }
 
         private void hanXinCodeECCLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (BarcodeWriterSettings == null)
+                return;
+
             BarcodeWriterSettings.HanXinCodeErrorCorrectionLevel = (HanXinCodeErrorCorrectionLevel)hanXinCodeECCLevelComboBox.SelectedItem;
         }
 
         #endregion
 
+        
+        #region DotCode
+        
+        private void dotCodeRectangualrModulesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.DotCodeRectangularModules = dotCodeRectangularModulesCheckBox.Checked;
+        }
+
+        private void dotCodeAspectRatioNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            SetDotCodeAspectRatio();
+        }
+
+        private void SetDotCodeAspectRatio()
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.DotCodeMatrixWidthHeightRatio = (int)dotCodeAspectRatioNumericUpDown.Value / 10.0;
+        }
+
+        private void dotCodeAspectRationRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDotCodeAspectRatio();
+        }
+
+        private void dotCodeWidthNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.DotCodeMatrixWidth = (int)dotCodeWidthNumericUpDown.Value;
+        }
+
+        private void dotCodeHeightNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.DotCodeMatrixHeight = (int)dotCodeHeightNumericUpDown.Value;
+        }
+
+        #endregion
 
         #region Tools
 
@@ -1545,7 +1730,9 @@ namespace BarcodeDemo.Controls
         /// </summary>
         public event EventHandler<ExceptionEventArgs> WriterException;
 
+
         #endregion
 
+      
     }
 }

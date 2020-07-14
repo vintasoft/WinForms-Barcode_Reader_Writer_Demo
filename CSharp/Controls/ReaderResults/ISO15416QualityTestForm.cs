@@ -302,20 +302,21 @@ namespace BarcodeDemo
             if (profile.DecodeGrade != ISO15416QualityGrade.Unavailable)
             {
                 if (profile.Decode)
-                    AppendParametrInfo(sb, "Decode", "YES", profile.DecodeGrade, string.Format(" ({0})", profile.DecodeValue));
+                    AppendParametrInfo(sb, "Decode", "YES", (int)profile.DecodeGrade, string.Format(" ({0})", profile.DecodeValue));
                 else
-                    AppendParametrInfo(sb, "Decode", "NO", profile.DecodeGrade);
+                    AppendParametrInfo(sb, "Decode", "NO", (int)profile.DecodeGrade);
             }
-            AppendParametrInfo(sb, "Rmax (Max reflectance)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MaxReflectance), ISO15416QualityGrade.Unavailable);
-            AppendParametrInfo(sb, "Rmin (Min reflectance)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MinReflectance), profile.MinReflectanceGrade);
-            AppendParametrInfo(sb, "GT (Global threshold)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.GlobalThreshold), ISO15416QualityGrade.Unavailable);
-            AppendParametrInfo(sb, "SC (Symbol contrast)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.SymbolContrast), profile.SymbolContrastGrade);
-            AppendParametrInfo(sb, "ECmin (Min edge contrast)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MinEdgeContrast), profile.MinEdgeContrastGrade);
-            AppendParametrInfo(sb, "MOD (Modulation)", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Modulation), profile.ModulationGrade);
-            AppendParametrInfo(sb, "Defects", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Defects), profile.DefectsGrade);
+            AppendParametrInfo(sb, "Rmax (Max reflectance)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MaxReflectance), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "Rmin (Min reflectance)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MinReflectance), (int)profile.MinReflectanceGrade);
+            AppendParametrInfo(sb, "GT (Global threshold)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.GlobalThreshold), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "SC (Symbol contrast)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.SymbolContrast), profile.SymbolContrastGradeValue);
+            AppendParametrInfo(sb, "ECmin (Min edge contrast)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.MinEdgeContrast), (int)profile.MinEdgeContrastGrade);
+            AppendParametrInfo(sb, "MOD (Modulation)", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Modulation), profile.ModulationGradeValue);
+            AppendParametrInfo(sb, "ERNMax", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.MaxElementReflectanceNonUniformity), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "Defects", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Defects), profile.DefectsGradeValue);
             if (profile.DecodabilityGrade != ISO15416QualityGrade.Unavailable)
-                AppendParametrInfo(sb, "Decodability", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Decodability), profile.DecodabilityGrade);
-            AppendParametrInfo(sb, "Scan grade (profile grade)", ((int)profile.ScanGrade).ToString(), profile.ScanGrade);
+                AppendParametrInfo(sb, "Decodability", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Decodability), profile.DecodabilityGradeValue);
+            AppendParametrInfo(sb, "Scan grade (profile grade)", ((int)profile.ScanGrade).ToString(), profile.ScanGradeValue);
             return sb.ToString();
         }
 
@@ -327,9 +328,9 @@ namespace BarcodeDemo
             StringBuilder sb,
             string name,
             string value,
-            ISO15416QualityGrade grade)
+            double gradeValue)
         {
-            AppendParametrInfo(sb, name, value, grade, "");
+            AppendParametrInfo(sb, name, value, gradeValue, "");
         }
 
         /// <summary>
@@ -340,14 +341,14 @@ namespace BarcodeDemo
             StringBuilder sb,
             string name,
             string value,
-            ISO15416QualityGrade grade,
+            double gradeValue,
             string comment)
         {
             string gradeText;
-            if (grade == ISO15416QualityGrade.Unavailable)
+            if (gradeValue < 0)
                 gradeText = "N/A";
             else
-                gradeText = grade.ToString();
+                gradeText = string.Format("{0} ({1})", ISO15416QualityTest.ConvertQualityGradeValueToQualityGrade(gradeValue), gradeValue.ToString("f1", CultureInfo.InvariantCulture));
             sb.AppendLine(string.Format("{0}{1}{2}{3}", name.PadRight(30), value.PadRight(10), gradeText, comment));
         }
 

@@ -49,7 +49,7 @@ namespace BarcodeDemo
             this.scanIntervalEditor = new BarcodeDemo.ScanIntervalEditorControl();
             this.expectedBarcodesEditor = new BarcodeDemo.ExpectedBarcodesEditorControl();
             this.scanDirectionEditor = new BarcodeDemo.ScanDirectionEditorControl();
-            this.maxThreadsCountEditor = new BarcodeDemo.MaxThreadsCountEditorControl();
+            this.maxThreadCountEditor = new BarcodeDemo.MaxThreadCountEditorControl();
             this.minConfidenceEditor = new BarcodeDemo.MinConfidenceEditorControl();
             this.resetSettingsButton = new System.Windows.Forms.Button();
             this.demoVersionRestrictionsGroupBox = new System.Windows.Forms.GroupBox();
@@ -320,7 +320,7 @@ namespace BarcodeDemo
             this.GroupBox6.Controls.Add(this.scanIntervalEditor);
             this.GroupBox6.Controls.Add(this.expectedBarcodesEditor);
             this.GroupBox6.Controls.Add(this.scanDirectionEditor);
-            this.GroupBox6.Controls.Add(this.maxThreadsCountEditor);
+            this.GroupBox6.Controls.Add(this.maxThreadCountEditor);
             this.GroupBox6.Controls.Add(this.minConfidenceEditor);
             this.GroupBox6.Controls.Add(this.resetSettingsButton);
             this.GroupBox6.Controls.Add(this.demoVersionRestrictionsGroupBox);
@@ -362,17 +362,17 @@ namespace BarcodeDemo
             this.scanDirectionEditor.Size = new System.Drawing.Size(252, 97);
             this.scanDirectionEditor.TabIndex = 32;
             // 
-            // maxThreadsCountEditor
+            // maxThreadCountEditor
             // 
-            this.maxThreadsCountEditor.Location = new System.Drawing.Point(6, 99);
-            this.maxThreadsCountEditor.Maximum = 8;
-            this.maxThreadsCountEditor.Minimum = 1;
-            this.maxThreadsCountEditor.Name = "maxThreadsCountEditor";
-            this.maxThreadsCountEditor.Size = new System.Drawing.Size(240, 97);
-            this.maxThreadsCountEditor.TabIndex = 31;
-            this.maxThreadsCountEditor.TickFrequency = 1;
-            this.maxThreadsCountEditor.Title = "Max threads count";
-            this.maxThreadsCountEditor.Value = 4;
+            this.maxThreadCountEditor.Location = new System.Drawing.Point(6, 99);
+            this.maxThreadCountEditor.Maximum = 8;
+            this.maxThreadCountEditor.Minimum = 1;
+            this.maxThreadCountEditor.Name = "maxThreadCountEditor";
+            this.maxThreadCountEditor.Size = new System.Drawing.Size(240, 97);
+            this.maxThreadCountEditor.TabIndex = 31;
+            this.maxThreadCountEditor.TickFrequency = 1;
+            this.maxThreadCountEditor.Title = "Max threads count";
+            this.maxThreadCountEditor.Value = 4;
             // 
             // minConfidenceEditor
             // 
@@ -758,7 +758,7 @@ namespace BarcodeDemo
             this.thresholdMinTrackBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.thresholdMinTrackBar.LargeChange = 50;
             this.thresholdMinTrackBar.Location = new System.Drawing.Point(3, 14);
-            this.thresholdMinTrackBar.Maximum = 765;
+            this.thresholdMinTrackBar.Maximum = 768;
             this.thresholdMinTrackBar.Name = "thresholdMinTrackBar";
             this.thresholdMinTrackBar.Size = new System.Drawing.Size(421, 30);
             this.thresholdMinTrackBar.TabIndex = 0;
@@ -1006,8 +1006,6 @@ namespace BarcodeDemo
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 661);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -1124,7 +1122,7 @@ namespace BarcodeDemo
         private BarcodeTypesReaderSettingsControl readerBarcodeTypes;
         private AdvancedReaderSettingsControl advancedReaderSettings;
         private MinConfidenceEditorControl minConfidenceEditor;
-        private BarcodeDemo.MaxThreadsCountEditorControl maxThreadsCountEditor;
+        private BarcodeDemo.MaxThreadCountEditorControl maxThreadCountEditor;
         private System.Windows.Forms.TabPage tpResults;
         private BarcodeReaderResultsControl barcodeReaderResultsControl1;
         private BarcodeDemo.ScanDirectionEditorControl scanDirectionEditor;

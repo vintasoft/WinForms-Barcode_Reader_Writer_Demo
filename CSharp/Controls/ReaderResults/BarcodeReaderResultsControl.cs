@@ -938,6 +938,10 @@ namespace BarcodeDemo
                         AddBarcodeExtendedInformation("Start symbol", codabarInfo.StartSymbol);
                         AddBarcodeExtendedInformation("Stop symbol", codabarInfo.StopSymbol);
                         break;
+                    case BarcodeType.DotCode:
+                        DotCodeInfo dotcodeInfo = (DotCodeInfo)info;
+                        AddBarcodeExtendedInformation("Mask", dotcodeInfo.Mask);
+                        break;
                 }
             }
         }

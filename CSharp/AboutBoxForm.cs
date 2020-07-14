@@ -108,12 +108,16 @@ namespace BarcodeDemo
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(string.Format("http://{0}", ((LinkLabel)sender).Text));
+            ProcessStartInfo processInfo = new ProcessStartInfo(string.Format("https://{0}", ((LinkLabel)sender).Text));
+            processInfo.UseShellExecute = true;
+            Process.Start(processInfo);
         }
 
         private void vintasoftLogoPictureBox_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.vintasoft.com");
+            ProcessStartInfo processInfo = new ProcessStartInfo("https://www.vintasoft.com");
+            processInfo.UseShellExecute = true;
+            Process.Start(processInfo);
         }
 
         #endregion
