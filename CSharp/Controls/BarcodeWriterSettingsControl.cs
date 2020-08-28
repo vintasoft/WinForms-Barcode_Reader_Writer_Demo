@@ -32,6 +32,11 @@ namespace BarcodeDemo.Controls
         MailmarkCmdmValueItem _mailmarkCmdmValueItem = new MailmarkCmdmValueItem();
 
         /// <summary>
+        /// The Swiss QR Code value item.
+        /// </summary>
+        SwissQRCodeValueItem _swissQRCodeValueItem = new SwissQRCodeValueItem();
+
+        /// <summary>
         /// The PPN barcode value.
         /// </summary>
         PpnBarcodeValue _ppnBarcodeValue = new PpnBarcodeValue();
@@ -179,6 +184,7 @@ namespace BarcodeDemo.Controls
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICAztecCode);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICDataMatrix);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.HIBCLICQRCode);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.SwissQRCode);
             twoDimensionalBarcodeComboBox.SelectedItem = BarcodeType.DataMatrix;
 
             // fonts
@@ -578,6 +584,11 @@ namespace BarcodeDemo.Controls
                     //  encode Mailmark barcode value
                     SelectedBarcodeSubset.Encode(_mailmarkCmdmValueItem, BarcodeWriterSettings);
                 }
+                else if (SelectedBarcodeSubset is SwissQRCodeBarcodeSymbology)
+                {
+                    //  encode Swiss QR Code barcode value
+                    SelectedBarcodeSubset.Encode(_swissQRCodeValueItem, BarcodeWriterSettings);
+                }
                 else if (SelectedBarcodeSubset is PpnBarcodeSymbology)
                 {
                     //  encode PPN barcode value
@@ -952,6 +963,7 @@ namespace BarcodeDemo.Controls
             if (SelectedBarcodeSubset != null &&
                 SelectedBarcodeSubset is GS1BarcodeSymbologySubset ||
                 SelectedBarcodeSubset is MailmarkCmdmBarcodeSymbology ||
+                SelectedBarcodeSubset is SwissQRCodeBarcodeSymbology ||
                 SelectedBarcodeSubset is PpnBarcodeSymbology)
                 useCustomValueDialog = true;
             subsetBarcodeValueButton.Visible = useCustomValueDialog;
@@ -974,6 +986,17 @@ namespace BarcodeDemo.Controls
             else if (SelectedBarcodeSubset is MailmarkCmdmBarcodeSymbology)
             {
                 using (PropertyGridForm form = new PropertyGridForm(_mailmarkCmdmValueItem, "Mailmark CMDM value", false))
+                {
+                    form.PropertyGrid.PropertySort = PropertySort.NoSort;
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        EncodeValue();
+                    }
+                }
+            }
+            else if (SelectedBarcodeSubset is SwissQRCodeBarcodeSymbology)
+            {
+                using (PropertyGridForm form = new PropertyGridForm(_swissQRCodeValueItem, "Swiss QR Code value", false))
                 {
                     form.PropertyGrid.PropertySort = PropertySort.NoSort;
                     if (form.ShowDialog() == DialogResult.OK)

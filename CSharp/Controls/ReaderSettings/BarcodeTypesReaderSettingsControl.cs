@@ -266,6 +266,7 @@ namespace BarcodeDemo
             barcodeIsbt128CheckBox.Checked = false;
             barcodeIsbt128DataMatrixCheckBox.Checked = false;
             barcodeGs1DotCodeCheckBox.Checked = false;
+            barcodeSwissQRCodeCheckBox.Checked = false;
             foreach (BarcodeSymbologySubset subset in BarcodeReaderSettings.ScanBarcodeSubsets)
             {
                 if (subset is GS1_128BarcodeSymbology)
@@ -388,6 +389,8 @@ namespace BarcodeDemo
                 }
                 if (subset is SwissPostParcelBarcodeSymbology)
                     barcodeSwissPostParcelCheckBox.Checked = true;
+                if (subset is SwissQRCodeBarcodeSymbology)
+                    barcodeSwissQRCodeCheckBox.Checked = true;
                 if (subset is PpnBarcodeSymbology)
                     barcodePpnCheckBox.Checked = true;
                 if (subset is EanVelocityBarcodeSymbology)
@@ -626,6 +629,8 @@ namespace BarcodeDemo
             }
             if (barcodeSwissPostParcelCheckBox.Checked)
                 BarcodeReaderSettings.ScanBarcodeSubsets.Add(BarcodeSymbologySubsets.SwissPostParcel);
+            if (barcodeSwissQRCodeCheckBox.Checked)
+                BarcodeReaderSettings.ScanBarcodeSubsets.Add(BarcodeSymbologySubsets.SwissQRCode);
             if (barcodePpnCheckBox.Checked)
                 BarcodeReaderSettings.ScanBarcodeSubsets.Add(BarcodeSymbologySubsets.PPN);
             if (barcodeEanVelocityCheckBox.Checked)

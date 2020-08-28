@@ -115,6 +115,7 @@ namespace BarcodeDemo
             this.unknownLinearMinScanlinesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.unknownLinearMaxBarWideNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.twoDimensionalBarcodesTabPage = new System.Windows.Forms.TabPage();
+            this.barcodeGs1DotCodeCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodeDotCodeCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodeHibcLicAztecCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodeHibcLicDataMatrixCheckBox = new System.Windows.Forms.CheckBox();
@@ -141,7 +142,7 @@ namespace BarcodeDemo
             this.barcodeAztecCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodeDataMatrixCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodePDF417CheckBox = new System.Windows.Forms.CheckBox();
-            this.barcodeGs1DotCodeCheckBox = new System.Windows.Forms.CheckBox();
+            this.barcodeSwissQRCodeCheckBox = new System.Windows.Forms.CheckBox();
             this.barcodeTypesGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.linearBarcodesTabPage.SuspendLayout();
@@ -1092,6 +1093,7 @@ namespace BarcodeDemo
             // 
             // twoDimensionalBarcodesTabPage
             // 
+            this.twoDimensionalBarcodesTabPage.Controls.Add(this.barcodeSwissQRCodeCheckBox);
             this.twoDimensionalBarcodesTabPage.Controls.Add(this.barcodeGs1DotCodeCheckBox);
             this.twoDimensionalBarcodesTabPage.Controls.Add(this.barcodeDotCodeCheckBox);
             this.twoDimensionalBarcodesTabPage.Controls.Add(this.barcodeHibcLicAztecCheckBox);
@@ -1126,6 +1128,15 @@ namespace BarcodeDemo
             this.twoDimensionalBarcodesTabPage.TabIndex = 1;
             this.twoDimensionalBarcodesTabPage.Text = "2D";
             this.twoDimensionalBarcodesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // barcodeGs1DotCodeCheckBox
+            // 
+            this.barcodeGs1DotCodeCheckBox.Location = new System.Drawing.Point(373, 118);
+            this.barcodeGs1DotCodeCheckBox.Name = "barcodeGs1DotCodeCheckBox";
+            this.barcodeGs1DotCodeCheckBox.Size = new System.Drawing.Size(99, 22);
+            this.barcodeGs1DotCodeCheckBox.TabIndex = 73;
+            this.barcodeGs1DotCodeCheckBox.Text = "GS1 DotCode";
+            this.barcodeGs1DotCodeCheckBox.CheckedChanged += new System.EventHandler(this.barcodeTypeCheckBox_CheckedChanged);
             // 
             // barcodeDotCodeCheckBox
             // 
@@ -1174,7 +1185,7 @@ namespace BarcodeDemo
             // 
             // barcodeAAMVACheckBox
             // 
-            this.barcodeAAMVACheckBox.Location = new System.Drawing.Point(232, 167);
+            this.barcodeAAMVACheckBox.Location = new System.Drawing.Point(232, 190);
             this.barcodeAAMVACheckBox.Name = "barcodeAAMVACheckBox";
             this.barcodeAAMVACheckBox.Size = new System.Drawing.Size(86, 22);
             this.barcodeAAMVACheckBox.TabIndex = 67;
@@ -1193,7 +1204,7 @@ namespace BarcodeDemo
             // 
             // barcodeHanXinCodeCheckBox
             // 
-            this.barcodeHanXinCodeCheckBox.Location = new System.Drawing.Point(213, 97);
+            this.barcodeHanXinCodeCheckBox.Location = new System.Drawing.Point(213, 120);
             this.barcodeHanXinCodeCheckBox.Name = "barcodeHanXinCodeCheckBox";
             this.barcodeHanXinCodeCheckBox.Size = new System.Drawing.Size(120, 22);
             this.barcodeHanXinCodeCheckBox.TabIndex = 66;
@@ -1301,7 +1312,7 @@ namespace BarcodeDemo
             // 
             // barcodeMaxicodeCheckBox
             // 
-            this.barcodeMaxicodeCheckBox.Location = new System.Drawing.Point(213, 78);
+            this.barcodeMaxicodeCheckBox.Location = new System.Drawing.Point(213, 101);
             this.barcodeMaxicodeCheckBox.Name = "barcodeMaxicodeCheckBox";
             this.barcodeMaxicodeCheckBox.Size = new System.Drawing.Size(84, 22);
             this.barcodeMaxicodeCheckBox.TabIndex = 49;
@@ -1310,7 +1321,7 @@ namespace BarcodeDemo
             // 
             // barcodeMicroPDF417CheckBox
             // 
-            this.barcodeMicroPDF417CheckBox.Location = new System.Drawing.Point(213, 127);
+            this.barcodeMicroPDF417CheckBox.Location = new System.Drawing.Point(213, 150);
             this.barcodeMicroPDF417CheckBox.Name = "barcodeMicroPDF417CheckBox";
             this.barcodeMicroPDF417CheckBox.Size = new System.Drawing.Size(99, 22);
             this.barcodeMicroPDF417CheckBox.TabIndex = 51;
@@ -1328,7 +1339,7 @@ namespace BarcodeDemo
             // 
             // barcodeMicroQRCheckBox
             // 
-            this.barcodeMicroQRCheckBox.Location = new System.Drawing.Point(213, 58);
+            this.barcodeMicroQRCheckBox.Location = new System.Drawing.Point(213, 81);
             this.barcodeMicroQRCheckBox.Name = "barcodeMicroQRCheckBox";
             this.barcodeMicroQRCheckBox.Size = new System.Drawing.Size(83, 22);
             this.barcodeMicroQRCheckBox.TabIndex = 48;
@@ -1356,24 +1367,25 @@ namespace BarcodeDemo
             // 
             // barcodePDF417CheckBox
             // 
-            this.barcodePDF417CheckBox.Location = new System.Drawing.Point(213, 146);
+            this.barcodePDF417CheckBox.Location = new System.Drawing.Point(213, 169);
             this.barcodePDF417CheckBox.Name = "barcodePDF417CheckBox";
-            this.barcodePDF417CheckBox.Size = new System.Drawing.Size(206, 22);
+            this.barcodePDF417CheckBox.Size = new System.Drawing.Size(161, 22);
             this.barcodePDF417CheckBox.TabIndex = 18;
             this.barcodePDF417CheckBox.Text = "PDF417, PDF417 Compact";
             this.barcodePDF417CheckBox.CheckedChanged += new System.EventHandler(this.barcodeTypeCheckBox_CheckedChanged);
             // 
-            // barcodeGs1DotCodeCheckBox
+            // barcodeSwissQRCodeCheckBox
             // 
-            this.barcodeGs1DotCodeCheckBox.Location = new System.Drawing.Point(373, 118);
-            this.barcodeGs1DotCodeCheckBox.Name = "barcodeGs1DotCodeCheckBox";
-            this.barcodeGs1DotCodeCheckBox.Size = new System.Drawing.Size(99, 22);
-            this.barcodeGs1DotCodeCheckBox.TabIndex = 73;
-            this.barcodeGs1DotCodeCheckBox.Text = "GS1 DotCode";
-            this.barcodeGs1DotCodeCheckBox.CheckedChanged += new System.EventHandler(this.barcodeTypeCheckBox_CheckedChanged);
+            this.barcodeSwissQRCodeCheckBox.Location = new System.Drawing.Point(232, 58);
+            this.barcodeSwissQRCodeCheckBox.Name = "barcodeSwissQRCodeCheckBox";
+            this.barcodeSwissQRCodeCheckBox.Size = new System.Drawing.Size(124, 22);
+            this.barcodeSwissQRCodeCheckBox.TabIndex = 74;
+            this.barcodeSwissQRCodeCheckBox.Text = "Swiss QR Code";
+            this.barcodeSwissQRCodeCheckBox.CheckedChanged += new System.EventHandler(this.barcodeTypeCheckBox_CheckedChanged);
             // 
             // BarcodeTypesReaderSettingsControl
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.barcodeTypesGroupBox);
             this.Name = "BarcodeTypesReaderSettingsControl";
@@ -1513,5 +1525,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.CheckBox barcodeHibcLicQrCheckBox;
         private System.Windows.Forms.CheckBox barcodeDotCodeCheckBox;
         private System.Windows.Forms.CheckBox barcodeGs1DotCodeCheckBox;
+        private System.Windows.Forms.CheckBox barcodeSwissQRCodeCheckBox;
     }
 }
