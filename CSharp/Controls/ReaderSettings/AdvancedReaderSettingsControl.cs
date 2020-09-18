@@ -50,25 +50,7 @@ namespace BarcodeDemo
 
 
         #region Properties
-
-        BarcodeTypesReaderSettingsControl _barcodeTypesReaderSettings = null;
-        /// <summary>
-        /// Gets or sets the barcode types control.
-        /// </summary>
-        [DefaultValue((object)null)]
-        public BarcodeTypesReaderSettingsControl BarcodeTypesReaderSettings
-        {
-            get
-            {
-                return _barcodeTypesReaderSettings;
-            }
-            set
-            {
-                _barcodeTypesReaderSettings = value;
-                UpdateUI();
-            }
-        }
-
+       
         /// <summary>
         /// Gets or sets a value indicating whether barcode reader must interpret ECI characters.
         /// </summary>
@@ -163,10 +145,6 @@ namespace BarcodeDemo
                 upscale2RadioButton.Checked = true;
             else if (BarcodeReaderSettings.ImageScaleFactor <= 3f)
                 upscale3RadioButton.Checked = true;
-            if (_barcodeTypesReaderSettings != null)
-            {
-                _barcodeTypesReaderSettings.HighlightOptionalChecksumBarcodes = optionalChecksumCheckBox.Checked;
-            }
             invertColorsCheckBox.Checked = BarcodeReaderSettings.InvertImageColors;
             erodeCheckBox.Checked = BarcodeReaderSettings.Erode;
             removePeasCheckBox.Checked = BarcodeReaderSettings.RemovePeas;
@@ -232,10 +210,6 @@ namespace BarcodeDemo
                 BarcodeReaderSettings.ImageScaleFactor = 2f;
             else if (upscale3RadioButton.Checked)
                 BarcodeReaderSettings.ImageScaleFactor = 3f;
-            if (_barcodeTypesReaderSettings != null)
-            {
-                _barcodeTypesReaderSettings.HighlightOptionalChecksumBarcodes = optionalChecksumCheckBox.Checked;
-            }
             BarcodeReaderSettings.InvertImageColors = invertColorsCheckBox.Checked;
             BarcodeReaderSettings.Erode = erodeCheckBox.Checked;
             BarcodeReaderSettings.RemovePeas = removePeasCheckBox.Checked;

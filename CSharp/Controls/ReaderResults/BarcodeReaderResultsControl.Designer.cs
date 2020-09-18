@@ -1,4 +1,4 @@
-﻿namespace BarcodeDemo
+namespace BarcodeDemo
 {
     partial class BarcodeReaderResultsControl
     {
@@ -350,7 +350,7 @@
             // 
             // Number
             // 
-            this.Number.HeaderText = "№";
+            this.Number.HeaderText = "N";
             this.Number.Name = "Number";
             this.Number.ReadOnly = true;
             this.Number.Width = 30;
@@ -887,7 +887,6 @@
             // 
             // BarcodeReaderResultsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel1);

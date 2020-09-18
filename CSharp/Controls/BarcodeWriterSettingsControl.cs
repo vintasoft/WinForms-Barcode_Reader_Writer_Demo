@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -261,10 +261,12 @@ namespace BarcodeDemo.Controls
             // PDF417
             AddEnumValues(pdf417EncodingModeComboBox, typeof(PDF417EncodingMode));
             AddEnumValues(pdf417ErrorCorrectionComboBox, typeof(PDF417ErrorCorrectionLevel));
+            AddEnumValues(pdf417GS1ComponentTypeComboBox, typeof(GS1TwoDimensionalComponentType));
 
             // MicroPDF417
             AddEnumValues(microPDF417EncodingModeComboBox, typeof(PDF417EncodingMode));
             AddEnumValues(microPDF417SymbolSizeComboBox, typeof(MicroPDF417SymbolType));
+            AddEnumValues(microPDF417GS1ComponentTypeComboBox, typeof(GS1TwoDimensionalComponentType));
 
             // ECI
             EciCharacterEncoding[] eciCharacterEncodings = EciCharacterEncoding.GetEciCharacterEncodings();
@@ -397,6 +399,8 @@ namespace BarcodeDemo.Controls
                         microPDF417ColumnsNumericUpDown.Value = value.MicroPDF417Columns;
                         microPDF417EncodingModeComboBox.SelectedItem = value.MicroPDF417EncodingMode;
                         microPDF417SymbolSizeComboBox.SelectedItem = value.MicroPDF417Symbol;
+                        microPDF417GS1ComponentTypeComboBox.SelectedItem = value.GS1TwoDimensionalComponentType;
+                        pdf417GS1ComponentTypeComboBox.SelectedItem = value.GS1TwoDimensionalComponentType;
                         microPED417RowHeightNumericUpDown.Value = value.MicroPDF417RowHeight;
                         if (value.QRMaskPattern == -1)
                             microQRDataMaskPatternComboBox.SelectedIndex = 0;
@@ -747,8 +751,8 @@ namespace BarcodeDemo.Controls
             }
             else
             {
-                barcodeType = SelectedBarcodeSubset.BaseType;
-                switch (SelectedBarcodeSubset.BaseType)
+                barcodeType = SelectedBarcodeSubset.BarcodeType;
+                switch (SelectedBarcodeSubset.BarcodeType)
                 {
                     case BarcodeType.MSI:
                     case BarcodeType.Code11:
@@ -876,7 +880,7 @@ namespace BarcodeDemo.Controls
                     BarcodeSymbologySubset barcodeSubset = twoDimensionalBarcodeComboBox.SelectedItem as BarcodeSymbologySubset;
                     BarcodeType baseBarcodeType;
                     if (barcodeSubset != null)
-                        baseBarcodeType = barcodeSubset.BaseType;
+                        baseBarcodeType = barcodeSubset.BarcodeType;
                     else
                         baseBarcodeType = (BarcodeType)twoDimensionalBarcodeComboBox.SelectedItem;
 
@@ -1097,7 +1101,7 @@ namespace BarcodeDemo.Controls
             BarcodeSymbologySubset barcodeSubset = twoDimensionalBarcodeComboBox.SelectedItem as BarcodeSymbologySubset;
             BarcodeType baseBarcodeType;
             if (barcodeSubset != null)
-                baseBarcodeType = barcodeSubset.BaseType;
+                baseBarcodeType = barcodeSubset.BarcodeType;
             else
                 baseBarcodeType = (BarcodeType)twoDimensionalBarcodeComboBox.SelectedItem;
 
@@ -1115,6 +1119,21 @@ namespace BarcodeDemo.Controls
                 }
 
                 UpdateUI();
+
+                if (BarcodeWriterSettings != null)
+                {
+                    bool resetGS1TwoDimensionalComponentType = false;
+                    if (baseBarcodeType == BarcodeType.PDF417 || baseBarcodeType == BarcodeType.PDF417Compact)
+                        resetGS1TwoDimensionalComponentType = BarcodeWriterSettings.GS1TwoDimensionalComponentType != GS1TwoDimensionalComponentType.CC_C;
+                    if (baseBarcodeType == BarcodeType.MicroPDF417)
+                        resetGS1TwoDimensionalComponentType = BarcodeWriterSettings.GS1TwoDimensionalComponentType == GS1TwoDimensionalComponentType.CC_C;
+                    if (resetGS1TwoDimensionalComponentType)
+                    {
+                        BarcodeWriterSettings.GS1TwoDimensionalComponentType = GS1TwoDimensionalComponentType.Undefined;
+                        microPDF417GS1ComponentTypeComboBox.SelectedItem = GS1TwoDimensionalComponentType.Undefined;
+                        pdf417GS1ComponentTypeComboBox.SelectedItem = GS1TwoDimensionalComponentType.Undefined;
+                    }
+                }
 
                 // select settings panel
                 switch (baseBarcodeType)
@@ -1558,6 +1577,14 @@ namespace BarcodeDemo.Controls
                 BarcodeWriterSettings.Barcode = BarcodeType.PDF417;
         }
 
+        private void pdf417GS1ComponentTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.GS1TwoDimensionalComponentType = (GS1TwoDimensionalComponentType)pdf417GS1ComponentTypeComboBox.SelectedItem;
+        }
+
         #endregion
 
 
@@ -1577,6 +1604,15 @@ namespace BarcodeDemo.Controls
                 return;
 
             BarcodeWriterSettings.MicroPDF417Symbol = (MicroPDF417SymbolType)microPDF417SymbolSizeComboBox.SelectedItem;
+        }
+
+
+        private void microPDF417GS1ComponentTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BarcodeWriterSettings == null)
+                return;
+
+            BarcodeWriterSettings.GS1TwoDimensionalComponentType = (GS1TwoDimensionalComponentType)microPDF417GS1ComponentTypeComboBox.SelectedItem;
         }
 
         private void microPDF417ColumnsNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -1752,6 +1788,7 @@ namespace BarcodeDemo.Controls
         /// Occurs when writer throws exception.        
         /// </summary>
         public event EventHandler<ExceptionEventArgs> WriterException;
+
 
 
         #endregion

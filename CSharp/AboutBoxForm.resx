@@ -387,7 +387,7 @@
     <value>This demo demonstrates the following SDK possibilities:
 
 1. Recognize 1D and 2D barcodes from image:
- - 102 barcode symbologies and subsets are supported: Code 39, Code 128, DataMatrix, QR, PDF417, etc
+ - 129 barcode symbologies and subsets are supported: Code 39, Code 128, DataMatrix, QR, PDF417, etc
  - Load image from image file or image-resource of PDF document
  - Set barcode symbologies to search
  - Search unknown linear barcodes

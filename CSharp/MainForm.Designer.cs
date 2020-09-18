@@ -43,8 +43,8 @@ namespace BarcodeDemo
             this.currentBarcodeInfo = new System.Windows.Forms.Label();
             this.outputTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tpSettings = new System.Windows.Forms.TabPage();
+            this.readerBarcodeTypes = new BarcodeDemo.ReaderSettingsBarcodeTypesControl();
             this.advancedReaderSettings = new BarcodeDemo.AdvancedReaderSettingsControl();
-            this.readerBarcodeTypes = new BarcodeDemo.BarcodeTypesReaderSettingsControl();
             this.GroupBox6 = new System.Windows.Forms.GroupBox();
             this.scanIntervalEditor = new BarcodeDemo.ScanIntervalEditorControl();
             this.expectedBarcodesEditor = new BarcodeDemo.ExpectedBarcodesEditorControl();
@@ -289,8 +289,8 @@ namespace BarcodeDemo
             // 
             // tpSettings
             // 
-            this.tpSettings.Controls.Add(this.advancedReaderSettings);
             this.tpSettings.Controls.Add(this.readerBarcodeTypes);
+            this.tpSettings.Controls.Add(this.advancedReaderSettings);
             this.tpSettings.Controls.Add(this.GroupBox6);
             this.tpSettings.Location = new System.Drawing.Point(4, 22);
             this.tpSettings.Name = "tpSettings";
@@ -299,21 +299,20 @@ namespace BarcodeDemo
             this.tpSettings.Text = "Reader settings";
             this.tpSettings.UseVisualStyleBackColor = true;
             // 
+            // readerBarcodeTypes
+            // 
+            this.readerBarcodeTypes.Location = new System.Drawing.Point(3, 0);
+            this.readerBarcodeTypes.Name = "readerBarcodeTypes";
+            this.readerBarcodeTypes.Size = new System.Drawing.Size(491, 258);
+            this.readerBarcodeTypes.TabIndex = 26;
+            // 
             // advancedReaderSettings
             // 
-            this.advancedReaderSettings.BarcodeTypesReaderSettings = this.readerBarcodeTypes;
             this.advancedReaderSettings.InterpretEciCharacters = false;
             this.advancedReaderSettings.Location = new System.Drawing.Point(498, 0);
             this.advancedReaderSettings.Name = "advancedReaderSettings";
-            this.advancedReaderSettings.Size = new System.Drawing.Size(275, 258);
+            this.advancedReaderSettings.Size = new System.Drawing.Size(275, 259);
             this.advancedReaderSettings.TabIndex = 25;
-            // 
-            // readerBarcodeTypes
-            // 
-            this.readerBarcodeTypes.Location = new System.Drawing.Point(1, 0);
-            this.readerBarcodeTypes.Name = "readerBarcodeTypes";
-            this.readerBarcodeTypes.Size = new System.Drawing.Size(492, 258);
-            this.readerBarcodeTypes.TabIndex = 24;
             // 
             // GroupBox6
             // 
@@ -416,8 +415,8 @@ namespace BarcodeDemo
             this.unregistredRestrictionsLabel.Name = "unregistredRestrictionsLabel";
             this.unregistredRestrictionsLabel.Size = new System.Drawing.Size(231, 48);
             this.unregistredRestrictionsLabel.TabIndex = 29;
-            this.unregistredRestrictionsLabel.Text = "Barcode value in evaluation version will be replaced to the \"*DEMO*\" string for Q" +
-    "R, RSS(GS1) and Intelligent Mail barcodes.";
+            this.unregistredRestrictionsLabel.Text = "Barcode value in evaluation version will be replaced to the \"*DEMO*\" string for R" +
+    "SS(GS1) and Intelligent Mail barcodes.";
             // 
             // tpResults
             // 
@@ -425,7 +424,7 @@ namespace BarcodeDemo
             this.tpResults.Location = new System.Drawing.Point(4, 22);
             this.tpResults.Name = "tpResults";
             this.tpResults.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResults.Size = new System.Drawing.Size(776, 444);
+            this.tpResults.Size = new System.Drawing.Size(776, 463);
             this.tpResults.TabIndex = 1;
             this.tpResults.Text = "Reader results";
             this.tpResults.UseVisualStyleBackColor = true;
@@ -440,7 +439,7 @@ namespace BarcodeDemo
             this.barcodeReaderResultsControl1.Location = new System.Drawing.Point(3, 3);
             this.barcodeReaderResultsControl1.Name = "barcodeReaderResultsControl1";
             this.barcodeReaderResultsControl1.RecognizedBarcodes = null;
-            this.barcodeReaderResultsControl1.Size = new System.Drawing.Size(770, 438);
+            this.barcodeReaderResultsControl1.Size = new System.Drawing.Size(770, 457);
             this.barcodeReaderResultsControl1.TabIndex = 0;
             // 
             // writerTabPage
@@ -449,7 +448,7 @@ namespace BarcodeDemo
             this.writerTabPage.Location = new System.Drawing.Point(4, 22);
             this.writerTabPage.Name = "writerTabPage";
             this.writerTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.writerTabPage.Size = new System.Drawing.Size(776, 444);
+            this.writerTabPage.Size = new System.Drawing.Size(776, 463);
             this.writerTabPage.TabIndex = 3;
             this.writerTabPage.Text = "Writer";
             this.writerTabPage.UseVisualStyleBackColor = true;
@@ -470,7 +469,7 @@ namespace BarcodeDemo
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.barcodeWriterSettingsControl1);
-            this.splitContainer2.Size = new System.Drawing.Size(770, 438);
+            this.splitContainer2.Size = new System.Drawing.Size(770, 457);
             this.splitContainer2.SplitterDistance = 501;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -483,7 +482,7 @@ namespace BarcodeDemo
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(501, 290);
+            this.panel4.Size = new System.Drawing.Size(501, 309);
             this.panel4.TabIndex = 1;
             // 
             // barcodeWriterErrorText
@@ -493,7 +492,7 @@ namespace BarcodeDemo
             this.barcodeWriterErrorText.ForeColor = System.Drawing.Color.DarkRed;
             this.barcodeWriterErrorText.Location = new System.Drawing.Point(0, 0);
             this.barcodeWriterErrorText.Name = "barcodeWriterErrorText";
-            this.barcodeWriterErrorText.Size = new System.Drawing.Size(499, 288);
+            this.barcodeWriterErrorText.Size = new System.Drawing.Size(499, 307);
             this.barcodeWriterErrorText.TabIndex = 1;
             this.barcodeWriterErrorText.Text = "Barcode Writing Error";
             this.barcodeWriterErrorText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -517,7 +516,7 @@ namespace BarcodeDemo
             this.panel2.Controls.Add(this.readBarcodeFromWriterImageButton);
             this.panel2.Controls.Add(this.createWriterImageButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 290);
+            this.panel2.Location = new System.Drawing.Point(0, 309);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(501, 148);
             this.panel2.TabIndex = 0;
@@ -585,7 +584,7 @@ namespace BarcodeDemo
             this.barcodeWriterSettingsControl1.Location = new System.Drawing.Point(0, 0);
             this.barcodeWriterSettingsControl1.Name = "barcodeWriterSettingsControl1";
             this.barcodeWriterSettingsControl1.SelectedBarcodeSubset = null;
-            this.barcodeWriterSettingsControl1.Size = new System.Drawing.Size(265, 438);
+            this.barcodeWriterSettingsControl1.Size = new System.Drawing.Size(265, 457);
             this.barcodeWriterSettingsControl1.TabIndex = 0;
             this.barcodeWriterSettingsControl1.WriterException += new System.EventHandler<BarcodeDemo.ExceptionEventArgs>(this.barcodeWriterSettingsControl1_WriterException);
             // 
@@ -1119,7 +1118,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox showProgressCheckBox;
         private System.Windows.Forms.Button resetSettingsButton;
-        private BarcodeTypesReaderSettingsControl readerBarcodeTypes;
         private AdvancedReaderSettingsControl advancedReaderSettings;
         private MinConfidenceEditorControl minConfidenceEditor;
         private BarcodeDemo.MaxThreadCountEditorControl maxThreadCountEditor;
@@ -1149,6 +1147,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem saveSVGImageAsToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveSvgFileDialog;
+        private ReaderSettingsBarcodeTypesControl readerBarcodeTypes;
     }
 }
-

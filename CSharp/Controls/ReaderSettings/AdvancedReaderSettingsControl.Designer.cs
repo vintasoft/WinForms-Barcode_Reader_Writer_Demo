@@ -145,8 +145,8 @@ namespace BarcodeDemo
             // 
             // maxCellSizeNumericUpDown
             // 
-            this.maxCellSizeNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.maxCellSizeNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.maxCellSizeNumericUpDown.Location = new System.Drawing.Point(163, 109);
             this.maxCellSizeNumericUpDown.Maximum = new decimal(new int[] {
             256,
@@ -206,6 +206,8 @@ namespace BarcodeDemo
             this.optionalChecksumCheckBox.Size = new System.Drawing.Size(169, 17);
             this.optionalChecksumCheckBox.TabIndex = 33;
             this.optionalChecksumCheckBox.Text = "Check optional checksum";
+            this.toolTip1.SetToolTip(this.optionalChecksumCheckBox, "Barcode symbologies with optional checksum: Code 39, Industrial Standard 2 of 5, " +
+        "Interleaved 2 of 5, Matrix 2 of 5.");
             this.optionalChecksumCheckBox.UseVisualStyleBackColor = true;
             this.optionalChecksumCheckBox.CheckedChanged += new System.EventHandler(this.settingCheckBox_CheckedChanged);
             // 
@@ -229,8 +231,8 @@ namespace BarcodeDemo
             // 
             // recognitionTimeoutNumericUpDown
             // 
-            this.recognitionTimeoutNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.recognitionTimeoutNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.recognitionTimeoutNumericUpDown.Increment = new decimal(new int[] {
             10,
             0,

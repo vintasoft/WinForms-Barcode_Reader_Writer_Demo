@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.GS1;
+using Vintasoft.Barcode.SymbologySubsets;
 using Vintasoft.Barcode.SymbologySubsets.AAMVA;
 using Vintasoft.Barcode.SymbologySubsets.Hibc;
 using Vintasoft.Barcode.SymbologySubsets.Isbt128;
@@ -315,7 +316,7 @@ namespace BarcodeDemo
             }
             ShowBarcodeValue(info);
 
-            if (info is BarcodeSubsetInfo)
+            if (info is BarcodeSubsetInfo && !(((BarcodeSubsetInfo)info).BarcodeSubset is CompositeBarcodeSymbologySubset))
                 info = ((BarcodeSubsetInfo)info).BaseBarcodeInfo;
             ShowBarcodeExtendedInformation(info);
             ShowBarcodeValueItems(info);
@@ -447,10 +448,24 @@ namespace BarcodeDemo
 
                     sb.Append(Environment.NewLine);
 
-                    sb.Append(string.Format("{0} value: ", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
-                    sb.Append(Environment.NewLine);
-                    sb.Append(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
-                    sb.Append(Environment.NewLine);
+                    CompositeBarcodeSymbologySubset compositeSubset = ((BarcodeSubsetInfo)info).BarcodeSubset as CompositeBarcodeSymbologySubset;
+                    if (compositeSubset!=null)
+                    {
+                        foreach (IBarcodeInfo componentInfo in info.SymbolComponents)
+                        {
+                            sb.Append(string.Format("{0} component value: ", componentInfo.BarcodeType));
+                            sb.Append(Environment.NewLine);
+                            sb.Append(componentInfo.Value);
+                            sb.Append(Environment.NewLine);
+                        }
+                    }
+                    else
+                    {
+                        sb.Append(string.Format("{0} value: ", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
+                        sb.Append(Environment.NewLine);
+                        sb.Append(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
+                        sb.Append(Environment.NewLine);
+                    }
 
                     sb.Append(Environment.NewLine);
                     sb.Append("GS1 decoded value:");
@@ -633,8 +648,8 @@ namespace BarcodeDemo
                         sb.AppendLine(string.Format("Creditor building number or address line 2:        {0}", value.CreditorBuildingNumberOrAddressLine2));
                     if (!string.IsNullOrEmpty(value.CreditorTown))
                         sb.AppendLine(string.Format("Creditor town:                                     {0}", value.CreditorTown));
-                    if (!string.IsNullOrEmpty(value.CreditorContry))
-                        sb.AppendLine(string.Format("Creditor contry:                                   {0}", value.CreditorContry));
+                    if (!string.IsNullOrEmpty(value.CreditorCountry))
+                        sb.AppendLine(string.Format("Creditor country:                                   {0}", value.CreditorCountry));
 
 
                     if (!string.IsNullOrEmpty(value.Amount))
@@ -652,8 +667,8 @@ namespace BarcodeDemo
                         sb.AppendLine(string.Format("Ultimate debtor building number or address line 2: {0}", value.UltimateDebtorBuildingNumberOrAddressLine2));
                     if (!string.IsNullOrEmpty(value.UltimateDebtorTown))
                         sb.AppendLine(string.Format("Ultimate debtor town:                              {0}", value.UltimateDebtorTown));
-                    if (!string.IsNullOrEmpty(value.UltimateDebtorContry))
-                        sb.AppendLine(string.Format("Ultimate debtor contry:                            {0}", value.UltimateDebtorContry));
+                    if (!string.IsNullOrEmpty(value.UltimateDebtorCountry))
+                        sb.AppendLine(string.Format("Ultimate debtor country:                            {0}", value.UltimateDebtorCountry));
 
                     if (!string.IsNullOrEmpty(value.PaymentReferenceType))
                         sb.AppendLine(string.Format("Payment reference type:                            {0}", value.PaymentReferenceType));
@@ -932,10 +947,12 @@ namespace BarcodeDemo
                         AddBarcodeExtendedInformation("Error correction level", pdf417Info.ErrorCorrectionLevel);
                         AddBarcodeExtendedInformation("Row codewords count", pdf417Info.RowCodewordsCount);
                         AddBarcodeExtendedInformation("Rows count", pdf417Info.RowsCount);
+                        AddBarcodeExtendedInformation("GS1 component type", pdf417Info.GS1ComponentType);
                         break;
                     case BarcodeType.MicroPDF417:
                         MicroPDF417Info microPdf417Info = (MicroPDF417Info)info;
                         AddBarcodeExtendedInformation("Symbol type", microPdf417Info.SymbolType);
+                        AddBarcodeExtendedInformation("GS1 component type", microPdf417Info.GS1ComponentType);
                         break;
                     case BarcodeType.DataMatrix:
                         DataMatrixInfo dataMatrixInfo = (DataMatrixInfo)info;
