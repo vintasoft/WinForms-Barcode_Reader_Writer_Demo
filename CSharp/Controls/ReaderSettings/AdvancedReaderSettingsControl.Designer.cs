@@ -543,8 +543,7 @@ namespace BarcodeDemo
             // 
             // AdvancedReaderSettingsControl
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox5);
+           this.Controls.Add(this.groupBox5);
             this.Name = "AdvancedReaderSettingsControl";
             this.Size = new System.Drawing.Size(276, 245);
             this.groupBox5.ResumeLayout(false);

@@ -213,7 +213,6 @@ namespace BarcodeDemo
             // ISO15416QualityTestForm
             // 
             this.AcceptButton = this.okButton;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.testResults);
             this.Controls.Add(this.groupBox1);

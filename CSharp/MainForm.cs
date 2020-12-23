@@ -174,18 +174,18 @@ namespace BarcodeDemo
 
             _barcodeReader.Progress += new EventHandler<BarcodeReaderProgressEventArgs>(BarcodeReader_RecognizeProgress);
 
-            _barcodeReader.Settings.CollectTestInformation = true;
+            _barcodeReader.Settings.CollectTestInformation = true;            
 
             readerBarcodeTypes.SettingsChanged += new EventHandler(ReaderBarcodeTypes_SettingsChanged);
 
-
+            
             _barcodeWriter.Settings.Barcode = BarcodeType.Code128;
             _barcodeWriter.Settings.Value = "012345";
             _barcodeWriter.Settings.PixelFormat = BarcodeImagePixelFormat.Bgr24;
             barcodeWriterSettingsControl1.BarcodeWriterSettings = _barcodeWriter.Settings;
             _barcodeWriter.Settings.Changed += new EventHandler(WriterSettings_Changed);
 
-            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);
+            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);            
         }
 
         #endregion
@@ -295,7 +295,7 @@ namespace BarcodeDemo
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (AboutBoxForm aboutDialog = new AboutBoxForm("vsbarcode-dotnet"))
-                aboutDialog.ShowDialog();
+                aboutDialog.ShowDialog();            
         }
 
         #endregion
@@ -320,11 +320,11 @@ namespace BarcodeDemo
             try
             {
                 // get the path to directory with barcode image samples
-                string directoryWithBarcodeImageSamples = GetDirectoryWithBarcodeImageSamples();
+                string exampleImagesDir = GetExampleImagesDirectory();
                 // if directory exists
-                if (Directory.Exists(directoryWithBarcodeImageSamples))
+                if (exampleImagesDir != null)
                     // make the directory as initial directory for the open file dialog
-                    openFileDialog1.InitialDirectory = directoryWithBarcodeImageSamples;
+                    openFileDialog1.InitialDirectory = exampleImagesDir;
             }
             catch (Exception)
             {
@@ -341,30 +341,29 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Returns the path to a directory with barcode image samples.
+        /// Returns path to "Images" directory with example barcode images.
         /// </summary>
-        private string GetDirectoryWithBarcodeImageSamples()
+        /// <returns>Path to "Images" directory with example barcode images.</returns>
+        private string GetExampleImagesDirectory()
         {
-            try
-            {
-                string directoryPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.FullyQualifiedName);
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.Combine(directoryPath, "Images");
-                if (Directory.Exists(directoryPath))
-                    return directoryPath;
+            string binDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.FullyQualifiedName);
+            string exampleImagesDir = Path.Combine(binDir, Path.Combine("..", Path.Combine("..", Path.Combine("..", "Images"))));
+            if (Directory.Exists(exampleImagesDir))
+                return Path.GetFullPath(exampleImagesDir);
 
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.GetDirectoryName(directoryPath);
-                directoryPath = Path.Combine(directoryPath, "Images");
-                return directoryPath;
-            }
-            catch
-            {
-                return "";
-            }
+            exampleImagesDir = Path.Combine(binDir, Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", "Images")))));
+            if (Directory.Exists(exampleImagesDir))
+                return Path.GetFullPath(exampleImagesDir);
+
+            exampleImagesDir = Path.Combine(binDir, Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", "Images"))))));
+            if (Directory.Exists(exampleImagesDir))
+                return Path.GetFullPath(exampleImagesDir);
+
+            exampleImagesDir = Path.Combine(binDir, Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", Path.Combine("..", "Images")))))));
+            if (Directory.Exists(exampleImagesDir))
+                return Path.GetFullPath(exampleImagesDir);
+
+            return null;
         }
 
         /// <summary>
@@ -405,6 +404,7 @@ namespace BarcodeDemo
                 }
             }
         }
+
 
         /// <summary>
         /// Key is down in main form.
@@ -758,7 +758,7 @@ namespace BarcodeDemo
             if (_barcodeReaderImage != null && _barcodeReaderSourceImage != writerPictureBox.Image)
             {
                 if (_barcodeReaderSourceImage != _barcodeReaderImage)
-                {
+                {                    
                     _barcodeReaderSourceImage.Dispose();
                     _barcodeReaderSourceImage = null;
                     _barcodeReaderSourceStream.Dispose();
@@ -1344,7 +1344,7 @@ namespace BarcodeDemo
                     e.Cancel = true;
             }
         }
-
+       
         /// <summary>
         /// Reads barcodes from the image.
         /// </summary>
@@ -1574,13 +1574,13 @@ namespace BarcodeDemo
                         PointF[] referenceRecognitionPoints = null;
                         if (inf is AztecInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] {
-                                ((AztecInfo)inf).BulleyeCenter
+                            referenceRecognitionPoints = new PointF[] { 
+                                ((AztecInfo)inf).BulleyeCenter 
                             };
                         }
                         else if (inf is QRInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] {
+                            referenceRecognitionPoints = new PointF[] { 
                                ((QRInfo)inf).LeftTopFinderPatternCenter,
                                ((QRInfo)inf).LeftBottomFinderPatternCenter,
                                ((QRInfo)inf).RightTopFinderPatternCenter
@@ -1588,7 +1588,7 @@ namespace BarcodeDemo
                         }
                         else if (inf is HanXinCodeInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] {
+                            referenceRecognitionPoints = new PointF[] { 
                                ((HanXinCodeInfo)inf).LeftTopFinderPatternCenter,
                                ((HanXinCodeInfo)inf).LeftBottomFinderPatternCenter,
                                ((HanXinCodeInfo)inf).RightTopFinderPatternCenter,
@@ -1915,7 +1915,7 @@ namespace BarcodeDemo
                 return;
             _barcodeWriting = true;
             try
-            {
+            {                
                 if (barcodeWriterSettingsControl1.SelectedBarcodeSubset != null)
                     if (!barcodeWriterSettingsControl1.EncodeValue())
                         return;
@@ -1927,7 +1927,7 @@ namespace BarcodeDemo
                     {
                         // generate "design" barcode use barcode render
                         if (_barcodeImageWidth > 0 && _barcodeImageHeigth > 0)
-                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;
+                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;                        
                         writerPictureBox.Image = _barcodeRenderer.GetBarcodeAsBitmap(
                             _barcodeWriter, _barcodeImageWidth, _barcodeImageHeigth, _barcodeImageSizeUnits);
                         barcodeRendered = true;
@@ -2009,5 +2009,9 @@ namespace BarcodeDemo
 
         #endregion
 
+        private void readerBarcodeTypes_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

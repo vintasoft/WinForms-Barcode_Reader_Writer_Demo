@@ -170,7 +170,6 @@ namespace BarcodeDemo
             // GetSizeForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(210, 159);
             this.Controls.Add(this.heightValueEditor);
@@ -187,6 +186,7 @@ namespace BarcodeDemo
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "GetSizeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set image size";

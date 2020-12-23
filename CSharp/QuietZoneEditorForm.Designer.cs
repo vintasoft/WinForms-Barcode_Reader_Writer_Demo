@@ -151,7 +151,6 @@ namespace BarcodeDemo
             // QuietZoneEditorForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(186, 133);
             this.Controls.Add(this.groupBox1);
@@ -160,6 +159,7 @@ namespace BarcodeDemo
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "QuietZoneEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quiet Zone";

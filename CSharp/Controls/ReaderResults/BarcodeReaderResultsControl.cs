@@ -209,6 +209,8 @@ namespace BarcodeDemo
                 thresholdLabel.Text = "";
                 barcodeValueAsGS1RadioButton.Enabled = showGS1DecoderButton.Enabled = false;
                 structureAppendLabel.Visible = false;
+                ISO15415QualityTestButton.Enabled = false;
+                ISO15416QualityTestButton.Enabled = false;
             }
             else
             {

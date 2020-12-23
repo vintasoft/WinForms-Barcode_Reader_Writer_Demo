@@ -887,7 +887,6 @@ namespace BarcodeDemo
             // 
             // BarcodeReaderResultsControl
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel1);
             this.Name = "BarcodeReaderResultsControl";

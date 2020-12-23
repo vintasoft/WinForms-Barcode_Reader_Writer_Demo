@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-
+using System.Windows.Forms;
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 
@@ -193,7 +193,14 @@ namespace BarcodeDemo
 
             BarcodeReaderSettings.AustralianPostCustomerInfoFormat = (AustralianPostCustomerInfoFormat)barcodeReaderAustralianCustomInfoComboBox.SelectedItem;
             BarcodeReaderSettings.MSIChecksum = (MSIChecksumType)barcodeReaderMSIChecksumComboBox.SelectedItem;
-            BarcodeReaderSettings.RecognitionTimeout = (int)recognitionTimeoutNumericUpDown.Value;
+            try
+            {
+                BarcodeReaderSettings.RecognitionTimeout = (int)recognitionTimeoutNumericUpDown.Value;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             BarcodeReaderSettings.SearchCode39WithoutStartStop = code39WithoutStartStopCheckBox.Checked;
             BarcodeReaderSettings.MatrixBarcodeMaxCellSize = (int)maxCellSizeNumericUpDown.Value;
             BarcodeReaderSettings.QRMaxAxialNonuniformity = (float)qrMaxAxialNonuniformityNumericUpDown.Value / 100f;
@@ -223,7 +230,14 @@ namespace BarcodeDemo
         /// </summary>
         private void recognitionTimeoutNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            BarcodeReaderSettings.RecognitionTimeout = (int)recognitionTimeoutNumericUpDown.Value;
+            try
+            {
+                BarcodeReaderSettings.RecognitionTimeout = (int)recognitionTimeoutNumericUpDown.Value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

@@ -232,7 +232,6 @@ namespace BarcodeDemo
             // 
             // AboutBoxForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 472);
             this.Controls.Add(this.decriptionRichTextBox);
             this.Controls.Add(this.nameLabel);
@@ -241,6 +240,7 @@ namespace BarcodeDemo
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "AboutBoxForm";
             this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
