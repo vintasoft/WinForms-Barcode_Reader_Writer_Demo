@@ -1,81 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{571B07E7-832F-4F7A-ADD7-3EFEDD3E5ACC}</ProjectGuid>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BarcodeDemo</RootNamespace>
     <AssemblyName>BarcodeDemo</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <ApplicationIcon>App.ico</ApplicationIcon>
+
+    <EnableDefaultItems>false</EnableDefaultItems>
+
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>  
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>    
+
+    <Version>14.0.0.1</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEMO_VERSION</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>None</DebugType>
-    <DebugSymbols>false</DebugSymbols>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEMO_VERSION</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>None</DebugType>
-    <DebugSymbols>false</DebugSymbols>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>None</DebugType>
-    <DebugSymbols>false</DebugSymbols>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Vintasoft.Barcode" Version="14.0.0.1" />
     <PackageReference Include="Vintasoft.Barcode.Gdi" Version="14.0.0.1" />
@@ -104,9 +65,7 @@
     <Compile Include="BarcodeDesigner\BarcodeRenderers\MatrixBarcodeRendererBase.cs" />
     <Compile Include="BarcodeDesigner\BarcodeRenderers\BarcodeMatixDotType.cs" />
     <Compile Include="BarcodeDesigner\BarcodeRenderers\ConnectedMatixBarcodeRenderer.cs" />
-    <Compile Include="Controls\BarcodeStructureViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\BarcodeStructureViewer.cs" />
     <Compile Include="Controls\BarcodeWriterSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,24 +86,16 @@
     <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.Designer.cs">
       <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.Designer.cs">
-      <DependentUpon>DemoVersionRestrictionsForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.cs" />
+    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.Designer.cs" />
     <Compile Include="Controls\ReaderSettings\ParameterEditors\ExpectedBarcodesEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterSlaveEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.Designer.cs">
-      <DependentUpon>ReaderSettingsBarcodeTypesControl.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.cs" />
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.Designer.cs" />
     <Compile Include="Controls\ReaderSettings\ReaderSettingsEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,12 +197,8 @@
       <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.resx">
-      <DependentUpon>DemoVersionRestrictionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.resx">
-      <DependentUpon>ReaderSettingsBarcodeTypesControl.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.resx" />
+    <EmbeddedResource Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.resx" />
     <EmbeddedResource Include="Controls\ReaderSettings\ScanDirectionEditorControl.resx">
       <DependentUpon>ScanDirectionEditorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -298,12 +245,4 @@
     </EmbeddedResource>
     <Content Include="App.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -45,6 +45,8 @@ namespace BarcodeDemo
             this.interpretEciCharactersCheckBox = new System.Windows.Forms.CheckBox();
             this.collectQualityTestInformationCheckBox = new System.Windows.Forms.CheckBox();
             this.imagePreproceesingTabPage = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.adaptiveBinarizationStepNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.erodeCheckBox = new System.Windows.Forms.CheckBox();
             this.removePeasCheckBox = new System.Windows.Forms.CheckBox();
             this.invertColorsCheckBox = new System.Windows.Forms.CheckBox();
@@ -76,6 +78,7 @@ namespace BarcodeDemo
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recognitionTimeoutNumericUpDown)).BeginInit();
             this.imagePreproceesingTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.adaptiveBinarizationStepNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.barcodesTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataMatrixLPatternMaxErasuresNumericUpDown)).BeginInit();
@@ -272,6 +275,8 @@ namespace BarcodeDemo
             // 
             // imagePreproceesingTabPage
             // 
+            this.imagePreproceesingTabPage.Controls.Add(this.label8);
+            this.imagePreproceesingTabPage.Controls.Add(this.adaptiveBinarizationStepNumericUpDown);
             this.imagePreproceesingTabPage.Controls.Add(this.erodeCheckBox);
             this.imagePreproceesingTabPage.Controls.Add(this.removePeasCheckBox);
             this.imagePreproceesingTabPage.Controls.Add(this.invertColorsCheckBox);
@@ -283,9 +288,32 @@ namespace BarcodeDemo
             this.imagePreproceesingTabPage.Text = "Image Preprocessing";
             this.imagePreproceesingTabPage.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(148, 13);
+            this.label8.TabIndex = 58;
+            this.label8.Text = "Adaptive binarization step (px)";
+            // 
+            // adaptiveBinarizationStepNumericUpDown
+            // 
+            this.adaptiveBinarizationStepNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.adaptiveBinarizationStepNumericUpDown.Location = new System.Drawing.Point(189, 50);
+            this.adaptiveBinarizationStepNumericUpDown.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.adaptiveBinarizationStepNumericUpDown.Name = "adaptiveBinarizationStepNumericUpDown";
+            this.adaptiveBinarizationStepNumericUpDown.Size = new System.Drawing.Size(67, 20);
+            this.adaptiveBinarizationStepNumericUpDown.TabIndex = 56;
+            this.adaptiveBinarizationStepNumericUpDown.ValueChanged += new System.EventHandler(this.imageProcessing_SettingsChanged);
+            // 
             // erodeCheckBox
             // 
-            this.erodeCheckBox.Location = new System.Drawing.Point(12, 96);
+            this.erodeCheckBox.Location = new System.Drawing.Point(6, 126);
             this.erodeCheckBox.Name = "erodeCheckBox";
             this.erodeCheckBox.Size = new System.Drawing.Size(62, 17);
             this.erodeCheckBox.TabIndex = 55;
@@ -297,7 +325,7 @@ namespace BarcodeDemo
             // 
             this.removePeasCheckBox.Checked = true;
             this.removePeasCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.removePeasCheckBox.Location = new System.Drawing.Point(12, 50);
+            this.removePeasCheckBox.Location = new System.Drawing.Point(6, 80);
             this.removePeasCheckBox.Name = "removePeasCheckBox";
             this.removePeasCheckBox.Size = new System.Drawing.Size(106, 17);
             this.removePeasCheckBox.TabIndex = 54;
@@ -307,7 +335,7 @@ namespace BarcodeDemo
             // 
             // invertColorsCheckBox
             // 
-            this.invertColorsCheckBox.Location = new System.Drawing.Point(12, 73);
+            this.invertColorsCheckBox.Location = new System.Drawing.Point(6, 103);
             this.invertColorsCheckBox.Name = "invertColorsCheckBox";
             this.invertColorsCheckBox.Size = new System.Drawing.Size(92, 17);
             this.invertColorsCheckBox.TabIndex = 53;
@@ -543,7 +571,7 @@ namespace BarcodeDemo
             // 
             // AdvancedReaderSettingsControl
             // 
-           this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox5);
             this.Name = "AdvancedReaderSettingsControl";
             this.Size = new System.Drawing.Size(276, 245);
             this.groupBox5.ResumeLayout(false);
@@ -554,6 +582,8 @@ namespace BarcodeDemo
             this.groupBox11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.recognitionTimeoutNumericUpDown)).EndInit();
             this.imagePreproceesingTabPage.ResumeLayout(false);
+            this.imagePreproceesingTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.adaptiveBinarizationStepNumericUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.barcodesTabPage.ResumeLayout(false);
@@ -606,5 +636,7 @@ namespace BarcodeDemo
         private System.Windows.Forms.CheckBox invertColorsCheckBox;
         private System.Windows.Forms.RadioButton downscale3RadioButton;
         internal System.Windows.Forms.CheckBox barcodeCharacteristicNormalBarcodesCheckBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown adaptiveBinarizationStepNumericUpDown;
     }
 }

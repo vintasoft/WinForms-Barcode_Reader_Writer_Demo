@@ -436,6 +436,16 @@ namespace BarcodeDemo
             OnSettingsChanged(EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Updates the UI.
+        /// </summary>
+        public override void UpdateUI()
+        {
+            base.UpdateUI();
+
+            UpdateBarcodeSymbologiesInScanBarcodeTypesListBox();
+        }
+
         #endregion
 
         #endregion

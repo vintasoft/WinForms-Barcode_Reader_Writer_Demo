@@ -4,9 +4,10 @@ using System.Drawing;
 using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
-
+using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.QualityTests;
+using Vintasoft.Imaging;
 
 namespace BarcodeDemo
 {
@@ -45,16 +46,19 @@ namespace BarcodeDemo
         /// <summary>
         /// Initializes a new instance of the <see cref="ISO15416QualityTestForm"/> class.
         /// </summary>
-        /// <param name="info">The barcode information.</param>
+        /// <param name="barcodeInfo">The barcode information.</param>
         /// <param name="barcodeImage">The barcode image.</param>
-        /// <param name="invertImageColors">Indicates that image colors are inverted.</param>
+        /// <param name="isBarcodeImageInverted">A value indicating whether barcode image is inverted.</param>
         public ISO15416QualityTestForm(
-            BarcodeInfo1D info,
+            BarcodeInfo1D barcodeInfo,
             Image barcodeImage,
-            bool invertBarcodeImage)
+            bool isBarcodeImageInverted)
             : this()
         {
-            _test = new ISO15416QualityTest(info, barcodeImage, invertBarcodeImage);
+            using (VintasoftBitmap bitmap = GdiConverter.Convert(barcodeImage, false))
+            {
+                _test = new ISO15416QualityTest(barcodeInfo, bitmap, isBarcodeImageInverted);
+            }
 
             UpdateUI();
         }
@@ -316,6 +320,8 @@ namespace BarcodeDemo
             AppendParametrInfo(sb, "Defects", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Defects), profile.DefectsGradeValue);
             if (profile.DecodabilityGrade != ISO15416QualityGrade.Unavailable)
                 AppendParametrInfo(sb, "Decodability", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Decodability), profile.DecodabilityGradeValue);
+            AppendParametrInfo(sb, "PCS (Print contrast signal)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.PrintContrastSignal), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "Average bar gain", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.AverageBarGain), (int)ISO15416QualityGrade.Unavailable);
             AppendParametrInfo(sb, "Scan grade (profile grade)", ((int)profile.ScanGrade).ToString(), profile.ScanGradeValue);
             return sb.ToString();
         }

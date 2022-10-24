@@ -11,10 +11,10 @@ using System.Collections.Generic;
 
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
-using Vintasoft.Barcode.GS1;
 using Vintasoft.Barcode.BarcodeStructure;
 using Vintasoft.Barcode.SymbologySubsets;
-using Vintasoft.Barcode.SymbologySubsets.AAMVA;
+using Vintasoft.Barcode.Gdi;
+using Vintasoft.Primitives;
 
 namespace BarcodeDemo
 {
@@ -157,6 +157,19 @@ namespace BarcodeDemo
         #region Constructors
 
         /// <summary>
+        /// Initializes the <see cref="MainForm"/> class.
+        /// </summary>
+        static MainForm()
+        {
+#if NETCOREAPP
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+#endif
+
+            // initialize Vintasoft.Barcode.Gdi assembly
+            Vintasoft.Barcode.GdiAssembly.Init();
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -170,22 +183,22 @@ namespace BarcodeDemo
 
             _formTitle = string.Format("VintaSoft 1D/2D Barcode Reader/Writer Demo v{0} ", BarcodeGlobalSettings.ProductVersion);
             // update the application title
-            this.Text = _formTitle;
+            Text = _formTitle;
 
             _barcodeReader.Progress += new EventHandler<BarcodeReaderProgressEventArgs>(BarcodeReader_RecognizeProgress);
 
-            _barcodeReader.Settings.CollectTestInformation = true;            
+            _barcodeReader.Settings.CollectTestInformation = true;
 
             readerBarcodeTypes.SettingsChanged += new EventHandler(ReaderBarcodeTypes_SettingsChanged);
 
-            
+
             _barcodeWriter.Settings.Barcode = BarcodeType.Code128;
             _barcodeWriter.Settings.Value = "012345";
             _barcodeWriter.Settings.PixelFormat = BarcodeImagePixelFormat.Bgr24;
             barcodeWriterSettingsControl1.BarcodeWriterSettings = _barcodeWriter.Settings;
             _barcodeWriter.Settings.Changed += new EventHandler(WriterSettings_Changed);
 
-            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);            
+            advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);
         }
 
         #endregion
@@ -225,7 +238,7 @@ namespace BarcodeDemo
         #region 'File' menu
 
         /// <summary>
-        /// Selects and opens the image file.
+        /// Selects and opens an image file.
         /// </summary>
         private void openImageButton_Click(object sender, EventArgs e)
         {
@@ -295,7 +308,7 @@ namespace BarcodeDemo
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (AboutBoxForm aboutDialog = new AboutBoxForm("vsbarcode-dotnet"))
-                aboutDialog.ShowDialog();            
+                aboutDialog.ShowDialog();
         }
 
         #endregion
@@ -758,7 +771,7 @@ namespace BarcodeDemo
             if (_barcodeReaderImage != null && _barcodeReaderSourceImage != writerPictureBox.Image)
             {
                 if (_barcodeReaderSourceImage != _barcodeReaderImage)
-                {                    
+                {
                     _barcodeReaderSourceImage.Dispose();
                     _barcodeReaderSourceImage = null;
                     _barcodeReaderSourceStream.Dispose();
@@ -877,10 +890,9 @@ namespace BarcodeDemo
         /// </summary>
         private void barcodeReaderPictureBox_Click(object sender, EventArgs e)
         {
-            if (zoomImageCheckBox.Checked)
-                return;
-
+            // try to find barcode in cursor position
             int index = FindInfoIndex(_lastMousePosition);
+            // if barcode was found
             if (index >= 0)
             {
                 barcodeReaderResultsControl1.BarcodeInfoIndex = index;
@@ -893,13 +905,20 @@ namespace BarcodeDemo
         /// </summary>
         private void barcodeReaderPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            _lastMousePosition = e.Location;
-            if (_barcodeReaderImage == null || zoomImageCheckBox.Checked)
+            if (_barcodeReaderImage == null)
                 return;
-            string s = string.Format("({0},{1})   ", e.X, e.Y);
+
+            // convert cursor position to image space
+            _lastMousePosition = ConvertPointToImageSpace(e.Location);
+            // add cursor position to status strip
+            string s = string.Format("({0},{1})   ", _lastMousePosition.X, _lastMousePosition.Y);
+            // try to find barcode in cursor position
             int index = FindInfoIndex(_lastMousePosition);
+
+            // if barcode was found
             if (index >= 0)
             {
+                // add barcode data to status strip
                 string barcodeType = _barcodeRecognitionResults[index].BarcodeType.ToString();
                 if (_barcodeRecognitionResults[index] is BarcodeSubsetInfo)
                     barcodeType = ((BarcodeSubsetInfo)_barcodeRecognitionResults[index]).BarcodeSubset.Name;
@@ -910,20 +929,77 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Finds index of the barcode located in specified position.
+        /// Converts point from image viewer space to the image space.
         /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
+        /// <param name="pointInViewerSpace">Point in image viewer space.</param>
+        /// <returns>Point in image space.</returns>
+        private Point ConvertPointToImageSpace(Point pointInViewerSpace)
+        {
+            Size viewerSize = barcodeReaderPictureBox.Size;
+            Size imageSize = barcodeReaderPictureBox.Image.Size;
+
+            if (viewerSize == imageSize)
+                return pointInViewerSpace;
+
+            int mouseX;
+            int mouseY;
+            // get side scaling
+            float scaleX = (float)viewerSize.Width / imageSize.Width;
+            float scaleY = (float)viewerSize.Height / imageSize.Height;
+            // if image height is scaled proportionally to the viewer height
+            if (scaleY < scaleX)
+            {
+                // convert Y to image space
+                mouseY = imageSize.Height * pointInViewerSpace.Y / viewerSize.Height;
+                // find left image border in viewer space
+                int imageX = (int)((viewerSize.Width - imageSize.Width * scaleY) / 2f);
+                // convert cursor position X to image space
+                mouseX = (int)((pointInViewerSpace.X - imageX) / scaleY);
+            }
+            // if image width is scaled proportionally to the viewer width
+            else if (scaleY > scaleX)
+            {
+                // convert X to image space
+                mouseX = imageSize.Width * pointInViewerSpace.X / viewerSize.Width;
+                // find top image border in viewer space
+                int imageY = (int)((viewerSize.Height - imageSize.Height * scaleX) / 2f);
+                // convert cursor position Y to image space
+                mouseY = (int)((pointInViewerSpace.Y - imageY) / scaleX);
+            }
+            else
+            {
+                // convert X to image space
+                mouseX = imageSize.Width * pointInViewerSpace.X / viewerSize.Width;
+                // convert Y to image space
+                mouseY = imageSize.Height * pointInViewerSpace.Y / viewerSize.Height;
+            }
+
+            return new Point(mouseX, mouseY);
+        }
+
+        /// <summary>
+        /// Finds barcode located in specified position.
+        /// </summary>
+        /// <param name="mousePosition">Mouse position.</param>
+        /// <returns>The index of barcode located in specified position.</returns>
         private int FindInfoIndex(Point mousePosition)
         {
+            // if there is no recognized barcodes
             if (_barcodeRecognitionResults == null || _barcodeRecognitionResults.Length == 0)
                 return -1;
+
+            // for each recognized barcode
             for (int i = 0; i < _barcodeRecognitionResults.Length; i++)
+            {
+                // if recognized barcode has region
                 if (_barcodeRecognitionResults[i].Region != null)
                 {
-                    if (_barcodeRecognitionResults[i].Region.IsPointInRegion(mousePosition))
+                    // if point is located in region
+                    if (_barcodeRecognitionResults[i].Region.IsPointInRegion(GdiConverter.Convert(mousePosition)))
                         return i;
                 }
+            }
+
             return -1;
         }
 
@@ -951,7 +1027,7 @@ namespace BarcodeDemo
         #region Process the barcode reader image
 
         /// <summary>
-        /// Preview of the barcode reader image processing is enabled/disabled.
+        /// Enables/disables preview of the image processing for image with barcodes.
         /// </summary>
         private void showImageProcessing_CheckedChanged(object sender, EventArgs e)
         {
@@ -959,7 +1035,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Eroding of the barcode reader image is enabled/disabled.
+        /// Enables/disables eroding of image with barcodes.
         /// </summary>
         private void readerErode_CheckedChanged(object sender, EventArgs e)
         {
@@ -983,7 +1059,7 @@ namespace BarcodeDemo
         /// </summary>
         private void InitBarcodeReaderSettingsUI(ReaderSettings settings)
         {
-            thresholdIterationsTrackBar.Maximum = ReaderSettings.MaxThresholdInterations;
+            thresholdIterationsTrackBar.Maximum = 75;
             if (settings.ThresholdIterations > 1)
                 thresholdIterationsTrackBar.Value = settings.ThresholdIterations;
             else
@@ -1073,7 +1149,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Automatic barcode recognition is enabled/disabled.
+        /// Enables/disables the automatic barcode recognition.
         /// </summary>
         private void automaticRecognitionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -1305,7 +1381,7 @@ namespace BarcodeDemo
         }
 
         /// <summary>
-        /// Showing of barcode recognition progress is enabled/disabled.
+        /// Enables/disables the displaying of barcode recognition progress.
         /// </summary>
         private void showProgressCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -1344,9 +1420,9 @@ namespace BarcodeDemo
                     e.Cancel = true;
             }
         }
-       
+
         /// <summary>
-        /// Reads barcodes from the image.
+        /// Reads barcodes from image.
         /// </summary>
         private void ReadBarcodes()
         {
@@ -1497,22 +1573,22 @@ namespace BarcodeDemo
             GC.Collect();
 
             // draws an information about found barcodes on the reader image
-            DrawBarcodeInfoOnReaderImage(bitmap, _barcodeRecognitionResults);
+            DrawBarcodeInfoOnImageWithBarcodes(bitmap, _barcodeRecognitionResults);
 
             // shows the reader image in picture box
             barcodeReaderPictureBox.Image = bitmap;
         }
 
         /// <summary>
-        /// Draws an information about found barcodes on the reader image.
+        /// Draws information about found barcodes on image with barcodes.
         /// </summary>
-        /// <param name="bitmap"></param>
-        /// <param name="barcodeInfos"></param>
-        private void DrawBarcodeInfoOnReaderImage(Bitmap bitmap, IBarcodeInfo[] barcodeInfos)
+        /// <param name="imageWithBarcodes">Image with barcodes.</param>
+        /// <param name="barcodeInfos">Information about found barcodes.</param>
+        private void DrawBarcodeInfoOnImageWithBarcodes(Bitmap imageWithBarcodes, IBarcodeInfo[] barcodeInfos)
         {
             try
             {
-                using (Graphics g = Graphics.FromImage(bitmap))
+                using (Graphics g = Graphics.FromImage(imageWithBarcodes))
                 {
                     Brush brush = Brushes.Blue;
                     for (int i = 0; i < barcodeInfos.Length; i++)
@@ -1541,12 +1617,12 @@ namespace BarcodeDemo
                             Pen symbolComponentPen = new Pen(Color.FromArgb(192, Color.Blue), 2);
                             foreach (IBarcodeInfo symbolComponentInfo in inf.SymbolComponents)
                             {
-                                g.DrawPolygon(symbolComponentPen, symbolComponentInfo.Region.GetPoints());
+                                g.DrawPolygon(symbolComponentPen, GdiConverter.Convert(symbolComponentInfo.Region.GetPoints()));
                             }
                         }
                         pen.Color = Color.FromArgb(192, pen.Color);
-                        g.FillPolygon(new SolidBrush(Color.FromArgb(48, pen.Color)), inf.Region.GetPoints());
-                        g.DrawPolygon(pen, inf.Region.GetPoints());
+                        g.FillPolygon(new SolidBrush(Color.FromArgb(48, pen.Color)), GdiConverter.Convert(inf.Region.GetPoints()));
+                        g.DrawPolygon(pen, GdiConverter.Convert(inf.Region.GetPoints()));
 
                         SolidBrush br = new SolidBrush(Color.Lime);
                         if (inf.ReadingQuality < 0.75)
@@ -1571,16 +1647,16 @@ namespace BarcodeDemo
                             g.DrawString(string.Format("[{0}] {1}: {2}", i + 1, barcodeTypeValue, inf.Value), new Font("Courier New", 8), brush, inf.Region.LeftTop.X, inf.Region.LeftTop.Y - 20);
                         }
 
-                        PointF[] referenceRecognitionPoints = null;
+                        VintasoftPointF[] referenceRecognitionPoints = null;
                         if (inf is AztecInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] { 
-                                ((AztecInfo)inf).BulleyeCenter 
+                            referenceRecognitionPoints = new VintasoftPointF[] {
+                                ((AztecInfo)inf).BulleyeCenter
                             };
                         }
                         else if (inf is QRInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] { 
+                            referenceRecognitionPoints = new VintasoftPointF[] {
                                ((QRInfo)inf).LeftTopFinderPatternCenter,
                                ((QRInfo)inf).LeftBottomFinderPatternCenter,
                                ((QRInfo)inf).RightTopFinderPatternCenter
@@ -1588,7 +1664,7 @@ namespace BarcodeDemo
                         }
                         else if (inf is HanXinCodeInfo)
                         {
-                            referenceRecognitionPoints = new PointF[] { 
+                            referenceRecognitionPoints = new VintasoftPointF[] {
                                ((HanXinCodeInfo)inf).LeftTopFinderPatternCenter,
                                ((HanXinCodeInfo)inf).LeftBottomFinderPatternCenter,
                                ((HanXinCodeInfo)inf).RightTopFinderPatternCenter,
@@ -1606,7 +1682,7 @@ namespace BarcodeDemo
                                     float delta = (float)Math.Max(((BarcodeInfo2D)inf).CellWidth, ((BarcodeInfo2D)inf).CellHeight) / 2;
                                     for (int j = 0; j < referenceRecognitionPoints.Length; j++)
                                     {
-                                        PointF point = referenceRecognitionPoints[j];
+                                        PointF point = GdiConverter.Convert(referenceRecognitionPoints[j]);
                                         if (!point.IsEmpty)
                                         {
                                             g.FillEllipse(pointBrush, new RectangleF(point.X - delta, point.Y - delta, delta * 2, delta * 2));
@@ -1634,36 +1710,39 @@ namespace BarcodeDemo
         /// <summary>
         /// Returns the barcode value as a string.
         /// </summary>
-        private string GetBarcodeInfo(int index, IBarcodeInfo info)
+        /// <param name="barcodeInfoIndex">Index of barcode info in barcode recognition result.</param>
+        /// <param name="barcodeInfo">Barcode info.</param>
+        /// <returns>Barcode value as a string.</returns>
+        private string GetBarcodeInfo(int barcodeInfoIndex, IBarcodeInfo barcodeInfo)
         {
-            info.ShowNonDataFlagsInValue = true;
+            barcodeInfo.ShowNonDataFlagsInValue = true;
 
             string value;
-            if (info.BarcodeInfoClass == BarcodeInfoClass.Barcode2D && advancedReaderSettings.InterpretEciCharacters)
-                value = EciCharacterDecoder.Decode(info.ValueItems);
+            if (barcodeInfo.BarcodeInfoClass == BarcodeInfoClass.Barcode2D && advancedReaderSettings.InterpretEciCharacters)
+                value = EciCharacterDecoder.Decode(barcodeInfo.ValueItems);
             else
-                value = info.Value;
+                value = barcodeInfo.Value;
 
-            if (info is UPCEANInfo)
+            if (barcodeInfo is UPCEANInfo)
             {
-                if ((info.BarcodeType & BarcodeType.UPCE) != 0)
-                    value += string.Format(" (UPC-E: {0})", (info as UPCEANInfo).UPCEValue);
+                if ((barcodeInfo.BarcodeType & BarcodeType.UPCE) != 0)
+                    value += string.Format(" (UPC-E: {0})", (barcodeInfo as UPCEANInfo).UPCEValue);
 
-                if ((info.BarcodeType & BarcodeType.UPCA) != 0)
-                    value += string.Format(" (UPC-A: {0})", (info as UPCEANInfo).UPCAValue);
+                if ((barcodeInfo.BarcodeType & BarcodeType.UPCA) != 0)
+                    value += string.Format(" (UPC-A: {0})", (barcodeInfo as UPCEANInfo).UPCAValue);
             }
 
             string confidence;
-            if (info.Confidence == ReaderSettings.ConfidenceNotAvailable)
+            if (barcodeInfo.Confidence == ReaderSettings.ConfidenceNotAvailable)
                 confidence = "N/A";
             else
-                confidence = Math.Round(info.Confidence).ToString() + "%";
+                confidence = Math.Round(barcodeInfo.Confidence).ToString() + "%";
 
-            if (info is BarcodeSubsetInfo)
+            if (barcodeInfo is BarcodeSubsetInfo)
             {
-                if (info is AamvaBarcodeInfo)
+                if (barcodeInfo is AamvaBarcodeInfo)
                 {
-                    AamvaBarcodeValue aamvaValue = ((AamvaBarcodeInfo)info).AamvaValue;
+                    AamvaBarcodeValue aamvaValue = ((AamvaBarcodeInfo)barcodeInfo).AamvaValue;
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine();
                     sb.AppendLine(string.Format("Issuer identification number: {0}", aamvaValue.Header.IssuerIdentificationNumber));
@@ -1689,7 +1768,7 @@ namespace BarcodeDemo
                 {
                     value = string.Format("{0}{1}Base value: {2}",
                         RemoveSpecialCharacters(value), Environment.NewLine,
-                        RemoveSpecialCharacters(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value));
+                        RemoveSpecialCharacters(((BarcodeSubsetInfo)barcodeInfo).BaseBarcodeInfo.Value));
                 }
             }
             else
@@ -1698,27 +1777,27 @@ namespace BarcodeDemo
             }
 
             string barcodeTypeValue;
-            if (info is StructuredAppendBarcodeInfo)
+            if (barcodeInfo is StructuredAppendBarcodeInfo)
             {
-                barcodeTypeValue = string.Format("{0} (Reconstructed)", info.BarcodeType);
+                barcodeTypeValue = string.Format("{0} (Reconstructed)", barcodeInfo.BarcodeType);
             }
-            else if (info is BarcodeSubsetInfo)
+            else if (barcodeInfo is BarcodeSubsetInfo)
             {
-                BarcodeSubsetInfo subsetInfo = (BarcodeSubsetInfo)info;
+                BarcodeSubsetInfo subsetInfo = (BarcodeSubsetInfo)barcodeInfo;
                 barcodeTypeValue = string.Format("{0} ({1})", subsetInfo.BarcodeSubset.Name, subsetInfo.BarcodeSubset.BarcodeType);
             }
             else
             {
-                barcodeTypeValue = info.BarcodeType.ToString();
+                barcodeTypeValue = barcodeInfo.BarcodeType.ToString();
             }
 
             StringBuilder result = new StringBuilder();
-            result.AppendLine(string.Format("[{0}:{1}]", index + 1, barcodeTypeValue));
+            result.AppendLine(string.Format("[{0}:{1}]", barcodeInfoIndex + 1, barcodeTypeValue));
             result.AppendLine(string.Format("Value: {0}", value));
             result.AppendLine(string.Format("Confidence: {0}", confidence));
-            result.AppendLine(string.Format("Reading quality: {0}", info.ReadingQuality));
-            result.AppendLine(string.Format("Threshold: {0}", info.Threshold));
-            result.AppendLine(string.Format("Region: {0}", info.Region));
+            result.AppendLine(string.Format("Reading quality: {0}", barcodeInfo.ReadingQuality));
+            result.AppendLine(string.Format("Threshold: {0}", barcodeInfo.Threshold));
+            result.AppendLine(string.Format("Region: {0}", barcodeInfo.Region));
             return result.ToString();
         }
 
@@ -1760,7 +1839,7 @@ namespace BarcodeDemo
         #region Barcode writer
 
         /// <summary>
-        /// Creates the image with barcode.
+        /// Creates an image with barcode.
         /// </summary>
         private void createWriterImageButton_Click(object sender, EventArgs e)
         {
@@ -1827,11 +1906,13 @@ namespace BarcodeDemo
             _barcodeReader.Settings.AustralianPostCustomerInfoFormat = _barcodeWriter.Settings.AustralianPostCustomerInfoFormat;
             _barcodeReader.Settings.MSIChecksum = _barcodeWriter.Settings.MSIChecksum;
             if (_barcodeWriter.Settings.Barcode == BarcodeType.DotCode)
+            {
                 if (_barcodeReader.Settings.ScanInterval > _barcodeWriter.Settings.MinWidth)
                 {
                     _barcodeReader.Settings.ScanInterval = _barcodeWriter.Settings.MinWidth;
                     scanIntervalEditor.UpdateUI();
                 }
+            }
             if (barcodeWriterSettingsControl1.SelectedBarcodeSubset != null)
             {
                 if (!_barcodeReader.Settings.ScanBarcodeSubsets.Contains(barcodeWriterSettingsControl1.SelectedBarcodeSubset))
@@ -1915,10 +1996,12 @@ namespace BarcodeDemo
                 return;
             _barcodeWriting = true;
             try
-            {                
+            {
                 if (barcodeWriterSettingsControl1.SelectedBarcodeSubset != null)
+                {
                     if (!barcodeWriterSettingsControl1.EncodeValue())
                         return;
+                }
                 barcodeWriterErrorText.Visible = false;
                 bool barcodeRendered = false;
                 if (_barcodeRenderer != null)
@@ -1927,7 +2010,7 @@ namespace BarcodeDemo
                     {
                         // generate "design" barcode use barcode render
                         if (_barcodeImageWidth > 0 && _barcodeImageHeigth > 0)
-                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;                        
+                            _barcodeWriter.Settings.Resolution = _barcodeImageResolution;
                         writerPictureBox.Image = _barcodeRenderer.GetBarcodeAsBitmap(
                             _barcodeWriter, _barcodeImageWidth, _barcodeImageHeigth, _barcodeImageSizeUnits);
                         barcodeRendered = true;
@@ -2009,9 +2092,6 @@ namespace BarcodeDemo
 
         #endregion
 
-        private void readerBarcodeTypes_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }

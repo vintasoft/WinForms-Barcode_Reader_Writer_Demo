@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Vintasoft.Barcode.BarcodeStructure;
 
 using Vintasoft.Barcode;
+using Vintasoft.Barcode.Gdi;
 
 namespace BarcodeDemo.Controls
 {
@@ -87,7 +88,7 @@ namespace BarcodeDemo.Controls
                 BarcodeElement barcodeElement = BarcodeRenderer.BarcodeElement;
                 if (barcodeElement != null)
                 {
-                    Rectangle bbox = barcodeElement.GetBoundingBox();
+                    Rectangle bbox = GdiConverter.Convert(barcodeElement.GetBoundingBox());
                     float dx = Math.Abs(bbox.X) * RenderingScale + (Width - barcodeElement.Width * RenderingScale) / 2;
                     float dy = Math.Abs(bbox.Y) * RenderingScale + (Height - barcodeElement.Height * RenderingScale) / 2;
                     e.Graphics.TranslateTransform(dx, dy);

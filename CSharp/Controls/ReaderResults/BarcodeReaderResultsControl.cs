@@ -9,9 +9,6 @@ using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.GS1;
 using Vintasoft.Barcode.SymbologySubsets;
-using Vintasoft.Barcode.SymbologySubsets.AAMVA;
-using Vintasoft.Barcode.SymbologySubsets.Hibc;
-using Vintasoft.Barcode.SymbologySubsets.Isbt128;
 
 namespace BarcodeDemo
 {
@@ -337,7 +334,7 @@ namespace BarcodeDemo
             }
             else
             {
-                Rectangle rect = info.Region.Rectangle;
+                Rectangle rect = GdiConverter.Convert(info.Region.Rectangle);
                 int p = 1;
                 rect.X = Math.Max(0, rect.X - p);
                 rect.Y = Math.Max(0, rect.Y - p);

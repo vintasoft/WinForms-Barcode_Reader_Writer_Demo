@@ -14,7 +14,7 @@ namespace BarcodeDemo
         #region Fields
 
         /// <summary>
-        /// Indicates that all quiet zones can be set using one value.
+        /// A value indicating whether all quiet zones can be set using one value.
         /// </summary>
         bool _setAll = false;
 
@@ -22,7 +22,7 @@ namespace BarcodeDemo
 
 
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuietZoneEditorForm"/> class.
@@ -40,6 +40,9 @@ namespace BarcodeDemo
         #region Properties
 
         WriterSettings _settings = null;
+        /// <summary>
+        /// Gets or sets the barcode writer settings.
+        /// </summary>
         public WriterSettings Settings
         {
             get

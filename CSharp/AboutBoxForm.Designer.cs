@@ -270,7 +270,7 @@ namespace BarcodeDemo
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label imagingSDKVersionLabel;
-        protected System.Windows.Forms.RichTextBox decriptionRichTextBox;
+        private System.Windows.Forms.RichTextBox decriptionRichTextBox;
 
     }
 }

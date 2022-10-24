@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeStructure;
+using Vintasoft.Barcode.Gdi;
 
 namespace BarcodeDemo
 {

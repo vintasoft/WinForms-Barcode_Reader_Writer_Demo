@@ -2,9 +2,10 @@
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-
+using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeInfo;
 using Vintasoft.Barcode.QualityTests;
+using Vintasoft.Imaging;
 
 namespace BarcodeDemo
 {
@@ -38,7 +39,8 @@ namespace BarcodeDemo
             InitializeComponent();
 
             ISO15415QualityTest test = new ISO15415QualityTest();
-            test.CalculateGrades(barcodeInfo, barcodeImage, invertImageColors);
+            using (VintasoftBitmap bitmap = GdiConverter.Convert(barcodeImage, false))
+                test.CalculateGrades(barcodeInfo, bitmap, invertImageColors);
             _test = test;
 
             if (test.StartPatternTestGrade != ISO15415QualityGrade.Unavailable)

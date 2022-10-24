@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 using Vintasoft.Barcode;
+using Vintasoft.Imaging;
 
 namespace BarcodeDemo
 {
@@ -73,7 +75,7 @@ namespace BarcodeDemo
         private Image GetImageFromPage(PdfImageViewer viewer, int pageIndex)
         {
             string[] names = viewer.GetImageNames(pageIndex);
-            ArrayList images = new ArrayList();
+            List<VintasoftBitmap> images = new List<VintasoftBitmap>();
             for (int i = 0; i < names.Length; i++)
             {
                 try
@@ -88,7 +90,7 @@ namespace BarcodeDemo
             if (images.Count == 0)
                 return null;
             if (images.Count == 1)
-                return (Image)images[0];
+                return GdiConverter.Convert(images[0], true);
 
             // merge images
             int padding = 5;
@@ -97,7 +99,7 @@ namespace BarcodeDemo
             int n = images.Count;
             for (int i = 0; i < n; i++)
             {
-                Image current = (Image)images[i];
+                VintasoftBitmap current = images[i];
                 if (width < current.Width)
                     width = current.Width;
                 heigth += current.Height;
@@ -105,17 +107,19 @@ namespace BarcodeDemo
             width += 3;
             heigth += (n + 1) * padding;
             Bitmap result = new Bitmap(width, heigth, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(result);
-            g.FillRectangle(Brushes.White, new Rectangle(0, 0, width, heigth));
-            int dy = 1;
-            for (int i = 0; i < n; i++)
+            using (Graphics g = Graphics.FromImage(result))
             {
-                Image current = (Image)images[i];
-                g.DrawImageUnscaled(current, new Point(1, dy));
-                dy += current.Height + padding;
-                current.Dispose();
+                g.FillRectangle(Brushes.White, new Rectangle(0, 0, width, heigth));
+                int y = 1;
+                for (int i = 0; i < n; i++)
+                {
+                    using (Bitmap current = GdiConverter.Convert(images[i], true))
+                    {
+                        g.DrawImageUnscaled(current, new Point(1, y));
+                        y += current.Height + padding;
+                    }
+                }
             }
-            g.Dispose();
 
             return result;
         }

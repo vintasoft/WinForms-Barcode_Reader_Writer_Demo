@@ -95,11 +95,15 @@ namespace BarcodeDemo
 
         #region Methods
 
+        /// <summary>
+        /// Raises the System.Windows.Forms.Form.Load event.
+        /// </summary>
         protected override void OnLoad(EventArgs e)
         {
             Text = "About...";
             base.OnLoad(e);
         }
+
 
         private void okButton_Click(object sender, EventArgs e)
         {

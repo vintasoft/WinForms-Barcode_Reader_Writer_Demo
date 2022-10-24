@@ -148,7 +148,7 @@ namespace BarcodeDemo
         public override void Render()
         {
             // create cached matrix that stores connection condition for cells
-            Rectangle barcodeBBox = BarcodeElement.GetBoundingBox();
+            Rectangle barcodeBBox = GdiConverter.Convert(BarcodeElement.GetBoundingBox());
             _barcodeX = barcodeBBox.X;
             _barcodeY = barcodeBBox.Y;
             _canConnectCellMatrix = new bool[barcodeBBox.Height, barcodeBBox.Width];

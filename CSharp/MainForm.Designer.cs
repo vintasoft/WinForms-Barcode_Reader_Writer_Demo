@@ -305,7 +305,6 @@ namespace BarcodeDemo
             this.readerBarcodeTypes.Name = "readerBarcodeTypes";
             this.readerBarcodeTypes.Size = new System.Drawing.Size(491, 258);
             this.readerBarcodeTypes.TabIndex = 26;
-            this.readerBarcodeTypes.Load += new System.EventHandler(this.readerBarcodeTypes_Load);
             // 
             // advancedReaderSettings
             // 
@@ -365,8 +364,6 @@ namespace BarcodeDemo
             // maxThreadCountEditor
             // 
             this.maxThreadCountEditor.Location = new System.Drawing.Point(6, 99);
-            this.maxThreadCountEditor.Maximum = 8;
-            this.maxThreadCountEditor.Minimum = 1;
             this.maxThreadCountEditor.Name = "maxThreadCountEditor";
             this.maxThreadCountEditor.Size = new System.Drawing.Size(240, 97);
             this.maxThreadCountEditor.TabIndex = 31;

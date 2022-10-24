@@ -148,6 +148,7 @@ namespace BarcodeDemo
             invertColorsCheckBox.Checked = BarcodeReaderSettings.InvertImageColors;
             erodeCheckBox.Checked = BarcodeReaderSettings.Erode;
             removePeasCheckBox.Checked = BarcodeReaderSettings.RemovePeas;
+            adaptiveBinarizationStepNumericUpDown.Value = BarcodeReaderSettings.AdaptiveBinarizationStep;
 
             _enableSetSettings = true;
         }
@@ -220,7 +221,7 @@ namespace BarcodeDemo
             BarcodeReaderSettings.InvertImageColors = invertColorsCheckBox.Checked;
             BarcodeReaderSettings.Erode = erodeCheckBox.Checked;
             BarcodeReaderSettings.RemovePeas = removePeasCheckBox.Checked;
-
+            BarcodeReaderSettings.AdaptiveBinarizationStep = (int)adaptiveBinarizationStepNumericUpDown.Value;
 
             _enableSetSettings = true;
         }

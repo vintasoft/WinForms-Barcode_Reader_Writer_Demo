@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.BarcodeStructure;
+using Vintasoft.Barcode.Gdi;
 
 namespace BarcodeDemo
 {
@@ -342,7 +343,7 @@ namespace BarcodeDemo
             if (_barcode != null)
             {
                 barcodeStructureControl1.RenderingScale = _previewScale;
-                Rectangle barcodeBoundingBox = _barcode.GetBoundingBox();
+                Rectangle barcodeBoundingBox = GdiConverter.Convert(_barcode.GetBoundingBox());
                 int width = (int)Math.Round((barcodeBoundingBox.Width + 2) * PreviewScale);
                 int height = (int)Math.Round((barcodeBoundingBox.Height + 2) * PreviewScale);
                 barcodeStructureControl1.Width = width;
