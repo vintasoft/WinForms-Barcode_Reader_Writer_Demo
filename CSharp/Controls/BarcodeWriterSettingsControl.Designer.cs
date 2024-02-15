@@ -153,18 +153,9 @@ namespace BarcodeDemo.Controls
             this.code16KRowsComboBox = new System.Windows.Forms.ComboBox();
             this.barcodes2DTabPage = new System.Windows.Forms.TabPage();
             this.twoDimensionalBarcodeComboBox = new System.Windows.Forms.ComboBox();
-            this.microPDF417SettingsPanel = new System.Windows.Forms.Panel();
-            this.microPDF417GS1ComponentTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.dotCodeSettingsPanel = new System.Windows.Forms.Panel();
-            this.dotCodeAspectRatioNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.dotCodeRectangularModulesCheckBox = new System.Windows.Forms.CheckBox();
-            this.label51 = new System.Windows.Forms.Label();
-            this.dotCodeHeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.dotCodeWidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.pdf417SettingsPanel = new System.Windows.Forms.Panel();
+            this.pdf417GS1ComponentTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label52 = new System.Windows.Forms.Label();
             this.aztecSettingsPanel = new System.Windows.Forms.Panel();
             this.maxiCodeSettingsPanel = new System.Windows.Forms.Panel();
             this.dataMatrixSettingsPanel = new System.Windows.Forms.Panel();
@@ -181,10 +172,19 @@ namespace BarcodeDemo.Controls
             this.qrSettingsPanel = new System.Windows.Forms.Panel();
             this.qrDataMaskPatternComboBox = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
+            this.microPDF417SettingsPanel = new System.Windows.Forms.Panel();
+            this.microPDF417GS1ComponentTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.dotCodeSettingsPanel = new System.Windows.Forms.Panel();
+            this.dotCodeAspectRatioNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.dotCodeRectangularModulesCheckBox = new System.Windows.Forms.CheckBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.dotCodeHeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.dotCodeWidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.encodingInfoComboBox = new System.Windows.Forms.ComboBox();
             this.encodingInfoCheckBox = new System.Windows.Forms.CheckBox();
-            this.pdf417GS1ComponentTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label52 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.valueFontSizeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueGapNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minWidthNumericUpDown)).BeginInit();
@@ -220,11 +220,6 @@ namespace BarcodeDemo.Controls
             this.code16KEncodeingModePanel.SuspendLayout();
             this.code16KRowsPanel.SuspendLayout();
             this.barcodes2DTabPage.SuspendLayout();
-            this.microPDF417SettingsPanel.SuspendLayout();
-            this.dotCodeSettingsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeAspectRatioNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeHeightNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeWidthNumericUpDown)).BeginInit();
             this.pdf417SettingsPanel.SuspendLayout();
             this.aztecSettingsPanel.SuspendLayout();
             this.maxiCodeSettingsPanel.SuspendLayout();
@@ -232,6 +227,11 @@ namespace BarcodeDemo.Controls
             this.hanXinCodeSettingsPanel.SuspendLayout();
             this.microQrSettingsPanel.SuspendLayout();
             this.qrSettingsPanel.SuspendLayout();
+            this.microPDF417SettingsPanel.SuspendLayout();
+            this.dotCodeSettingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeAspectRatioNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeHeightNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeWidthNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -459,11 +459,6 @@ namespace BarcodeDemo.Controls
             this.paddingNumericUpDown.Location = new System.Drawing.Point(111, 237);
             this.paddingNumericUpDown.Maximum = new decimal(new int[] {
             128,
-            0,
-            0,
-            0});
-            this.paddingNumericUpDown.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -1802,159 +1797,6 @@ namespace BarcodeDemo.Controls
             this.twoDimensionalBarcodeComboBox.TabIndex = 29;
             this.twoDimensionalBarcodeComboBox.SelectedIndexChanged += new System.EventHandler(this.twoDimensionalBarcodeComboBox_SelectedIndexChanged);
             // 
-            // microPDF417SettingsPanel
-            // 
-            this.microPDF417SettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417GS1ComponentTypeComboBox);
-            this.microPDF417SettingsPanel.Controls.Add(this.label50);
-            this.microPDF417SettingsPanel.Controls.Add(this.label38);
-            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417EncodingModeComboBox);
-            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417SymbolSizeComboBox);
-            this.microPDF417SettingsPanel.Controls.Add(this.label39);
-            this.microPDF417SettingsPanel.Controls.Add(this.label13);
-            this.microPDF417SettingsPanel.Controls.Add(this.microPED417RowHeightNumericUpDown);
-            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417ColumnsNumericUpDown);
-            this.microPDF417SettingsPanel.Controls.Add(this.label5);
-            this.microPDF417SettingsPanel.Location = new System.Drawing.Point(4, 31);
-            this.microPDF417SettingsPanel.Name = "microPDF417SettingsPanel";
-            this.microPDF417SettingsPanel.Size = new System.Drawing.Size(245, 183);
-            this.microPDF417SettingsPanel.TabIndex = 25;
-            this.microPDF417SettingsPanel.Visible = false;
-            // 
-            // microPDF417GS1ComponentTypeComboBox
-            // 
-            this.microPDF417GS1ComponentTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.microPDF417GS1ComponentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.microPDF417GS1ComponentTypeComboBox.FormattingEnabled = true;
-            this.microPDF417GS1ComponentTypeComboBox.Location = new System.Drawing.Point(127, 61);
-            this.microPDF417GS1ComponentTypeComboBox.Name = "microPDF417GS1ComponentTypeComboBox";
-            this.microPDF417GS1ComponentTypeComboBox.Size = new System.Drawing.Size(114, 21);
-            this.microPDF417GS1ComponentTypeComboBox.TabIndex = 42;
-            this.microPDF417GS1ComponentTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.microPDF417GS1ComponentTypeComboBox_SelectedIndexChanged);
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(2, 64);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(107, 13);
-            this.label50.TabIndex = 41;
-            this.label50.Text = "GS1 component type";
-            // 
-            // dotCodeSettingsPanel
-            // 
-            this.dotCodeSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeAspectRatioNumericUpDown);
-            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeRectangularModulesCheckBox);
-            this.dotCodeSettingsPanel.Controls.Add(this.label51);
-            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeHeightNumericUpDown);
-            this.dotCodeSettingsPanel.Controls.Add(this.label53);
-            this.dotCodeSettingsPanel.Controls.Add(this.label54);
-            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeWidthNumericUpDown);
-            this.dotCodeSettingsPanel.Location = new System.Drawing.Point(3, 32);
-            this.dotCodeSettingsPanel.Name = "dotCodeSettingsPanel";
-            this.dotCodeSettingsPanel.Size = new System.Drawing.Size(245, 183);
-            this.dotCodeSettingsPanel.TabIndex = 38;
-            this.dotCodeSettingsPanel.Visible = false;
-            // 
-            // dotCodeAspectRatioNumericUpDown
-            // 
-            this.dotCodeAspectRatioNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dotCodeAspectRatioNumericUpDown.Location = new System.Drawing.Point(127, 83);
-            this.dotCodeAspectRatioNumericUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.dotCodeAspectRatioNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.dotCodeAspectRatioNumericUpDown.Name = "dotCodeAspectRatioNumericUpDown";
-            this.dotCodeAspectRatioNumericUpDown.Size = new System.Drawing.Size(114, 20);
-            this.dotCodeAspectRatioNumericUpDown.TabIndex = 31;
-            this.dotCodeAspectRatioNumericUpDown.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.dotCodeAspectRatioNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeAspectRatioNumericUpDown_ValueChanged);
-            // 
-            // dotCodeRectangularModulesCheckBox
-            // 
-            this.dotCodeRectangularModulesCheckBox.AutoSize = true;
-            this.dotCodeRectangularModulesCheckBox.Location = new System.Drawing.Point(3, 117);
-            this.dotCodeRectangularModulesCheckBox.Name = "dotCodeRectangularModulesCheckBox";
-            this.dotCodeRectangularModulesCheckBox.Size = new System.Drawing.Size(126, 17);
-            this.dotCodeRectangularModulesCheckBox.TabIndex = 28;
-            this.dotCodeRectangularModulesCheckBox.Text = "Rectangular modules";
-            this.dotCodeRectangularModulesCheckBox.UseVisualStyleBackColor = true;
-            this.dotCodeRectangularModulesCheckBox.CheckedChanged += new System.EventHandler(this.dotCodeRectangualrModulesCheckBox_CheckedChanged);
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(2, 61);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(193, 13);
-            this.label51.TabIndex = 26;
-            this.label51.Text = "Matrix aspect ratio (width / height x 0.1)";
-            // 
-            // dotCodeHeightNumericUpDown
-            // 
-            this.dotCodeHeightNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dotCodeHeightNumericUpDown.Location = new System.Drawing.Point(127, 31);
-            this.dotCodeHeightNumericUpDown.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.dotCodeHeightNumericUpDown.Name = "dotCodeHeightNumericUpDown";
-            this.dotCodeHeightNumericUpDown.Size = new System.Drawing.Size(114, 20);
-            this.dotCodeHeightNumericUpDown.TabIndex = 25;
-            this.dotCodeHeightNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeHeightNumericUpDown_ValueChanged);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(3, 33);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(67, 13);
-            this.label53.TabIndex = 24;
-            this.label53.Text = "Matrix height";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(2, 9);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(63, 13);
-            this.label54.TabIndex = 22;
-            this.label54.Text = "Matrix width";
-            // 
-            // dotCodeWidthNumericUpDown
-            // 
-            this.dotCodeWidthNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dotCodeWidthNumericUpDown.Location = new System.Drawing.Point(127, 5);
-            this.dotCodeWidthNumericUpDown.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.dotCodeWidthNumericUpDown.Name = "dotCodeWidthNumericUpDown";
-            this.dotCodeWidthNumericUpDown.Size = new System.Drawing.Size(114, 20);
-            this.dotCodeWidthNumericUpDown.TabIndex = 23;
-            this.dotCodeWidthNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeWidthNumericUpDown_ValueChanged);
-            // 
             // pdf417SettingsPanel
             // 
             this.pdf417SettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1978,6 +1820,27 @@ namespace BarcodeDemo.Controls
             this.pdf417SettingsPanel.Size = new System.Drawing.Size(245, 183);
             this.pdf417SettingsPanel.TabIndex = 31;
             this.pdf417SettingsPanel.Visible = false;
+            // 
+            // pdf417GS1ComponentTypeComboBox
+            // 
+            this.pdf417GS1ComponentTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pdf417GS1ComponentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pdf417GS1ComponentTypeComboBox.FormattingEnabled = true;
+            this.pdf417GS1ComponentTypeComboBox.Location = new System.Drawing.Point(127, 33);
+            this.pdf417GS1ComponentTypeComboBox.Name = "pdf417GS1ComponentTypeComboBox";
+            this.pdf417GS1ComponentTypeComboBox.Size = new System.Drawing.Size(114, 21);
+            this.pdf417GS1ComponentTypeComboBox.TabIndex = 44;
+            this.pdf417GS1ComponentTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.pdf417GS1ComponentTypeComboBox_SelectedIndexChanged);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(3, 36);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(107, 13);
+            this.label52.TabIndex = 43;
+            this.label52.Text = "GS1 component type";
             // 
             // aztecSettingsPanel
             // 
@@ -2188,6 +2051,159 @@ namespace BarcodeDemo.Controls
             this.label42.TabIndex = 36;
             this.label42.Text = "Data mask pattern";
             // 
+            // microPDF417SettingsPanel
+            // 
+            this.microPDF417SettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417GS1ComponentTypeComboBox);
+            this.microPDF417SettingsPanel.Controls.Add(this.label50);
+            this.microPDF417SettingsPanel.Controls.Add(this.label38);
+            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417EncodingModeComboBox);
+            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417SymbolSizeComboBox);
+            this.microPDF417SettingsPanel.Controls.Add(this.label39);
+            this.microPDF417SettingsPanel.Controls.Add(this.label13);
+            this.microPDF417SettingsPanel.Controls.Add(this.microPED417RowHeightNumericUpDown);
+            this.microPDF417SettingsPanel.Controls.Add(this.microPDF417ColumnsNumericUpDown);
+            this.microPDF417SettingsPanel.Controls.Add(this.label5);
+            this.microPDF417SettingsPanel.Location = new System.Drawing.Point(4, 31);
+            this.microPDF417SettingsPanel.Name = "microPDF417SettingsPanel";
+            this.microPDF417SettingsPanel.Size = new System.Drawing.Size(245, 183);
+            this.microPDF417SettingsPanel.TabIndex = 25;
+            this.microPDF417SettingsPanel.Visible = false;
+            // 
+            // microPDF417GS1ComponentTypeComboBox
+            // 
+            this.microPDF417GS1ComponentTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.microPDF417GS1ComponentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.microPDF417GS1ComponentTypeComboBox.FormattingEnabled = true;
+            this.microPDF417GS1ComponentTypeComboBox.Location = new System.Drawing.Point(127, 61);
+            this.microPDF417GS1ComponentTypeComboBox.Name = "microPDF417GS1ComponentTypeComboBox";
+            this.microPDF417GS1ComponentTypeComboBox.Size = new System.Drawing.Size(114, 21);
+            this.microPDF417GS1ComponentTypeComboBox.TabIndex = 42;
+            this.microPDF417GS1ComponentTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.microPDF417GS1ComponentTypeComboBox_SelectedIndexChanged);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(2, 64);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(107, 13);
+            this.label50.TabIndex = 41;
+            this.label50.Text = "GS1 component type";
+            // 
+            // dotCodeSettingsPanel
+            // 
+            this.dotCodeSettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeAspectRatioNumericUpDown);
+            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeRectangularModulesCheckBox);
+            this.dotCodeSettingsPanel.Controls.Add(this.label51);
+            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeHeightNumericUpDown);
+            this.dotCodeSettingsPanel.Controls.Add(this.label53);
+            this.dotCodeSettingsPanel.Controls.Add(this.label54);
+            this.dotCodeSettingsPanel.Controls.Add(this.dotCodeWidthNumericUpDown);
+            this.dotCodeSettingsPanel.Location = new System.Drawing.Point(3, 32);
+            this.dotCodeSettingsPanel.Name = "dotCodeSettingsPanel";
+            this.dotCodeSettingsPanel.Size = new System.Drawing.Size(245, 183);
+            this.dotCodeSettingsPanel.TabIndex = 38;
+            this.dotCodeSettingsPanel.Visible = false;
+            // 
+            // dotCodeAspectRatioNumericUpDown
+            // 
+            this.dotCodeAspectRatioNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dotCodeAspectRatioNumericUpDown.Location = new System.Drawing.Point(127, 83);
+            this.dotCodeAspectRatioNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.dotCodeAspectRatioNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.dotCodeAspectRatioNumericUpDown.Name = "dotCodeAspectRatioNumericUpDown";
+            this.dotCodeAspectRatioNumericUpDown.Size = new System.Drawing.Size(114, 20);
+            this.dotCodeAspectRatioNumericUpDown.TabIndex = 31;
+            this.dotCodeAspectRatioNumericUpDown.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.dotCodeAspectRatioNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeAspectRatioNumericUpDown_ValueChanged);
+            // 
+            // dotCodeRectangularModulesCheckBox
+            // 
+            this.dotCodeRectangularModulesCheckBox.AutoSize = true;
+            this.dotCodeRectangularModulesCheckBox.Location = new System.Drawing.Point(3, 117);
+            this.dotCodeRectangularModulesCheckBox.Name = "dotCodeRectangularModulesCheckBox";
+            this.dotCodeRectangularModulesCheckBox.Size = new System.Drawing.Size(126, 17);
+            this.dotCodeRectangularModulesCheckBox.TabIndex = 28;
+            this.dotCodeRectangularModulesCheckBox.Text = "Rectangular modules";
+            this.dotCodeRectangularModulesCheckBox.UseVisualStyleBackColor = true;
+            this.dotCodeRectangularModulesCheckBox.CheckedChanged += new System.EventHandler(this.dotCodeRectangualrModulesCheckBox_CheckedChanged);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(2, 61);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(193, 13);
+            this.label51.TabIndex = 26;
+            this.label51.Text = "Matrix aspect ratio (width / height x 0.1)";
+            // 
+            // dotCodeHeightNumericUpDown
+            // 
+            this.dotCodeHeightNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dotCodeHeightNumericUpDown.Location = new System.Drawing.Point(127, 31);
+            this.dotCodeHeightNumericUpDown.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.dotCodeHeightNumericUpDown.Name = "dotCodeHeightNumericUpDown";
+            this.dotCodeHeightNumericUpDown.Size = new System.Drawing.Size(114, 20);
+            this.dotCodeHeightNumericUpDown.TabIndex = 25;
+            this.dotCodeHeightNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeHeightNumericUpDown_ValueChanged);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(3, 33);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(67, 13);
+            this.label53.TabIndex = 24;
+            this.label53.Text = "Matrix height";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(2, 9);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(63, 13);
+            this.label54.TabIndex = 22;
+            this.label54.Text = "Matrix width";
+            // 
+            // dotCodeWidthNumericUpDown
+            // 
+            this.dotCodeWidthNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dotCodeWidthNumericUpDown.Location = new System.Drawing.Point(127, 5);
+            this.dotCodeWidthNumericUpDown.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.dotCodeWidthNumericUpDown.Name = "dotCodeWidthNumericUpDown";
+            this.dotCodeWidthNumericUpDown.Size = new System.Drawing.Size(114, 20);
+            this.dotCodeWidthNumericUpDown.TabIndex = 23;
+            this.dotCodeWidthNumericUpDown.ValueChanged += new System.EventHandler(this.dotCodeWidthNumericUpDown_ValueChanged);
+            // 
             // encodingInfoComboBox
             // 
             this.encodingInfoComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -2214,27 +2230,6 @@ namespace BarcodeDemo.Controls
             this.encodingInfoCheckBox.Text = "Encoding info";
             this.encodingInfoCheckBox.UseVisualStyleBackColor = true;
             this.encodingInfoCheckBox.CheckedChanged += new System.EventHandler(this.encodingInfoCheckBox_CheckedChanged);
-            // 
-            // pdf417GS1ComponentTypeComboBox
-            // 
-            this.pdf417GS1ComponentTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pdf417GS1ComponentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.pdf417GS1ComponentTypeComboBox.FormattingEnabled = true;
-            this.pdf417GS1ComponentTypeComboBox.Location = new System.Drawing.Point(127, 33);
-            this.pdf417GS1ComponentTypeComboBox.Name = "pdf417GS1ComponentTypeComboBox";
-            this.pdf417GS1ComponentTypeComboBox.Size = new System.Drawing.Size(114, 21);
-            this.pdf417GS1ComponentTypeComboBox.TabIndex = 44;
-            this.pdf417GS1ComponentTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.pdf417GS1ComponentTypeComboBox_SelectedIndexChanged);
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(3, 36);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(107, 13);
-            this.label52.TabIndex = 43;
-            this.label52.Text = "GS1 component type";
             // 
             // BarcodeWriterSettingsControl
             // 
@@ -2285,13 +2280,6 @@ namespace BarcodeDemo.Controls
             this.code16KEncodeingModePanel.ResumeLayout(false);
             this.code16KRowsPanel.ResumeLayout(false);
             this.barcodes2DTabPage.ResumeLayout(false);
-            this.microPDF417SettingsPanel.ResumeLayout(false);
-            this.microPDF417SettingsPanel.PerformLayout();
-            this.dotCodeSettingsPanel.ResumeLayout(false);
-            this.dotCodeSettingsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeAspectRatioNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeHeightNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotCodeWidthNumericUpDown)).EndInit();
             this.pdf417SettingsPanel.ResumeLayout(false);
             this.pdf417SettingsPanel.PerformLayout();
             this.aztecSettingsPanel.ResumeLayout(false);
@@ -2306,6 +2294,13 @@ namespace BarcodeDemo.Controls
             this.microQrSettingsPanel.PerformLayout();
             this.qrSettingsPanel.ResumeLayout(false);
             this.qrSettingsPanel.PerformLayout();
+            this.microPDF417SettingsPanel.ResumeLayout(false);
+            this.microPDF417SettingsPanel.PerformLayout();
+            this.dotCodeSettingsPanel.ResumeLayout(false);
+            this.dotCodeSettingsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeAspectRatioNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeHeightNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotCodeWidthNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }

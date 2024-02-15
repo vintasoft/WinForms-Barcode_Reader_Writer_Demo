@@ -29,6 +29,7 @@ namespace BarcodeDemo
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.matrixModulationButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.centerPatternButton = new System.Windows.Forms.Button();
             this.barcodeSymbolButton = new System.Windows.Forms.Button();
@@ -57,14 +58,25 @@ namespace BarcodeDemo
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.matrixModulationButton);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.gbScanGrade);
             this.panel1.Controls.Add(this.okButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 514);
+            this.panel1.Location = new System.Drawing.Point(0, 553);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(508, 108);
             this.panel1.TabIndex = 0;
+            // 
+            // matrixModulationButton
+            // 
+            this.matrixModulationButton.Location = new System.Drawing.Point(4, 73);
+            this.matrixModulationButton.Name = "matrixModulationButton";
+            this.matrixModulationButton.Size = new System.Drawing.Size(120, 27);
+            this.matrixModulationButton.TabIndex = 5;
+            this.matrixModulationButton.Text = "Modualtion Matrix...";
+            this.matrixModulationButton.UseVisualStyleBackColor = true;
+            this.matrixModulationButton.Click += new System.EventHandler(this.matrixModulationButton_Click);
             // 
             // groupBox1
             // 
@@ -129,7 +141,7 @@ namespace BarcodeDemo
             this.gbScanGrade.Controls.Add(this.sg1);
             this.gbScanGrade.Controls.Add(this.sg0);
             this.gbScanGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gbScanGrade.Location = new System.Drawing.Point(132, 63);
+            this.gbScanGrade.Location = new System.Drawing.Point(130, 63);
             this.gbScanGrade.Name = "gbScanGrade";
             this.gbScanGrade.Size = new System.Drawing.Size(249, 39);
             this.gbScanGrade.TabIndex = 3;
@@ -214,9 +226,9 @@ namespace BarcodeDemo
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(429, 73);
+            this.okButton.Location = new System.Drawing.Point(385, 73);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 27);
+            this.okButton.Size = new System.Drawing.Size(119, 27);
             this.okButton.TabIndex = 0;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -228,7 +240,7 @@ namespace BarcodeDemo
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(508, 514);
+            this.panel2.Size = new System.Drawing.Size(508, 553);
             this.panel2.TabIndex = 1;
             // 
             // dataGridView
@@ -250,7 +262,7 @@ namespace BarcodeDemo
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(508, 514);
+            this.dataGridView.Size = new System.Drawing.Size(508, 553);
             this.dataGridView.TabIndex = 1;
             // 
             // cName
@@ -277,7 +289,7 @@ namespace BarcodeDemo
             // ISO15415QualityTestForm
             // 
             this.AcceptButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(508, 622);
+            this.ClientSize = new System.Drawing.Size(508, 661);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -318,6 +330,6 @@ namespace BarcodeDemo
         private System.Windows.Forms.Button startPatternButton;
         private System.Windows.Forms.Button barcodeSymbolButton;
         private System.Windows.Forms.Button centerPatternButton;
-
+        private System.Windows.Forms.Button matrixModulationButton;
     }
 }

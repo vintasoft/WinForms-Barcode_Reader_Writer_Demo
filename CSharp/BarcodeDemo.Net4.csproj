@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BarcodeDemo</RootNamespace>
     <AssemblyName>BarcodeDemo</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -19,6 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -28,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -38,6 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -48,6 +51,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -58,6 +62,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -68,6 +73,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -77,8 +83,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Vintasoft.Barcode" Version="14.2.2.1" />
-    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="14.2.2.1" />
+    <PackageReference Include="Vintasoft.Barcode" Version="14.3.0.1" />
+    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="14.3.0.1" />
     <PackageReference Include="Vintasoft.Shared" Version="4.1.2.1" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +120,12 @@
       <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExceptionEventArgs.cs" />
+    <Compile Include="Controls\ReaderResults\BarcodeMatrixModulationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\BarcodeMatrixModulationForm.Designer.cs">
+      <DependentUpon>BarcodeMatrixModulationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -237,6 +249,9 @@
     <EmbeddedResource Include="Controls\BarcodeWriterSettingsControl.resx">
       <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\BarcodeMatrixModulationForm.resx">
+      <DependentUpon>BarcodeMatrixModulationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.resx">
       <DependentUpon>AdvancedReaderSettingsControl.cs</DependentUpon>

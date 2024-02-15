@@ -1879,7 +1879,10 @@ namespace BarcodeDemo
                     {
                         MessageBox.Show("The evaluation version adds noise to the barcode image.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+                    _barcodeWriter.Settings.UseLegacyVectorGenerator = false;
                     string svgFile = _barcodeWriter.GetBarcodeAsSvgFile();
+
                     File.WriteAllText(saveSvgFileDialog.FileName, svgFile);
 
                     ProcessStartInfo processInfo = new ProcessStartInfo(saveSvgFileDialog.FileName);
@@ -1936,8 +1939,16 @@ namespace BarcodeDemo
         {
             using (GetSizeForm form = new GetSizeForm())
             {
-                form.WidthValue = _barcodeImageWidth;
-                form.HeightValue = _barcodeImageHeigth;
+                if (_barcodeImageWidth == 0 && _barcodeImageHeigth == 0 && _barcodeImageSizeUnits == UnitOfMeasure.Pixels && writerPictureBox.Image != null)
+                {
+                    form.WidthValue = writerPictureBox.Image.Width;
+                    form.HeightValue = writerPictureBox.Image.Height;
+                }
+                else
+                {
+                    form.WidthValue = _barcodeImageWidth;
+                    form.HeightValue = _barcodeImageHeigth;
+                }
                 form.UnitsValue = _barcodeImageSizeUnits;
                 form.ResolutionValue = _barcodeImageResolution;
 
@@ -2028,6 +2039,7 @@ namespace BarcodeDemo
                     {
                         // generate barcode image with specified size
                         _barcodeWriter.Settings.Resolution = _barcodeImageResolution;
+                        _barcodeWriter.Settings.UseLegacyVectorGenerator = false;
                         writerPictureBox.Image = _barcodeWriter.GetBarcodeAsBitmap(
                             _barcodeImageWidth, _barcodeImageHeigth, _barcodeImageSizeUnits);
                     }

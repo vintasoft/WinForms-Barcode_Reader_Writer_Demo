@@ -103,6 +103,7 @@ namespace BarcodeDemo.Controls
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ISSNPlus5);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.Interleaved2of5);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.Interleaved2of5ChecksumISO16390);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.ItalianPost2of5);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.OPC);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.DeutschePostIdentcode);
             linearBarcodeTypeComboBox.Items.Add(BarcodeSymbologySubsets.DeutschePostLeitcode);
@@ -125,6 +126,7 @@ namespace BarcodeDemo.Controls
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.UPCEPlus2);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.UPCEPlus5);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.AustralianPost);
+            linearBarcodeTypeComboBox.Items.Add(BarcodeType.JapanPost);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.IntelligentMail);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.Planet);
             linearBarcodeTypeComboBox.Items.Add(BarcodeType.Postnet);
@@ -703,6 +705,7 @@ namespace BarcodeDemo.Controls
                     case BarcodeType.IntelligentMail:
                     case BarcodeType.Postnet:
                     case BarcodeType.Planet:
+                    case BarcodeType.JapanPost:
                         postalADMiltiplierPanel.Visible = true;
                         break;
 

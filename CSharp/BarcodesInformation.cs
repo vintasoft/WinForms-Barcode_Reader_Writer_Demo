@@ -496,6 +496,16 @@ namespace BarcodeDemo
             text.Append(".\n\nValue must contain at least 10 digits.\nFirst two digits can be 11, 87, 45, 92, 59, 62, 44.");
             _info.Add(BarcodeType.AustralianPost, text.ToString());
 
+            // JapanPost
+            text.Length = 0;
+            text.Append("Japan Post 4-State symbology.");
+            text.Append(AllowableCharacters);
+            text.Append(LettersAZ);
+            text.Append(", ");
+            text.Append(Digits);
+            text.Append(".");
+            _info.Add(BarcodeType.JapanPost, text.ToString());
+
             // IntelligentMail
             text.Length = 0;
             text.Append("Intelligent Mail postal symbology.");

@@ -221,7 +221,7 @@ namespace BarcodeDemo
             this.MinimizeBox = false;
             this.Name = "ISO15416QualityTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ISO/IEC 15465 Print Quality Test";
+            this.Text = "ISO/IEC 15416 Print Quality Test";
             this.overallGradeGroupBox.ResumeLayout(false);
             this.overallGradeGroupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);

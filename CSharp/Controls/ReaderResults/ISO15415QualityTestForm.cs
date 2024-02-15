@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarcodeDemo.Controls.ReaderResults;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -92,11 +93,13 @@ namespace BarcodeDemo
                 AddRow("Fixed Pattern Damage", float.MinValue, "", test.FixedPatternDamageGrade);
             foreach (string name in test.AdditionalGrades.Keys)
                 AddRow(name, float.MinValue, "", test.AdditionalGrades[name]);
+            AddRow("Quiet Zone Size", test.QuietZoneSize, "X", ISO15415QualityGrade.Unavailable);
             if (test.QuietZone >= 0)
                 AddRow("Quiet Zone", test.QuietZone, "%", test.QuietZoneGrade);
             AddRow("Distortion Angle", test.DistortionAngle, "°", ISO15415QualityGrade.Unavailable);
             if (test.ContrastUniformity != float.MinValue)
                 AddRow("Contrast Uniformity", test.ContrastUniformity, "", ISO15415QualityGrade.Unavailable);
+            AddRow("Aperture", test.ApertureFactor * 100, "%", ISO15415QualityGrade.Unavailable);
             ISO15415QualityGrade scanGrade = test.ScanGrade;
             Color sgColor = Color.Empty;
             Label sgLabel = null;
@@ -136,6 +139,7 @@ namespace BarcodeDemo
             centerPatternButton.Enabled = test.CenterPatternTest != null;
             stopPatternButton.Enabled = test.StopPatternTest != null;
             barcodeSymbolButton.Enabled = test.SymbolIso15416QualityTest != null;
+            matrixModulationButton.Enabled = test.ModulationMatrix != null;
         }
 
         #endregion
@@ -154,7 +158,7 @@ namespace BarcodeDemo
             dataGridView.Rows[index].Cells[0].Value = name;
             string gradeValue;
             if (grade == ISO15415QualityGrade.Unavailable)
-                gradeValue = "Unavailable";
+                gradeValue = "";
             else
                 gradeValue = string.Format("{0} ({1})", (int)grade, grade);
             if (grade != ISO15415QualityGrade.Unavailable || value != float.MinValue)
@@ -164,6 +168,8 @@ namespace BarcodeDemo
                     string val;
                     if (units == "%")
                         val = string.Format(CultureInfo.InvariantCulture, "{0:f1}%", value, units);
+                    else if (units == "X")
+                        val = string.Format(CultureInfo.InvariantCulture, "{0}{1}", value, units);
                     else if (units != "")
                         val = string.Format(CultureInfo.InvariantCulture, "{0:f2}{1}", value, units);
                     else
@@ -213,6 +219,16 @@ namespace BarcodeDemo
         }
 
         /// <summary>
+        /// Shows modulation matrix.
+        /// </summary>
+        private void matrixModulationButton_Click(object sender, EventArgs e)
+        {
+            BarcodeMatrixModulationForm form = new BarcodeMatrixModulationForm();
+            form.SetModualtionMatrix(_test);
+            form.ShowDialog();
+        }
+
+        /// <summary>
         /// Closes this dialog.
         /// </summary>
         private void okButton_Click(object sender, EventArgs e)
@@ -221,6 +237,6 @@ namespace BarcodeDemo
         }
 
         #endregion
-
+     
     }
 }

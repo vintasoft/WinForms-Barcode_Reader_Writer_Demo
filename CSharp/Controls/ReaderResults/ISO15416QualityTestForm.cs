@@ -322,6 +322,9 @@ namespace BarcodeDemo
                 AppendParametrInfo(sb, "Decodability", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.Decodability), profile.DecodabilityGradeValue);
             AppendParametrInfo(sb, "PCS (Print contrast signal)", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.PrintContrastSignal), (int)ISO15416QualityGrade.Unavailable);
             AppendParametrInfo(sb, "Average bar gain", string.Format(CultureInfo.InvariantCulture, "{0:f1}%", profile.AverageBarGain), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "Black Narrow Width", string.Format(CultureInfo.InvariantCulture, "{0:f2}px", profile.BlackNarrowBarWidth), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "White Narrow Width", string.Format(CultureInfo.InvariantCulture, "{0:f2}px", profile.WhiteNarrowBarWidth), (int)ISO15416QualityGrade.Unavailable);
+            AppendParametrInfo(sb, "BWR (Black White Ratio)", string.Format(CultureInfo.InvariantCulture, "{0:f2}", profile.BlackWhiteRatio), (int)ISO15416QualityGrade.Unavailable);
             AppendParametrInfo(sb, "Scan grade (profile grade)", ((int)profile.ScanGrade).ToString(), profile.ScanGradeValue);
             return sb.ToString();
         }

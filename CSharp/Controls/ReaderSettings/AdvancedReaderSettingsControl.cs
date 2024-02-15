@@ -126,7 +126,7 @@ namespace BarcodeDemo
             DataMatrixLPatternMaxErasuresNumericUpDown.Value = BarcodeReaderSettings.DataMatrixLPatternMaxErasures;
             barcodeCharacteristicSmallBarcodesCheckBox.Checked = (BarcodeReaderSettings.BarcodeCharacteristics & BarcodeCharacteristics.SmallBarcodes) != 0;
             barcodeCharacteristicNormalBarcodesCheckBox.Checked = (BarcodeReaderSettings.BarcodeCharacteristics & BarcodeCharacteristics.NormalSizeBarcodes) != 0;
-            qrMaxAxialNonuniformityNumericUpDown.Value = (int)(BarcodeReaderSettings.QRMaxAxialNonuniformity * 100);
+            qrMaxAxialNonuniformityNumericUpDown.Value = (int)(BarcodeReaderSettings.QrMaxAxialNonuniformity * 100);
             recognitionTimeoutNumericUpDown.Value = BarcodeReaderSettings.RecognitionTimeout;
             code39WithoutStartStopCheckBox.Checked = BarcodeReaderSettings.SearchCode39WithoutStartStop;
             barcodeReaderAustralianCustomInfoComboBox.SelectedItem = BarcodeReaderSettings.AustralianPostCustomerInfoFormat;
@@ -204,7 +204,7 @@ namespace BarcodeDemo
             }
             BarcodeReaderSettings.SearchCode39WithoutStartStop = code39WithoutStartStopCheckBox.Checked;
             BarcodeReaderSettings.MatrixBarcodeMaxCellSize = (int)maxCellSizeNumericUpDown.Value;
-            BarcodeReaderSettings.QRMaxAxialNonuniformity = (float)qrMaxAxialNonuniformityNumericUpDown.Value / 100f;
+            BarcodeReaderSettings.QrMaxAxialNonuniformity = (float)qrMaxAxialNonuniformityNumericUpDown.Value / 100f;
             BarcodeReaderSettings.SearchQRModel1Barcodes = searchQRModel1CheckBox.Checked;
             if (downscale4RadioButton.Checked)
                 BarcodeReaderSettings.ImageScaleFactor = 1 / 4f;

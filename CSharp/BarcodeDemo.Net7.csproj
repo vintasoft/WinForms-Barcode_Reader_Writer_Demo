@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
@@ -18,8 +18,9 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>    
 
-    <Version>14.2.2.1</Version>
+    <Version>14.3.0.1</Version>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -37,11 +38,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Vintasoft.Barcode" Version="14.2.2.1" />
-    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="14.2.2.1" />
+    <PackageReference Include="Vintasoft.Barcode" Version="14.3.0.1" />
+    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="14.3.0.1" />
     <PackageReference Include="Vintasoft.Shared" Version="4.1.2.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="AboutBoxForm.cs">
       <SubType>Form</SubType>
@@ -65,7 +72,9 @@
     <Compile Include="BarcodeDesigner\BarcodeRenderers\MatrixBarcodeRendererBase.cs" />
     <Compile Include="BarcodeDesigner\BarcodeRenderers\BarcodeMatixDotType.cs" />
     <Compile Include="BarcodeDesigner\BarcodeRenderers\ConnectedMatixBarcodeRenderer.cs" />
-    <Compile Include="Controls\BarcodeStructureViewer.cs" />
+    <Compile Include="Controls\BarcodeStructureViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\BarcodeWriterSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -73,6 +82,12 @@
       <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExceptionEventArgs.cs" />
+    <Compile Include="Controls\ReaderResults\BarcodeMatrixModulationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderResults\BarcodeMatrixModulationForm.Designer.cs">
+      <DependentUpon>BarcodeMatrixModulationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,16 +101,24 @@
     <Compile Include="Controls\ReaderResults\BarcodeReaderResultsControl.Designer.cs">
       <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.cs" />
-    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.Designer.cs" />
+    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.Designer.cs">
+      <DependentUpon>DemoVersionRestrictionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReaderSettings\ParameterEditors\ExpectedBarcodesEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ReaderSettings\ParameterEditors\ParameterSlaveEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.cs" />
-    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.Designer.cs" />
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.Designer.cs">
+      <DependentUpon>ReaderSettingsBarcodeTypesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReaderSettings\ReaderSettingsEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -189,6 +212,9 @@
       <DependentUpon>BarcodeWriterSettingsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderResults\BarcodeMatrixModulationForm.resx">
+      <DependentUpon>BarcodeMatrixModulationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ReaderSettings\AdvancedReaderSettingsControl.resx">
       <DependentUpon>AdvancedReaderSettingsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -197,8 +223,12 @@
       <DependentUpon>BarcodeReaderResultsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.resx" />
-    <EmbeddedResource Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.resx" />
+    <EmbeddedResource Include="Controls\ReaderSettings\DemoVersionRestrictionsForm.resx">
+      <DependentUpon>DemoVersionRestrictionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderSettings\ReaderSettingsBarcodeTypesControl.resx">
+      <DependentUpon>ReaderSettingsBarcodeTypesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ReaderSettings\ScanDirectionEditorControl.resx">
       <DependentUpon>ScanDirectionEditorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
