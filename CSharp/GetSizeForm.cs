@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -36,6 +37,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets an image width, in units.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float WidthValue
         {
             get
@@ -51,6 +53,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets an image height, in units.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float HeightValue
         {
             get
@@ -66,6 +69,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the unit of measure of width and height.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public UnitOfMeasure UnitsValue
         {
             get
@@ -81,6 +85,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets an image resolution.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float ResolutionValue
         {
             get

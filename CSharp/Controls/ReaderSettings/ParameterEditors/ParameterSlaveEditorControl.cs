@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace BarcodeDemo
 {
@@ -14,6 +15,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets a master parameter editor control.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ParameterEditorControl MasterParameterEditor
         {
             get
@@ -52,6 +54,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets a property value.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override int Value
         {
             get

@@ -317,6 +317,7 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// Gets or sets a selected barcode subset.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BarcodeSymbologySubset SelectedBarcodeSubset
         {
             get
@@ -334,6 +335,7 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// Gest or sets a writer settings.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public WriterSettings BarcodeWriterSettings
         {
             get
@@ -442,6 +444,7 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// Gets a barcode image.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image BarcodeImage
         {
             set

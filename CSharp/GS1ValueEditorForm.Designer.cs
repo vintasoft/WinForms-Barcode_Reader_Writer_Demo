@@ -28,274 +28,268 @@ namespace BarcodeDemo
         /// </summary>
         private void InitializeComponent()
         {
-            this.ApplicationIdentifierLabel = new System.Windows.Forms.Label();
-            this.aiNumberComboBox = new System.Windows.Forms.ComboBox();
-            this.dataContentLabel = new System.Windows.Forms.Label();
-            this.aiValueTextBox = new System.Windows.Forms.TextBox();
-            this.dataValueLabel = new System.Windows.Forms.Label();
-            this.aiDataContentLabel = new System.Windows.Forms.Label();
-            this.addButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.aiListDataGridView = new System.Windows.Forms.DataGridView();
-            this.aiNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aiTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aiValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.okButton = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.dataFormatLabel = new System.Windows.Forms.Label();
-            this.aiDataFormatLabel = new System.Windows.Forms.Label();
-            this.formatStructureLabel = new System.Windows.Forms.Label();
-            this.formatStructureValueLabel = new System.Windows.Forms.Label();
-            this.barcodePrintableValueLabel = new System.Windows.Forms.Label();
-            this.gs1BarcodePrintableValueTextBox = new System.Windows.Forms.TextBox();
-            this.setDataValueButton = new System.Windows.Forms.Button();
-            this.setPrintableValueButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.aiListDataGridView)).BeginInit();
-            this.SuspendLayout();
+            ApplicationIdentifierLabel = new System.Windows.Forms.Label();
+            aiNumberComboBox = new System.Windows.Forms.ComboBox();
+            dataContentLabel = new System.Windows.Forms.Label();
+            aiValueTextBox = new System.Windows.Forms.TextBox();
+            dataValueLabel = new System.Windows.Forms.Label();
+            aiDataContentLabel = new System.Windows.Forms.Label();
+            addButton = new System.Windows.Forms.Button();
+            deleteButton = new System.Windows.Forms.Button();
+            aiListDataGridView = new System.Windows.Forms.DataGridView();
+            aiNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            aiTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            aiValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            okButton = new System.Windows.Forms.Button();
+            buttonCancel = new System.Windows.Forms.Button();
+            dataFormatLabel = new System.Windows.Forms.Label();
+            aiDataFormatLabel = new System.Windows.Forms.Label();
+            formatStructureLabel = new System.Windows.Forms.Label();
+            formatStructureValueLabel = new System.Windows.Forms.Label();
+            barcodePrintableValueLabel = new System.Windows.Forms.Label();
+            gs1BarcodePrintableValueTextBox = new System.Windows.Forms.TextBox();
+            setDataValueButton = new System.Windows.Forms.Button();
+            setPrintableValueButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)aiListDataGridView).BeginInit();
+            SuspendLayout();
             // 
             // ApplicationIdentifierLabel
             // 
-            this.ApplicationIdentifierLabel.AutoSize = true;
-            this.ApplicationIdentifierLabel.Location = new System.Drawing.Point(9, 40);
-            this.ApplicationIdentifierLabel.Name = "ApplicationIdentifierLabel";
-            this.ApplicationIdentifierLabel.Size = new System.Drawing.Size(102, 13);
-            this.ApplicationIdentifierLabel.TabIndex = 0;
-            this.ApplicationIdentifierLabel.Text = "Application Identifier";
+            ApplicationIdentifierLabel.AutoSize = true;
+            ApplicationIdentifierLabel.Location = new System.Drawing.Point(9, 40);
+            ApplicationIdentifierLabel.Name = "ApplicationIdentifierLabel";
+            ApplicationIdentifierLabel.Size = new System.Drawing.Size(118, 15);
+            ApplicationIdentifierLabel.TabIndex = 0;
+            ApplicationIdentifierLabel.Text = "Application Identifier";
             // 
             // aiNumberComboBox
             // 
-            this.aiNumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.aiNumberComboBox.FormattingEnabled = true;
-            this.aiNumberComboBox.Location = new System.Drawing.Point(134, 37);
-            this.aiNumberComboBox.Name = "aiNumberComboBox";
-            this.aiNumberComboBox.Size = new System.Drawing.Size(424, 21);
-            this.aiNumberComboBox.TabIndex = 1;
-            this.aiNumberComboBox.SelectedIndexChanged += new System.EventHandler(this.aiNumberComboBox_SelectedIndexChanged);
+            aiNumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            aiNumberComboBox.FormattingEnabled = true;
+            aiNumberComboBox.Location = new System.Drawing.Point(146, 37);
+            aiNumberComboBox.Name = "aiNumberComboBox";
+            aiNumberComboBox.Size = new System.Drawing.Size(412, 23);
+            aiNumberComboBox.TabIndex = 1;
+            aiNumberComboBox.SelectedIndexChanged += aiNumberComboBox_SelectedIndexChanged;
             // 
             // dataContentLabel
             // 
-            this.dataContentLabel.AutoSize = true;
-            this.dataContentLabel.Location = new System.Drawing.Point(9, 61);
-            this.dataContentLabel.Name = "dataContentLabel";
-            this.dataContentLabel.Size = new System.Drawing.Size(70, 13);
-            this.dataContentLabel.TabIndex = 2;
-            this.dataContentLabel.Text = "Data Content";
+            dataContentLabel.AutoSize = true;
+            dataContentLabel.Location = new System.Drawing.Point(9, 61);
+            dataContentLabel.Name = "dataContentLabel";
+            dataContentLabel.Size = new System.Drawing.Size(77, 15);
+            dataContentLabel.TabIndex = 2;
+            dataContentLabel.Text = "Data Content";
             // 
             // aiValueTextBox
             // 
-            this.aiValueTextBox.Location = new System.Drawing.Point(134, 101);
-            this.aiValueTextBox.Name = "aiValueTextBox";
-            this.aiValueTextBox.Size = new System.Drawing.Size(316, 20);
-            this.aiValueTextBox.TabIndex = 3;
+            aiValueTextBox.Location = new System.Drawing.Point(146, 101);
+            aiValueTextBox.Name = "aiValueTextBox";
+            aiValueTextBox.Size = new System.Drawing.Size(304, 23);
+            aiValueTextBox.TabIndex = 3;
             // 
             // dataValueLabel
             // 
-            this.dataValueLabel.AutoSize = true;
-            this.dataValueLabel.Location = new System.Drawing.Point(9, 101);
-            this.dataValueLabel.Name = "dataValueLabel";
-            this.dataValueLabel.Size = new System.Drawing.Size(60, 13);
-            this.dataValueLabel.TabIndex = 4;
-            this.dataValueLabel.Text = "Data Value";
+            dataValueLabel.AutoSize = true;
+            dataValueLabel.Location = new System.Drawing.Point(9, 101);
+            dataValueLabel.Name = "dataValueLabel";
+            dataValueLabel.Size = new System.Drawing.Size(62, 15);
+            dataValueLabel.TabIndex = 4;
+            dataValueLabel.Text = "Data Value";
             // 
             // aiDataContentLabel
             // 
-            this.aiDataContentLabel.Location = new System.Drawing.Point(131, 61);
-            this.aiDataContentLabel.Name = "aiDataContentLabel";
-            this.aiDataContentLabel.Size = new System.Drawing.Size(427, 37);
-            this.aiDataContentLabel.TabIndex = 5;
-            this.aiDataContentLabel.Text = "[Data Content]";
+            aiDataContentLabel.Location = new System.Drawing.Point(146, 61);
+            aiDataContentLabel.Name = "aiDataContentLabel";
+            aiDataContentLabel.Size = new System.Drawing.Size(412, 37);
+            aiDataContentLabel.TabIndex = 5;
+            aiDataContentLabel.Text = "[Data Content]";
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(456, 140);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(102, 23);
-            this.addButton.TabIndex = 6;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            addButton.Location = new System.Drawing.Point(456, 140);
+            addButton.Name = "addButton";
+            addButton.Size = new System.Drawing.Size(102, 23);
+            addButton.TabIndex = 6;
+            addButton.Text = "Add";
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += addButton_Click;
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(456, 170);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(102, 23);
-            this.deleteButton.TabIndex = 7;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            deleteButton.Location = new System.Drawing.Point(456, 170);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new System.Drawing.Size(102, 23);
+            deleteButton.TabIndex = 7;
+            deleteButton.Text = "Delete";
+            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.Click += deleteButton_Click;
             // 
             // aiListDataGridView
             // 
-            this.aiListDataGridView.AllowUserToAddRows = false;
-            this.aiListDataGridView.AllowUserToDeleteRows = false;
-            this.aiListDataGridView.AllowUserToResizeColumns = false;
-            this.aiListDataGridView.AllowUserToResizeRows = false;
-            this.aiListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.aiListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.aiNumberColumn,
-            this.aiTitleColumn,
-            this.aiValueColumn});
-            this.aiListDataGridView.Location = new System.Drawing.Point(12, 199);
-            this.aiListDataGridView.MultiSelect = false;
-            this.aiListDataGridView.Name = "aiListDataGridView";
-            this.aiListDataGridView.ReadOnly = true;
-            this.aiListDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.aiListDataGridView.Size = new System.Drawing.Size(546, 130);
-            this.aiListDataGridView.TabIndex = 8;
-            this.aiListDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.aiListDataGridView_RowEnter);
+            aiListDataGridView.AllowUserToAddRows = false;
+            aiListDataGridView.AllowUserToDeleteRows = false;
+            aiListDataGridView.AllowUserToResizeColumns = false;
+            aiListDataGridView.AllowUserToResizeRows = false;
+            aiListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            aiListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { aiNumberColumn, aiTitleColumn, aiValueColumn });
+            aiListDataGridView.Location = new System.Drawing.Point(12, 207);
+            aiListDataGridView.MultiSelect = false;
+            aiListDataGridView.Name = "aiListDataGridView";
+            aiListDataGridView.ReadOnly = true;
+            aiListDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            aiListDataGridView.Size = new System.Drawing.Size(546, 130);
+            aiListDataGridView.TabIndex = 8;
+            aiListDataGridView.RowEnter += aiListDataGridView_RowEnter;
             // 
             // aiNumberColumn
             // 
-            this.aiNumberColumn.HeaderText = "AI";
-            this.aiNumberColumn.Name = "aiNumberColumn";
-            this.aiNumberColumn.ReadOnly = true;
-            this.aiNumberColumn.Width = 70;
+            aiNumberColumn.HeaderText = "AI";
+            aiNumberColumn.Name = "aiNumberColumn";
+            aiNumberColumn.ReadOnly = true;
+            aiNumberColumn.Width = 70;
             // 
             // aiTitleColumn
             // 
-            this.aiTitleColumn.HeaderText = "Data Title";
-            this.aiTitleColumn.Name = "aiTitleColumn";
-            this.aiTitleColumn.ReadOnly = true;
-            this.aiTitleColumn.Width = 200;
+            aiTitleColumn.HeaderText = "Data Title";
+            aiTitleColumn.Name = "aiTitleColumn";
+            aiTitleColumn.ReadOnly = true;
+            aiTitleColumn.Width = 200;
             // 
             // aiValueColumn
             // 
-            this.aiValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.aiValueColumn.HeaderText = "Value";
-            this.aiValueColumn.Name = "aiValueColumn";
-            this.aiValueColumn.ReadOnly = true;
+            aiValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            aiValueColumn.HeaderText = "Value";
+            aiValueColumn.Name = "aiValueColumn";
+            aiValueColumn.ReadOnly = true;
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(402, 335);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 9;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            okButton.Location = new System.Drawing.Point(402, 343);
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.TabIndex = 9;
+            okButton.Text = "OK";
+            okButton.UseVisualStyleBackColor = true;
+            okButton.Click += okButton_Click;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(483, 335);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 10;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            buttonCancel.Location = new System.Drawing.Point(483, 343);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new System.Drawing.Size(75, 23);
+            buttonCancel.TabIndex = 10;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // dataFormatLabel
             // 
-            this.dataFormatLabel.AutoSize = true;
-            this.dataFormatLabel.Location = new System.Drawing.Point(9, 126);
-            this.dataFormatLabel.Name = "dataFormatLabel";
-            this.dataFormatLabel.Size = new System.Drawing.Size(65, 13);
-            this.dataFormatLabel.TabIndex = 11;
-            this.dataFormatLabel.Text = "Data Format";
+            dataFormatLabel.AutoSize = true;
+            dataFormatLabel.Location = new System.Drawing.Point(9, 126);
+            dataFormatLabel.Name = "dataFormatLabel";
+            dataFormatLabel.Size = new System.Drawing.Size(72, 15);
+            dataFormatLabel.TabIndex = 11;
+            dataFormatLabel.Text = "Data Format";
             // 
             // aiDataFormatLabel
             // 
-            this.aiDataFormatLabel.AutoSize = true;
-            this.aiDataFormatLabel.Location = new System.Drawing.Point(131, 126);
-            this.aiDataFormatLabel.Name = "aiDataFormatLabel";
-            this.aiDataFormatLabel.Size = new System.Drawing.Size(71, 13);
-            this.aiDataFormatLabel.TabIndex = 12;
-            this.aiDataFormatLabel.Text = "[Data Format]";
+            aiDataFormatLabel.AutoSize = true;
+            aiDataFormatLabel.Location = new System.Drawing.Point(146, 126);
+            aiDataFormatLabel.Name = "aiDataFormatLabel";
+            aiDataFormatLabel.Size = new System.Drawing.Size(80, 15);
+            aiDataFormatLabel.TabIndex = 12;
+            aiDataFormatLabel.Text = "[Data Format]";
             // 
             // formatStructureLabel
             // 
-            this.formatStructureLabel.AutoSize = true;
-            this.formatStructureLabel.Location = new System.Drawing.Point(9, 143);
-            this.formatStructureLabel.Name = "formatStructureLabel";
-            this.formatStructureLabel.Size = new System.Drawing.Size(85, 13);
-            this.formatStructureLabel.TabIndex = 13;
-            this.formatStructureLabel.Text = "Format Structure";
+            formatStructureLabel.AutoSize = true;
+            formatStructureLabel.Location = new System.Drawing.Point(9, 143);
+            formatStructureLabel.Name = "formatStructureLabel";
+            formatStructureLabel.Size = new System.Drawing.Size(96, 15);
+            formatStructureLabel.TabIndex = 13;
+            formatStructureLabel.Text = "Format Structure";
             // 
             // formatStructureValueLabel
             // 
-            this.formatStructureValueLabel.Location = new System.Drawing.Point(131, 143);
-            this.formatStructureValueLabel.Name = "formatStructureValueLabel";
-            this.formatStructureValueLabel.Size = new System.Drawing.Size(303, 61);
-            this.formatStructureValueLabel.TabIndex = 14;
-            this.formatStructureValueLabel.Text = "\'Nk\' - k numeric digits, fixed length\r\n\'NkC\' - k numeric digits + check digit, fi" +
-                "xed length\r\n\'N..k\' - up to k numeric digits\r\n\'X..k\' - up to k characters ISO646";
+            formatStructureValueLabel.Location = new System.Drawing.Point(146, 143);
+            formatStructureValueLabel.Name = "formatStructureValueLabel";
+            formatStructureValueLabel.Size = new System.Drawing.Size(288, 61);
+            formatStructureValueLabel.TabIndex = 14;
+            formatStructureValueLabel.Text = "'Nk' - k numeric digits, fixed length\r\n'NkC' - k numeric digits + check digit, fixed length\r\n'N..k' - up to k numeric digits\r\n'X..k' - up to k characters ISO646";
             // 
             // barcodePrintableValueLabel
             // 
-            this.barcodePrintableValueLabel.AutoSize = true;
-            this.barcodePrintableValueLabel.Location = new System.Drawing.Point(9, 9);
-            this.barcodePrintableValueLabel.Name = "barcodePrintableValueLabel";
-            this.barcodePrintableValueLabel.Size = new System.Drawing.Size(119, 13);
-            this.barcodePrintableValueLabel.TabIndex = 15;
-            this.barcodePrintableValueLabel.Text = "Barcode printable value";
+            barcodePrintableValueLabel.AutoSize = true;
+            barcodePrintableValueLabel.Location = new System.Drawing.Point(9, 9);
+            barcodePrintableValueLabel.Name = "barcodePrintableValueLabel";
+            barcodePrintableValueLabel.Size = new System.Drawing.Size(131, 15);
+            barcodePrintableValueLabel.TabIndex = 15;
+            barcodePrintableValueLabel.Text = "Barcode printable value";
             // 
             // gs1BarcodePrintableValueTextBox
             // 
-            this.gs1BarcodePrintableValueTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.gs1BarcodePrintableValueTextBox.Location = new System.Drawing.Point(134, 6);
-            this.gs1BarcodePrintableValueTextBox.Name = "gs1BarcodePrintableValueTextBox";
-            this.gs1BarcodePrintableValueTextBox.ReadOnly = true;
-            this.gs1BarcodePrintableValueTextBox.Size = new System.Drawing.Size(316, 20);
-            this.gs1BarcodePrintableValueTextBox.TabIndex = 16;
+            gs1BarcodePrintableValueTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            gs1BarcodePrintableValueTextBox.Location = new System.Drawing.Point(146, 6);
+            gs1BarcodePrintableValueTextBox.Name = "gs1BarcodePrintableValueTextBox";
+            gs1BarcodePrintableValueTextBox.ReadOnly = true;
+            gs1BarcodePrintableValueTextBox.Size = new System.Drawing.Size(304, 23);
+            gs1BarcodePrintableValueTextBox.TabIndex = 16;
             // 
             // setDataValueButton
             // 
-            this.setDataValueButton.Location = new System.Drawing.Point(456, 99);
-            this.setDataValueButton.Name = "setDataValueButton";
-            this.setDataValueButton.Size = new System.Drawing.Size(102, 23);
-            this.setDataValueButton.TabIndex = 17;
-            this.setDataValueButton.Text = "Set";
-            this.setDataValueButton.UseVisualStyleBackColor = true;
-            this.setDataValueButton.Click += new System.EventHandler(this.setButton_Click);
+            setDataValueButton.Location = new System.Drawing.Point(456, 99);
+            setDataValueButton.Name = "setDataValueButton";
+            setDataValueButton.Size = new System.Drawing.Size(102, 23);
+            setDataValueButton.TabIndex = 17;
+            setDataValueButton.Text = "Set";
+            setDataValueButton.UseVisualStyleBackColor = true;
+            setDataValueButton.Click += setButton_Click;
             // 
             // setPrintableValueButton
             // 
-            this.setPrintableValueButton.Location = new System.Drawing.Point(456, 4);
-            this.setPrintableValueButton.Name = "setPrintableValueButton";
-            this.setPrintableValueButton.Size = new System.Drawing.Size(102, 23);
-            this.setPrintableValueButton.TabIndex = 18;
-            this.setPrintableValueButton.Text = "Set";
-            this.setPrintableValueButton.UseVisualStyleBackColor = true;
-            this.setPrintableValueButton.Click += new System.EventHandler(this.setPrintableValueButton_Click);
+            setPrintableValueButton.Location = new System.Drawing.Point(456, 4);
+            setPrintableValueButton.Name = "setPrintableValueButton";
+            setPrintableValueButton.Size = new System.Drawing.Size(102, 23);
+            setPrintableValueButton.TabIndex = 18;
+            setPrintableValueButton.Text = "Set";
+            setPrintableValueButton.UseVisualStyleBackColor = true;
+            setPrintableValueButton.Click += setPrintableValueButton_Click;
             // 
             // GS1ValueEditorForm
             // 
-            this.AcceptButton = this.okButton;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(570, 366);
-            this.Controls.Add(this.setPrintableValueButton);
-            this.Controls.Add(this.setDataValueButton);
-            this.Controls.Add(this.gs1BarcodePrintableValueTextBox);
-            this.Controls.Add(this.barcodePrintableValueLabel);
-            this.Controls.Add(this.formatStructureLabel);
-            this.Controls.Add(this.aiDataFormatLabel);
-            this.Controls.Add(this.dataFormatLabel);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.aiListDataGridView);
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.addButton);
-            this.Controls.Add(this.aiDataContentLabel);
-            this.Controls.Add(this.dataValueLabel);
-            this.Controls.Add(this.aiValueTextBox);
-            this.Controls.Add(this.dataContentLabel);
-            this.Controls.Add(this.aiNumberComboBox);
-            this.Controls.Add(this.ApplicationIdentifierLabel);
-            this.Controls.Add(this.formatStructureValueLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Name = "GS1ValueEditorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormGS1ValueEditor";
-            ((System.ComponentModel.ISupportInitialize)(this.aiListDataGridView)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = okButton;
+            CancelButton = buttonCancel;
+            ClientSize = new System.Drawing.Size(570, 373);
+            Controls.Add(setPrintableValueButton);
+            Controls.Add(setDataValueButton);
+            Controls.Add(gs1BarcodePrintableValueTextBox);
+            Controls.Add(barcodePrintableValueLabel);
+            Controls.Add(formatStructureLabel);
+            Controls.Add(aiDataFormatLabel);
+            Controls.Add(dataFormatLabel);
+            Controls.Add(buttonCancel);
+            Controls.Add(okButton);
+            Controls.Add(aiListDataGridView);
+            Controls.Add(deleteButton);
+            Controls.Add(addButton);
+            Controls.Add(aiDataContentLabel);
+            Controls.Add(dataValueLabel);
+            Controls.Add(aiValueTextBox);
+            Controls.Add(dataContentLabel);
+            Controls.Add(aiNumberComboBox);
+            Controls.Add(ApplicationIdentifierLabel);
+            Controls.Add(formatStructureValueLabel);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "GS1ValueEditorForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "FormGS1ValueEditor";
+            ((System.ComponentModel.ISupportInitialize)aiListDataGridView).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -5,6 +5,7 @@ using Vintasoft.Barcode.BarcodeStructure;
 
 using Vintasoft.Barcode;
 using Vintasoft.Barcode.Gdi;
+using System.ComponentModel;
 
 namespace BarcodeDemo.Controls
 {
@@ -39,6 +40,7 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// Gets or sets the rendering scale.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public float RenderingScale
         {
             get
@@ -57,6 +59,7 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// Gets or sets the barcode renderer.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BarcodeGraphicsRenderer BarcodeRenderer
         {
             get

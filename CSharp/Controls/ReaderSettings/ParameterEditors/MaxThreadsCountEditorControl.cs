@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace BarcodeDemo
 {
@@ -30,6 +31,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets a property value.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override int Value
         {
             get

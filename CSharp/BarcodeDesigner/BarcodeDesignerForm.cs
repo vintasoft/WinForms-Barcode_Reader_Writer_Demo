@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -270,6 +271,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the preview scale of barcode.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float PreviewScale
         {
             get
@@ -288,6 +290,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the barcode renderer.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BarcodeGraphicsRenderer BarcodeRenderer
         {
             get
@@ -313,6 +316,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the barcode.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BarcodeStructureBase Barcode
         {
             get

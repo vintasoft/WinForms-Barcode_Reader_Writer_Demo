@@ -15,6 +15,7 @@ using Vintasoft.Barcode.BarcodeStructure;
 using Vintasoft.Barcode.SymbologySubsets;
 using Vintasoft.Barcode.Gdi;
 using Vintasoft.Primitives;
+using System.ComponentModel;
 
 namespace BarcodeDemo
 {
@@ -198,6 +199,7 @@ namespace BarcodeDemo
             _barcodeWriter.Settings.Barcode = BarcodeType.Code128;
             _barcodeWriter.Settings.Value = "012345";
             _barcodeWriter.Settings.PixelFormat = BarcodeImagePixelFormat.Bgr24;
+            _barcodeWriter.Settings.PharmacodeMaxValue = long.MaxValue;
             barcodeWriterSettingsControl1.BarcodeWriterSettings = _barcodeWriter.Settings;
             _barcodeWriter.Settings.Changed += new EventHandler(WriterSettings_Changed);
 
@@ -217,6 +219,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or set the current working directory.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal string CurrentDirectory
         {
             get
@@ -1148,6 +1151,7 @@ namespace BarcodeDemo
             int processorCount = Environment.ProcessorCount;
             settings.MaximumThreadCount = processorCount + processorCount / 2;
             settings.CollectTestInformation = true;
+            settings.PharmacodeMaxValue = long.MaxValue;
             return settings;
         }
 
@@ -1911,6 +1915,7 @@ namespace BarcodeDemo
             _barcodeReader.Settings.OptionalCheckSum = _barcodeWriter.Settings.OptionalCheckSum;
             _barcodeReader.Settings.AustralianPostCustomerInfoFormat = _barcodeWriter.Settings.AustralianPostCustomerInfoFormat;
             _barcodeReader.Settings.MSIChecksum = _barcodeWriter.Settings.MSIChecksum;
+            _barcodeReader.Settings.PharmacodeMaxValue = _barcodeWriter.Settings.PharmacodeMaxValue;
             if (_barcodeWriter.Settings.Barcode == BarcodeType.DotCode)
             {
                 if (_barcodeReader.Settings.ScanInterval > _barcodeWriter.Settings.MinWidth)

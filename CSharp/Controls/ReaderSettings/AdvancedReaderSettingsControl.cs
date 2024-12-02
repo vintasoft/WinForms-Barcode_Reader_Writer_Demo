@@ -50,13 +50,14 @@ namespace BarcodeDemo
 
 
         #region Properties
-       
+
         /// <summary>
         /// Gets or sets a value indicating whether barcode reader must interpret ECI characters.
         /// </summary>
         /// <value>
         /// <b>True</b> if barcode reader must interpret ECI characters; otherwise, <b>false</b>.
         /// </value>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool InterpretEciCharacters
         {
             get

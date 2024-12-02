@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -55,6 +56,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the recognized barcodes.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IBarcodeInfo[] RecognizedBarcodes
         {
             get
@@ -73,6 +75,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the index of current barcode.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BarcodeInfoIndex
         {
             get
@@ -91,6 +94,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets the image with barcodes.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image BarcodeImage
         {
             get
@@ -107,6 +111,7 @@ namespace BarcodeDemo
         /// <summary>
         /// Gets or sets a value indicating whether barcode image is inverted.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool InvertBarcodeImage
         {
             get
@@ -126,6 +131,7 @@ namespace BarcodeDemo
         /// <value>
         /// <b>True</b> if barcode reader must interpret ECI characters; otherwise, <b>false</b>.
         /// </value>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool InterpretEciCharacters
         {
             get
