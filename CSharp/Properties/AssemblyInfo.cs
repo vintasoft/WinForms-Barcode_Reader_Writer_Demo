@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VintaSoft 1D/2D Barcode Reader/Writer Demo")]
 [assembly: AssemblyDescription("VintaSoft 1D/2D Barcode Reader/Writer Demo")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("VintaSoft Llc.")]
+[assembly: AssemblyCompany("VintaSoft LLC")]
 [assembly: AssemblyProduct("VintaSoft Barcode .NET SDK")]
-[assembly: AssemblyCopyright("Copyright VintaSoft Llc. 2024")]
+[assembly: AssemblyCopyright("Copyright VintaSoft LLC 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
