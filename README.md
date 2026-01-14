@@ -1,4 +1,4 @@
-# VintaSoft WinForms Barcode Reader / Writer Demo
+﻿# VintaSoft WinForms Barcode Reader / Writer Demo
 
 This C# project uses <a href="https://www.vintasoft.com/vsbarcode-dotnet-index.html">VintaSoft Barcode .NET SDK</a> and demonstrates how to recognize barcodes in images and  generate barcode images. Project provides advanced barcode recognition and generation settings. Also project outputs extended barcode recognition results with Barcode Print Quality Test data according to ISO 15415 and 15416 standard.
 
