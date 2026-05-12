@@ -15,8 +15,8 @@ namespace BarcodeDemo
         /// </summary>
         public ExpectedBarcodesEditorControl()
         {
-            Minimum = 1;
-            Maximum = 72;
+            Minimum = 0;
+            Maximum = 100;
             Value = 1;
             Title = "Expected barcodes";
             TickFrequency = 2;
@@ -43,6 +43,18 @@ namespace BarcodeDemo
                 base.Value = value;
                 BarcodeReaderSettings.ExpectedBarcodes = value;
             }
+        }
+
+        #endregion
+
+
+        #region Methods
+
+        public override string GetValueAsString()
+        {
+            if (Value == 0)
+                return "AUTO";
+            return base.GetValueAsString();
         }
 
         #endregion

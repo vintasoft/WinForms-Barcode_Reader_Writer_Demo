@@ -45,11 +45,12 @@ namespace BarcodeDemo
             this.interpretEciCharactersCheckBox = new System.Windows.Forms.CheckBox();
             this.collectQualityTestInformationCheckBox = new System.Windows.Forms.CheckBox();
             this.imagePreproceesingTabPage = new System.Windows.Forms.TabPage();
+            this.invertModeComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.adaptiveBinarizationStepNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.erodeCheckBox = new System.Windows.Forms.CheckBox();
             this.removePeasCheckBox = new System.Windows.Forms.CheckBox();
-            this.invertColorsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.downscale3RadioButton = new System.Windows.Forms.RadioButton();
             this.downscale2RadioButton = new System.Windows.Forms.RadioButton();
@@ -275,11 +276,12 @@ namespace BarcodeDemo
             // 
             // imagePreproceesingTabPage
             // 
+            this.imagePreproceesingTabPage.Controls.Add(this.invertModeComboBox);
+            this.imagePreproceesingTabPage.Controls.Add(this.label7);
             this.imagePreproceesingTabPage.Controls.Add(this.label8);
             this.imagePreproceesingTabPage.Controls.Add(this.adaptiveBinarizationStepNumericUpDown);
             this.imagePreproceesingTabPage.Controls.Add(this.erodeCheckBox);
             this.imagePreproceesingTabPage.Controls.Add(this.removePeasCheckBox);
-            this.imagePreproceesingTabPage.Controls.Add(this.invertColorsCheckBox);
             this.imagePreproceesingTabPage.Controls.Add(this.groupBox1);
             this.imagePreproceesingTabPage.Location = new System.Drawing.Point(4, 22);
             this.imagePreproceesingTabPage.Name = "imagePreproceesingTabPage";
@@ -287,6 +289,32 @@ namespace BarcodeDemo
             this.imagePreproceesingTabPage.TabIndex = 2;
             this.imagePreproceesingTabPage.Text = "Image Preprocessing";
             this.imagePreproceesingTabPage.UseVisualStyleBackColor = true;
+            // 
+            // invertModeComboBox
+            // 
+            this.invertModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.invertModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.invertModeComboBox.FormattingEnabled = true;
+            this.invertModeComboBox.Items.AddRange(new object[] {
+            "NoInvert",
+            "Invert",
+            "NoInvert and Invert",
+            "Invert and NoInvert"});
+            this.invertModeComboBox.Location = new System.Drawing.Point(81, 130);
+            this.invertModeComboBox.Name = "invertModeComboBox";
+            this.invertModeComboBox.Size = new System.Drawing.Size(175, 21);
+            this.invertModeComboBox.TabIndex = 60;
+            this.invertModeComboBox.SelectedIndexChanged += new System.EventHandler(this.imageProcessing_SettingsChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 59;
+            this.label7.Text = "Invert colors:";
             // 
             // label8
             // 
@@ -313,7 +341,7 @@ namespace BarcodeDemo
             // 
             // erodeCheckBox
             // 
-            this.erodeCheckBox.Location = new System.Drawing.Point(6, 126);
+            this.erodeCheckBox.Location = new System.Drawing.Point(6, 103);
             this.erodeCheckBox.Name = "erodeCheckBox";
             this.erodeCheckBox.Size = new System.Drawing.Size(62, 17);
             this.erodeCheckBox.TabIndex = 55;
@@ -332,16 +360,6 @@ namespace BarcodeDemo
             this.removePeasCheckBox.Text = "Remove \"peas\"";
             this.removePeasCheckBox.UseVisualStyleBackColor = true;
             this.removePeasCheckBox.CheckedChanged += new System.EventHandler(this.imageProcessing_SettingsChanged);
-            // 
-            // invertColorsCheckBox
-            // 
-            this.invertColorsCheckBox.Location = new System.Drawing.Point(6, 103);
-            this.invertColorsCheckBox.Name = "invertColorsCheckBox";
-            this.invertColorsCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.invertColorsCheckBox.TabIndex = 53;
-            this.invertColorsCheckBox.Text = "Invert colors";
-            this.invertColorsCheckBox.UseVisualStyleBackColor = true;
-            this.invertColorsCheckBox.CheckedChanged += new System.EventHandler(this.imageProcessing_SettingsChanged);
             // 
             // groupBox1
             // 
@@ -633,10 +651,11 @@ namespace BarcodeDemo
         private System.Windows.Forms.RadioButton downscale4RadioButton;
         private System.Windows.Forms.CheckBox erodeCheckBox;
         private System.Windows.Forms.CheckBox removePeasCheckBox;
-        private System.Windows.Forms.CheckBox invertColorsCheckBox;
         private System.Windows.Forms.RadioButton downscale3RadioButton;
         internal System.Windows.Forms.CheckBox barcodeCharacteristicNormalBarcodesCheckBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown adaptiveBinarizationStepNumericUpDown;
+        private System.Windows.Forms.ComboBox invertModeComboBox;
+        private System.Windows.Forms.Label label7;
     }
 }

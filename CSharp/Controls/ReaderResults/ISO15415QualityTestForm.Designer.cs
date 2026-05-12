@@ -63,18 +63,18 @@ namespace BarcodeDemo
             this.panel1.Controls.Add(this.gbScanGrade);
             this.panel1.Controls.Add(this.okButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 553);
+            this.panel1.Location = new System.Drawing.Point(0, 527);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(508, 108);
+            this.panel1.Size = new System.Drawing.Size(508, 121);
             this.panel1.TabIndex = 0;
             // 
             // matrixModulationButton
             // 
-            this.matrixModulationButton.Location = new System.Drawing.Point(4, 73);
+            this.matrixModulationButton.Location = new System.Drawing.Point(385, 61);
             this.matrixModulationButton.Name = "matrixModulationButton";
             this.matrixModulationButton.Size = new System.Drawing.Size(120, 27);
             this.matrixModulationButton.TabIndex = 5;
-            this.matrixModulationButton.Text = "Modualtion Matrix...";
+            this.matrixModulationButton.Text = "Modulation Matrix...";
             this.matrixModulationButton.UseVisualStyleBackColor = true;
             this.matrixModulationButton.Click += new System.EventHandler(this.matrixModulationButton_Click);
             // 
@@ -141,18 +141,18 @@ namespace BarcodeDemo
             this.gbScanGrade.Controls.Add(this.sg1);
             this.gbScanGrade.Controls.Add(this.sg0);
             this.gbScanGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gbScanGrade.Location = new System.Drawing.Point(130, 63);
+            this.gbScanGrade.Location = new System.Drawing.Point(12, 68);
             this.gbScanGrade.Name = "gbScanGrade";
-            this.gbScanGrade.Size = new System.Drawing.Size(249, 39);
+            this.gbScanGrade.Size = new System.Drawing.Size(344, 39);
             this.gbScanGrade.TabIndex = 3;
             this.gbScanGrade.TabStop = false;
-            this.gbScanGrade.Text = "Scan Grade (minimum of all grades) - ";
+            this.gbScanGrade.Text = "Overall Symbol Grade";
             // 
             // sgHi
             // 
             this.sgHi.AutoSize = true;
             this.sgHi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.sgHi.Location = new System.Drawing.Point(218, 17);
+            this.sgHi.Location = new System.Drawing.Point(314, 17);
             this.sgHi.Name = "sgHi";
             this.sgHi.Size = new System.Drawing.Size(24, 13);
             this.sgHi.TabIndex = 16;
@@ -174,7 +174,7 @@ namespace BarcodeDemo
             this.sg4.AutoSize = true;
             this.sg4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sg4.ForeColor = System.Drawing.Color.Silver;
-            this.sg4.Location = new System.Drawing.Point(183, 17);
+            this.sg4.Location = new System.Drawing.Point(270, 17);
             this.sg4.Name = "sg4";
             this.sg4.Size = new System.Drawing.Size(29, 13);
             this.sg4.TabIndex = 14;
@@ -185,7 +185,7 @@ namespace BarcodeDemo
             this.sg3.AutoSize = true;
             this.sg3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sg3.ForeColor = System.Drawing.Color.Silver;
-            this.sg3.Location = new System.Drawing.Point(148, 17);
+            this.sg3.Location = new System.Drawing.Point(219, 17);
             this.sg3.Name = "sg3";
             this.sg3.Size = new System.Drawing.Size(29, 13);
             this.sg3.TabIndex = 13;
@@ -196,7 +196,7 @@ namespace BarcodeDemo
             this.sg2.AutoSize = true;
             this.sg2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sg2.ForeColor = System.Drawing.Color.Silver;
-            this.sg2.Location = new System.Drawing.Point(113, 17);
+            this.sg2.Location = new System.Drawing.Point(165, 17);
             this.sg2.Name = "sg2";
             this.sg2.Size = new System.Drawing.Size(29, 13);
             this.sg2.TabIndex = 12;
@@ -207,7 +207,7 @@ namespace BarcodeDemo
             this.sg1.AutoSize = true;
             this.sg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sg1.ForeColor = System.Drawing.Color.Silver;
-            this.sg1.Location = new System.Drawing.Point(77, 17);
+            this.sg1.Location = new System.Drawing.Point(105, 17);
             this.sg1.Name = "sg1";
             this.sg1.Size = new System.Drawing.Size(30, 13);
             this.sg1.TabIndex = 11;
@@ -218,7 +218,7 @@ namespace BarcodeDemo
             this.sg0.AutoSize = true;
             this.sg0.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sg0.ForeColor = System.Drawing.Color.Silver;
-            this.sg0.Location = new System.Drawing.Point(46, 17);
+            this.sg0.Location = new System.Drawing.Point(55, 17);
             this.sg0.Name = "sg0";
             this.sg0.Size = new System.Drawing.Size(28, 13);
             this.sg0.TabIndex = 10;
@@ -226,7 +226,7 @@ namespace BarcodeDemo
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(385, 73);
+            this.okButton.Location = new System.Drawing.Point(385, 91);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(119, 27);
             this.okButton.TabIndex = 0;
@@ -240,7 +240,7 @@ namespace BarcodeDemo
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(508, 553);
+            this.panel2.Size = new System.Drawing.Size(508, 527);
             this.panel2.TabIndex = 1;
             // 
             // dataGridView
@@ -262,7 +262,7 @@ namespace BarcodeDemo
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(508, 553);
+            this.dataGridView.Size = new System.Drawing.Size(508, 527);
             this.dataGridView.TabIndex = 1;
             // 
             // cName
@@ -289,7 +289,7 @@ namespace BarcodeDemo
             // ISO15415QualityTestForm
             // 
             this.AcceptButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(508, 661);
+            this.ClientSize = new System.Drawing.Size(508, 648);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

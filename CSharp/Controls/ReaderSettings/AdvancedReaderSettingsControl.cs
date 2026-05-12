@@ -146,7 +146,7 @@ namespace BarcodeDemo
                 upscale2RadioButton.Checked = true;
             else if (BarcodeReaderSettings.ImageScaleFactor <= 3f)
                 upscale3RadioButton.Checked = true;
-            invertColorsCheckBox.Checked = BarcodeReaderSettings.InvertImageColors;
+            invertModeComboBox.SelectedIndex = (int)BarcodeReaderSettings.ImageInvertMode;
             erodeCheckBox.Checked = BarcodeReaderSettings.Erode;
             removePeasCheckBox.Checked = BarcodeReaderSettings.RemovePeas;
             adaptiveBinarizationStepNumericUpDown.Value = BarcodeReaderSettings.AdaptiveBinarizationStep;
@@ -219,7 +219,7 @@ namespace BarcodeDemo
                 BarcodeReaderSettings.ImageScaleFactor = 2f;
             else if (upscale3RadioButton.Checked)
                 BarcodeReaderSettings.ImageScaleFactor = 3f;
-            BarcodeReaderSettings.InvertImageColors = invertColorsCheckBox.Checked;
+            BarcodeReaderSettings.ImageInvertMode = (ImageInvertMode)invertModeComboBox.SelectedIndex;
             BarcodeReaderSettings.Erode = erodeCheckBox.Checked;
             BarcodeReaderSettings.RemovePeas = removePeasCheckBox.Checked;
             BarcodeReaderSettings.AdaptiveBinarizationStep = (int)adaptiveBinarizationStepNumericUpDown.Value;

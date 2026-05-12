@@ -162,11 +162,34 @@ namespace BarcodeDemo
         /// </summary>
         static MainForm()
         {
-            // register the evaluation license for VintaSoft Barcode .NET SDK
-            Vintasoft.Barcode.BarcodeGlobalSettings.Register("REG_USER", "REG_EMAIL", "EXPIRATION_DATE", "REG_CODE");
-
 #if NETCOREAPP
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+#endif
+
+#if !DISABLE_AI
+            try
+            {
+                // initialize Vintasoft.Barcode.AI.1D assembly
+                Vintasoft.Barcode.Ai1DAssembly.Init();
+            }
+            catch
+            {
+#if DEBUG
+                throw;
+#endif
+            }
+
+            try
+            {
+                // initialize Vintasoft.Barcode.AI.2D assembly
+                Vintasoft.Barcode.Ai2DAssembly.Init();
+            }
+            catch
+            {
+#if DEBUG
+                throw;
+#endif
+            }
 #endif
 
             // initialize Vintasoft.Barcode.Gdi assembly
@@ -206,7 +229,7 @@ namespace BarcodeDemo
             advancedReaderSettings.ImageProcessingSettingsChanged += new EventHandler(AdvancedReaderSettings_ImageProcessingSettingsChanged);
         }
 
-        #endregion
+#endregion
 
 
 
@@ -489,7 +512,7 @@ namespace BarcodeDemo
             if (image == null)
                 return false;
             if (IsPaletteImage(image))
-                return (image.Width * image.Height) > (3 * 60 * 1024 * 1024);
+                return false;
             return (image.Width * image.Height) > (60 * 1024 * 1024);
         }
 
@@ -525,6 +548,16 @@ namespace BarcodeDemo
             readBarcodesButton.Enabled = isBarcodeReaderImageLoaded;
 
             automaticRecognitionCheckBox.Enabled = isBarcodeReaderImageLoaded;
+
+            if (BarcodeRegionDetectors.Default.Detectors.Count > 0)
+            {
+                useBarcodeRegionDetectorsCheckBox.Enabled = true;
+            }
+            else
+            {
+                useBarcodeRegionDetectorsCheckBox.Enabled = false;
+                useBarcodeRegionDetectorsCheckBox.Checked = false;
+            }
 
             thresholdMethodGroupBox.Enabled = isBarcodeReaderImageLoaded && !isAutomaticRecognitionEnabled;
             thresholdGroupBox.Enabled = isBarcodeReaderImageLoaded && !isAutomaticRecognitionEnabled;
@@ -1089,6 +1122,7 @@ namespace BarcodeDemo
             }
 
             automaticRecognitionCheckBox.Checked = settings.AutomaticRecognition;
+            useBarcodeRegionDetectorsCheckBox.Checked = settings.UseBarcodeRegionDetectors;
 
             readerBarcodeTypes.UpdateUI();
             advancedReaderSettings.UpdateUI();
@@ -1116,6 +1150,7 @@ namespace BarcodeDemo
         private void InitBarcodeReaderSettings()
         {
             _barcodeReader.Settings.AutomaticRecognition = automaticRecognitionCheckBox.Checked;
+            _barcodeReader.Settings.UseBarcodeRegionDetectors = useBarcodeRegionDetectorsCheckBox.Checked;
 
             _barcodeReader.Settings.Threshold = thresholdMinTrackBar.Value;
             if (thresholdMethodIterationRadioButton.Checked)
@@ -1141,17 +1176,12 @@ namespace BarcodeDemo
         private ReaderSettings GetDefaultReaderSettings()
         {
             ReaderSettings settings = new ReaderSettings();
-            settings.AutomaticRecognition = true;
-            settings.ScanBarcodeTypes = BarcodeType.QR | BarcodeType.Code39 | BarcodeType.Code128 | BarcodeType.EAN13 | BarcodeType.UPCA;
-            settings.ScanDirection = ScanDirection.LeftToRight | ScanDirection.RightToLeft | ScanDirection.BottomToTop | ScanDirection.TopToBottom;
-            settings.ThresholdIterations = 8;
-            settings.ThresholdMode = ThresholdMode.Automatic;
-            settings.MinConfidence = 95;
-            settings.SearchQRModel1Barcodes = true;
-            int processorCount = Environment.ProcessorCount;
-            settings.MaximumThreadCount = processorCount + processorCount / 2;
+            settings.ScanBarcodeTypes = BarcodeType.Code39 | BarcodeType.Code128 | BarcodeType.EAN13 | BarcodeType.EAN8 | BarcodeType.UPCE | BarcodeType.UPCA | 
+                BarcodeType.DataMatrix | BarcodeType.QR | BarcodeType.Aztec | BarcodeType.MaxiCode | BarcodeType.PDF417 | BarcodeType.PDF417Compact | 
+                BarcodeType.Interleaved2of5 | BarcodeType.Standard2of5;
             settings.CollectTestInformation = true;
             settings.PharmacodeMaxValue = long.MaxValue;
+            settings.SearchOneBarWidePharmacode = true;
             return settings;
         }
 
@@ -1487,7 +1517,6 @@ namespace BarcodeDemo
 
                 barcodeReaderResultsControl1.InterpretEciCharacters = advancedReaderSettings.InterpretEciCharacters;
                 barcodeReaderResultsControl1.RecognizedBarcodes = _barcodeRecognitionResults;
-                barcodeReaderResultsControl1.InvertBarcodeImage = _barcodeReader.Settings.InvertImageColors;
             }
             catch (Exception e)
             {

@@ -40,10 +40,10 @@ namespace BarcodeDemo.Controls.ReaderResults
         #region Methods
 
         /// <summary>
-        /// Sets the modualtion matrix.
+        /// Sets the modulation matrix.
         /// </summary>
         /// <param name="qualityTest">The quality test.</param>
-        public void SetModualtionMatrix(ISO15415QualityTest qualityTest)
+        public void SetModulationMatrix(ISO15415QualityTest qualityTest)
         {
             _qualityTest = qualityTest;
 

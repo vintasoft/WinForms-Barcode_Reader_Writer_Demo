@@ -823,9 +823,9 @@ namespace BarcodeDemo
 
             // DataMatrix
             text.Length = 0;
-            text.Append("Data Matrix is a two-dimensional barcode symbology.");
+            text.Append("Data Matrix and DRME is a two-dimensional barcode symbology.");
             text.Append(NewLine);
-            text.Append(" - ISO/IEC 16022:2006(E)");
+            text.Append(" - ISO/IEC 16022 (Data Matrix), ISO/IEC 21471 (DRME)");
             text.Append(NewLine);
             text.Append(" - Three data encoding modes:");
             text.Append(NewLine);

@@ -126,4 +126,13 @@
   <metadata name="aiValueColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="formatStructureValueLabel.Text" xml:space="preserve">
+    <value>'Nk' - k numeric digits, fixed length
+'NkC' - k numeric digits + check digit, fixed length
+'N..k' - up to k numeric digits
+'X..k' - up to k characters ISO646(subset 82)
+'Y..k' - up to k characters ISO646(subset 39)
+'Z..k' - up to k characters ISO646(subset 64)
+[-] - enclosed value is an optional component</value>
+  </data>
 </root>

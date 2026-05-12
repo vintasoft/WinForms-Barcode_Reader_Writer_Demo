@@ -18,7 +18,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>    
 
-    <Version>15.3.12.1</Version>
+    <Version>16.0.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,13 +40,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vintasoft.Barcode" Version="15.3.12.1" />
-    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="15.3.12.1" />
-    <PackageReference Include="Vintasoft.Shared" Version="4.6.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.23.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.23.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.0" />
+    <PackageReference Include="Vintasoft.Barcode" Version="16.0.0.1" />
+    <PackageReference Include="Vintasoft.Barcode.AI.1D" Version="16.0.0.2" />
+    <PackageReference Include="Vintasoft.Barcode.AI.2D" Version="16.0.0.2" />
+    <PackageReference Include="Vintasoft.Barcode.Gdi" Version="16.0.0.1" />
+    <PackageReference Include="Vintasoft.Shared" Version="4.6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -150,6 +151,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FindFiles.cs" />
+    <Compile Include="GS1DigitalLinkValueEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GS1DigitalLinkValueEditorForm.Designer.cs">
+      <DependentUpon>GS1DigitalLinkValueEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +248,10 @@
       <DependentUpon>ISO15416QualityTestForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="GS1DigitalLinkValueEditorForm.resx">
+      <DependentUpon>GS1DigitalLinkValueEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -275,4 +286,5 @@
     </EmbeddedResource>
     <Content Include="App.ico" />
   </ItemGroup>
+
 </Project>

@@ -21,7 +21,12 @@ namespace BarcodeDemo.Controls
         /// <summary>
         /// GS1 application identifier values.
         /// </summary>
-        GS1ApplicationIdentifierValue[] _GS1ApplicationIdentifierValues;
+        GS1ApplicationIdentifierValue[] _gs1ApplicationIdentifierValues;
+
+        /// <summary>
+        /// GS1 Digital Link.
+        /// </summary>
+        GS1DigitalLink _gs1DigitalLink;
 
         /// <summary>
         /// The Mailmark CMDM value item.
@@ -52,11 +57,12 @@ namespace BarcodeDemo.Controls
             InitializeComponent();
 
             // default GS1 value
-            _GS1ApplicationIdentifierValues = new GS1ApplicationIdentifierValue[] {
+            _gs1ApplicationIdentifierValues = new GS1ApplicationIdentifierValue[] {
                 new GS1ApplicationIdentifierValue(
                     GS1ApplicationIdentifiers.FindApplicationIdentifier("01"),
                     "0123456789012C")
             };
+            _gs1DigitalLink = new GS1DigitalLink("example.com", _gs1ApplicationIdentifierValues);
 
             // barcode image pixel formats
             AddEnumValues(pixelFormatComboBox, typeof(BarcodeImagePixelFormat));
@@ -171,6 +177,8 @@ namespace BarcodeDemo.Controls
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DataMatrix);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DotCode);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1QR);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DigitalLinkQR);
+            twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.GS1DigitalLinkDataMatrix);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.MailmarkCmdmType7);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.MailmarkCmdmType9);
             twoDimensionalBarcodeComboBox.Items.Add(BarcodeSymbologySubsets.MailmarkCmdmType29);
@@ -588,10 +596,16 @@ namespace BarcodeDemo.Controls
             string oldValue = BarcodeWriterSettings.Value;
             try
             {
+                if (SelectedBarcodeSubset is GS1DigitalLinkBarcodeSymbologySubset)
+                {
+                    //  encode GS1 barcode value
+                    SelectedBarcodeSubset.Encode(new GS1DigitalLinkValueItem(_gs1DigitalLink), BarcodeWriterSettings);
+                }
+                else
                 if (SelectedBarcodeSubset is GS1BarcodeSymbologySubset)
                 {
                     //  encode GS1 barcode value
-                    SelectedBarcodeSubset.Encode(new GS1ValueItem(_GS1ApplicationIdentifierValues), BarcodeWriterSettings);
+                    SelectedBarcodeSubset.Encode(new GS1ValueItem(_gs1ApplicationIdentifierValues), BarcodeWriterSettings);
                 }
                 else if (SelectedBarcodeSubset is MailmarkCmdmBarcodeSymbology)
                 {
@@ -977,6 +991,7 @@ namespace BarcodeDemo.Controls
             bool useCustomValueDialog = false;
             if (SelectedBarcodeSubset != null &&
                 SelectedBarcodeSubset is GS1BarcodeSymbologySubset ||
+                SelectedBarcodeSubset is GS1DigitalLinkBarcodeSymbologySubset ||
                 SelectedBarcodeSubset is MailmarkCmdmBarcodeSymbology ||
                 SelectedBarcodeSubset is SwissQRCodeBarcodeSymbology ||
                 SelectedBarcodeSubset is PpnBarcodeSymbology)
@@ -987,13 +1002,24 @@ namespace BarcodeDemo.Controls
 
         private void writerGS1ValueButton_Click(object sender, EventArgs e)
         {
-            if (SelectedBarcodeSubset is GS1BarcodeSymbologySubset)
+            if (SelectedBarcodeSubset is GS1DigitalLinkBarcodeSymbologySubset)
             {
-                using (GS1ValueEditorForm gs1Editor = new GS1ValueEditorForm(_GS1ApplicationIdentifierValues, false))
+                using (GS1DigitalLinkValueEditorForm gs1Editor = new GS1DigitalLinkValueEditorForm(_gs1DigitalLink, false))
                 {
                     if (gs1Editor.ShowDialog() == DialogResult.OK)
                     {
-                        _GS1ApplicationIdentifierValues = gs1Editor.GS1ApplicationIdentifierValues;
+                        _gs1DigitalLink = gs1Editor.DigitalLink;
+                        EncodeValue();
+                    }
+                }
+            }
+            else if (SelectedBarcodeSubset is GS1BarcodeSymbologySubset)
+            {
+                using (GS1ValueEditorForm gs1Editor = new GS1ValueEditorForm(_gs1ApplicationIdentifierValues, false))
+                {
+                    if (gs1Editor.ShowDialog() == DialogResult.OK)
+                    {
+                        _gs1ApplicationIdentifierValues = gs1Editor.GS1ApplicationIdentifierValues;
                         EncodeValue();
                     }
                 }

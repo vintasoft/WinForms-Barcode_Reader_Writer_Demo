@@ -93,6 +93,18 @@ namespace BarcodeDemo
             Value = _masterParameterEditor.Value;
         }
 
+        /// <summary>
+        /// Returns the value as a string.
+        /// </summary>
+        public override string GetValueAsString()
+        {
+            if (MasterParameterEditor!=null)
+            {
+                return MasterParameterEditor.GetValueAsString();
+            }
+            return base.GetValueAsString();
+        }
+
         #endregion
 
     }

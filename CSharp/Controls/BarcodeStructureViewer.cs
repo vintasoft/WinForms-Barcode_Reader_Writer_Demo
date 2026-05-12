@@ -91,13 +91,23 @@ namespace BarcodeDemo.Controls
                 BarcodeElement barcodeElement = BarcodeRenderer.BarcodeElement;
                 if (barcodeElement != null)
                 {
-                    Rectangle bbox = GdiConverter.Convert(barcodeElement.GetBoundingBox());
-                    float dx = Math.Abs(bbox.X) * RenderingScale + (Width - barcodeElement.Width * RenderingScale) / 2;
-                    float dy = Math.Abs(bbox.Y) * RenderingScale + (Height - barcodeElement.Height * RenderingScale) / 2;
-                    e.Graphics.TranslateTransform(dx, dy);
-                    e.Graphics.ScaleTransform(RenderingScale, RenderingScale);
-                    _barcodeStructureRender.Graphics = e.Graphics;
-                    _barcodeStructureRender.Render();
+                    if (barcodeElement is MatrixBarcodeStructure)
+                    {
+                        Rectangle bbox = GdiConverter.Convert(barcodeElement.GetBoundingBox());
+                        float dx = Math.Abs(bbox.X) * RenderingScale + (Width - barcodeElement.Width * RenderingScale) / 2;
+                        float dy = Math.Abs(bbox.Y) * RenderingScale + (Height - barcodeElement.Height * RenderingScale) / 2;
+                        e.Graphics.TranslateTransform(dx, dy);
+                        e.Graphics.ScaleTransform(RenderingScale, RenderingScale);
+                        _barcodeStructureRender.Graphics = e.Graphics;
+                        _barcodeStructureRender.Render();
+                    }
+                    else
+                    {
+                        StringFormat sf = new StringFormat();
+                        sf.Alignment = StringAlignment.Center;
+                        sf.LineAlignment = StringAlignment.Center;
+                        e.Graphics.DrawString(string.Format("Design of {0} is unsupported.", barcodeElement), Font, Brushes.Black, new RectangleF(0, 0, Width, Height), sf);
+                    }
                 }
             }
         }

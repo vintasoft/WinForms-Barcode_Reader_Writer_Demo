@@ -107,23 +107,6 @@ namespace BarcodeDemo
             }
         }
 
-        bool _invertBarcodeImage = false;
-        /// <summary>
-        /// Gets or sets a value indicating whether barcode image is inverted.
-        /// </summary>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool InvertBarcodeImage
-        {
-            get
-            {
-                return _invertBarcodeImage;
-            }
-            set
-            {
-                _invertBarcodeImage = value;
-            }
-        }
-
         bool _interpretEciCharacters = false;
         /// <summary>
         /// Gets or sets a value indicating whether the barcode reader must interpret ECI characters.
@@ -454,7 +437,7 @@ namespace BarcodeDemo
                     sb.Append(Environment.NewLine);
 
                     CompositeBarcodeSymbologySubset compositeSubset = ((BarcodeSubsetInfo)info).BarcodeSubset as CompositeBarcodeSymbologySubset;
-                    if (compositeSubset!=null)
+                    if (compositeSubset != null)
                     {
                         foreach (IBarcodeInfo componentInfo in info.SymbolComponents)
                         {
@@ -639,7 +622,7 @@ namespace BarcodeDemo
 
                     sb.AppendLine(string.Format("Version:                                           {0}", value.Version));
                     sb.AppendLine(string.Format("CodingType:                                        {0}", value.CodingType));
-                    
+
                     if (!string.IsNullOrEmpty(value.IBAN))
                         sb.AppendLine(string.Format("IBAN:                                              {0}", value.IBAN));
 
@@ -690,6 +673,97 @@ namespace BarcodeDemo
                         sb.AppendLine(string.Format("Alternative scheme parameters 1:                   {0}", value.AlternativeSchemeParameters1));
                     if (!string.IsNullOrEmpty(value.AlternativeSchemeParameters1))
                         sb.AppendLine(string.Format("Alternative scheme parameters 2:                   {0}", value.AlternativeSchemeParameters2));
+
+                    barcodeValueTextBox.Text = sb.ToString();
+                }
+                else if (info is IataBcbpBarcodeInfo)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.Append(string.Format("{0} decoded value: ", ((BarcodeSubsetInfo)info).BarcodeSubset.Name));
+                    sb.Append(Environment.NewLine);
+                    sb.Append(Environment.NewLine);
+
+                    IataBcbpValue value = ((IataBcbpBarcodeInfo)info).DecodedValue;
+
+                    if (!string.IsNullOrEmpty(value.FormatCode))
+                        sb.AppendLine(string.Format("FormatCode:                            {0}", value.FormatCode));
+                    if (!string.IsNullOrEmpty(value.NumberOfSegments))
+                        sb.AppendLine(string.Format("NumberOfSegments:                      {0}", value.NumberOfSegments));
+                    if (!string.IsNullOrEmpty(value.PassengerName))
+                        sb.AppendLine(string.Format("PassengerName:                         {0}", value.PassengerName));
+                    if (!string.IsNullOrEmpty(value.ElectronicTicketIndicator))
+                        sb.AppendLine(string.Format("ElectronicTicketIndicator:             {0}", value.ElectronicTicketIndicator));
+                    if (!string.IsNullOrEmpty(value.OperatingCarrierPnrCode))
+                        sb.AppendLine(string.Format("OperatingCarrierPnrCode:               {0}", value.OperatingCarrierPnrCode));
+                    if (!string.IsNullOrEmpty(value.FromCityAirportCode))
+                        sb.AppendLine(string.Format("FromCityAirportCode:                   {0}", value.FromCityAirportCode));
+                    if (!string.IsNullOrEmpty(value.ToCityAirportCode))
+                        sb.AppendLine(string.Format("ToCityAirportCode:                     {0}", value.ToCityAirportCode));
+                    if (!string.IsNullOrEmpty(value.OperatingCarrierDesignator))
+                        sb.AppendLine(string.Format("OperatingCarrierDesignator:            {0}", value.OperatingCarrierDesignator));
+                    if (!string.IsNullOrEmpty(value.FlightNumber))
+                        sb.AppendLine(string.Format("FlightNumber:                          {0}", value.FlightNumber));
+                    if (!string.IsNullOrEmpty(value.DateOfFlight))
+                        sb.AppendLine(string.Format("DateOfFlight:                          {0}", value.DateOfFlight));
+                    if (!string.IsNullOrEmpty(value.CompartmentCode))
+                        sb.AppendLine(string.Format("CompartmentCode:                       {0}", value.CompartmentCode));
+                    if (!string.IsNullOrEmpty(value.SeatNumber))
+                        sb.AppendLine(string.Format("SeatNumber:                            {0}", value.SeatNumber));
+                    if (!string.IsNullOrEmpty(value.CheckInSequenceNumber))
+                        sb.AppendLine(string.Format("CheckInSequenceNumber:                 {0}", value.CheckInSequenceNumber));
+                    if (!string.IsNullOrEmpty(value.PassengerStatus))
+                        sb.AppendLine(string.Format("PassengerStatus:                       {0}", value.PassengerStatus));
+                    if (!string.IsNullOrEmpty(value.ConditionalsSize))
+                        sb.AppendLine(string.Format("ConditionalsSize:                      {0}", value.ConditionalsSize));
+                    if (!string.IsNullOrEmpty(value.VersionNumber))
+                        sb.AppendLine(string.Format("VersionNumber:                         {0}", value.VersionNumber));
+                    if (!string.IsNullOrEmpty(value.UniqueConditionalsSize))
+                        sb.AppendLine(string.Format("UniqueConditionalsSize:                {0}", value.UniqueConditionalsSize));
+                    if (!string.IsNullOrEmpty(value.PassengerDescription))
+                        sb.AppendLine(string.Format("PassengerDescription:                  {0}", value.PassengerDescription));
+                    if (!string.IsNullOrEmpty(value.SourceOfCheckIn))
+                        sb.AppendLine(string.Format("SourceOfCheckIn:                       {0}", value.SourceOfCheckIn));
+                    if (!string.IsNullOrEmpty(value.SourceOfBoardingPassIssuance))
+                        sb.AppendLine(string.Format("SourceOfBoardingPassIssuance:          {0}", value.SourceOfBoardingPassIssuance));
+                    if (!string.IsNullOrEmpty(value.DateOfPassIssuance))
+                        sb.AppendLine(string.Format("DateOfPassIssuance:                    {0}", value.DateOfPassIssuance));
+                    if (!string.IsNullOrEmpty(value.DocumentType))
+                        sb.AppendLine(string.Format("DocumentType:                          {0}", value.DocumentType));
+                    if (!string.IsNullOrEmpty(value.AirlineDesignatorOfIssuer))
+                        sb.AppendLine(string.Format("AirlineDesignatorOfIssuer:             {0}", value.AirlineDesignatorOfIssuer));
+                    if (!string.IsNullOrEmpty(value.BaggageTagLicensePlate)
+                        ) sb.AppendLine(string.Format("BaggageTagLicensePlate:              {0}", value.BaggageTagLicensePlate));
+                    if (!string.IsNullOrEmpty(value.FirstBaggageTagLicensePlate))
+                        sb.AppendLine(string.Format("FirstBaggageTagLicensePlate:           {0}", value.FirstBaggageTagLicensePlate));
+                    if (!string.IsNullOrEmpty(value.SecondBaggageTagLicensePlate))
+                        sb.AppendLine(string.Format("SecondBaggageTagLicensePlate:          {0}", value.SecondBaggageTagLicensePlate));
+                    if (!string.IsNullOrEmpty(value.RepeatedConditionalsSize))
+                        sb.AppendLine(string.Format("RepeatedConditionalsSize:              {0}", value.RepeatedConditionalsSize));
+                    if (!string.IsNullOrEmpty(value.AirlineNumericCode))
+                        sb.AppendLine(string.Format("AirlineNumericCode:                    {0}", value.AirlineNumericCode));
+                    if (!string.IsNullOrEmpty(value.SerialNumber))
+                        sb.AppendLine(string.Format("SerialNumber:                          {0}", value.SerialNumber));
+                    if (!string.IsNullOrEmpty(value.SelecteeIndicator))
+                        sb.AppendLine(string.Format("SelecteeIndicator:                     {0}", value.SelecteeIndicator));
+                    if (!string.IsNullOrEmpty(value.InternationalDocumentVerification))
+                        sb.AppendLine(string.Format("InternationalDocumentVerification:     {0}", value.InternationalDocumentVerification));
+                    if (!string.IsNullOrEmpty(value.MarketingCarrierDesignator))
+                        sb.AppendLine(string.Format("MarketingCarrierDesignator:            {0}", value.MarketingCarrierDesignator));
+                    if (!string.IsNullOrEmpty(value.FrequentFlyerAirlineDesignator))
+                        sb.AppendLine(string.Format("FrequentFlyerAirlineDesignator:        {0}", value.FrequentFlyerAirlineDesignator));
+                    if (!string.IsNullOrEmpty(value.FrequentFlyerNumber))
+                        sb.AppendLine(string.Format("FrequentFlyerNumber:                   {0}", value.FrequentFlyerNumber));
+                    if (!string.IsNullOrEmpty(value.IdAdIndicator))
+                        sb.AppendLine(string.Format("IdAdIndicator:                         {0}", value.IdAdIndicator));
+                    if (!string.IsNullOrEmpty(value.FreeBaggageAllowance))
+                        sb.AppendLine(string.Format("FreeBaggageAllowance:                  {0}", value.FreeBaggageAllowance));
+
+                    sb.Append(Environment.NewLine);
+                    sb.Append(Environment.NewLine);
+                    sb.Append(string.Format("{0} base type value: ", ((BarcodeSubsetInfo)info).BaseBarcodeInfo.BarcodeType));
+                    sb.Append(Environment.NewLine);
+                    sb.Append(((BarcodeSubsetInfo)info).BaseBarcodeInfo.Value);
 
                     barcodeValueTextBox.Text = sb.ToString();
                 }
@@ -754,7 +828,10 @@ namespace BarcodeDemo
             }
             else if (barcodeValueAsGS1RadioButton.Checked)
             {
-                barcodeValueTextBox.Text = DecodeGS1BarcodeValue(((GS1BarcodeInfo)info).TransmittedData);
+                if (info is GS1DigitalLinkBarcodeInfo)
+                    barcodeValueTextBox.Text = DecodeGS1DigitalLinkBarcodeValue(((GS1DigitalLinkBarcodeInfo)info).DigitalLink);
+                else
+                    barcodeValueTextBox.Text = DecodeGS1BarcodeValue(((GS1BarcodeInfo)info).TransmittedData);
             }
 
             info.ShowNonDataFlagsInValue = true;
@@ -841,6 +918,25 @@ namespace BarcodeDemo
             catch
             {
                 return "GS1 Decoding Error.";
+            }
+        }
+
+        /// <summary>
+        /// Decodes the GS1 Digital Link barcode value.
+        /// </summary>
+        private string DecodeGS1DigitalLinkBarcodeValue(GS1DigitalLink value)
+        {
+            try
+            {
+                GS1ApplicationIdentifierValue[] ai = value.ApplicationIdentifierValues;
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < ai.Length; i++)
+                    sb.Append(ai[i].ToString());
+                return sb.ToString();
+            }
+            catch
+            {
+                return "GS1 Digital Link Decoding Error.";
             }
         }
 
@@ -1028,6 +1124,7 @@ namespace BarcodeDemo
                         break;
                 }
             }
+            AddBarcodeExtendedInformation("Inverted colors", info.HasInvertedColor);
         }
 
         /// <summary>
@@ -1208,9 +1305,18 @@ namespace BarcodeDemo
             try
             {
                 GS1BarcodeInfo info = (GS1BarcodeInfo)_recognizedBarcodes[_barcodeInfoIndex];
-                GS1ValueEditorForm gs1Viewer = new GS1ValueEditorForm(info.ApplicationIdentifierValues, true);
-                gs1Viewer.ShowDialog();
-                gs1Viewer.Dispose();
+                if (info is GS1DigitalLinkBarcodeInfo)
+                {
+                    GS1DigitalLinkValueEditorForm gs1DigitalLinkViewer = new GS1DigitalLinkValueEditorForm(((GS1DigitalLinkBarcodeInfo)info).DigitalLink, true);
+                    gs1DigitalLinkViewer.ShowDialog();
+                    gs1DigitalLinkViewer.Dispose();
+                }
+                else
+                {
+                    GS1ValueEditorForm gs1Viewer = new GS1ValueEditorForm(info.ApplicationIdentifierValues, true);
+                    gs1Viewer.ShowDialog();
+                    gs1Viewer.Dispose();
+                }
             }
             catch
             {
@@ -1230,7 +1336,7 @@ namespace BarcodeDemo
                     IBarcodeInfo info = _recognizedBarcodes[_barcodeInfoIndex];
                     if (info is BarcodeSubsetInfo)
                         info = ((BarcodeSubsetInfo)info).BaseBarcodeInfo;
-                    ISO15415QualityTestForm formQualityTest = new ISO15415QualityTestForm((BarcodeInfo2D)info, _barcodeImage, _invertBarcodeImage);
+                    ISO15415QualityTestForm formQualityTest = new ISO15415QualityTestForm((BarcodeInfo2D)info, _barcodeImage);
                     formQualityTest.ShowDialog();
                     formQualityTest.Dispose();
                 }
@@ -1253,7 +1359,7 @@ namespace BarcodeDemo
                     IBarcodeInfo info = _recognizedBarcodes[_barcodeInfoIndex];
                     if (info is BarcodeSubsetInfo)
                         info = ((BarcodeSubsetInfo)info).BaseBarcodeInfo;
-                    ISO15416QualityTestForm formQualityTest = new ISO15416QualityTestForm((BarcodeInfo1D)info, _barcodeImage, _invertBarcodeImage);
+                    ISO15416QualityTestForm formQualityTest = new ISO15416QualityTestForm((BarcodeInfo1D)info, _barcodeImage);
                     formQualityTest.ShowDialog();
                     formQualityTest.Dispose();
                 }
