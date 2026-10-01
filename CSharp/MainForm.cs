@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -201,6 +201,9 @@ namespace BarcodeDemo
         /// </summary>
         public MainForm()
         {
+            // register the evaluation license for VintaSoft Barcode .NET SDK
+            Vintasoft.Barcode.BarcodeGlobalSettings.Register("REG_USER", "REG_EMAIL", "EXPIRATION_DATE", "REG_CODE");
+
             InitializeComponent();
 
             // this code is necessary for evaluation version only
