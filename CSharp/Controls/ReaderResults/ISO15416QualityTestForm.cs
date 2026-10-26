@@ -309,9 +309,9 @@ namespace BarcodeDemo
                 AppendParametrInfo(sb, "Decode", profile.Decode);
                 if (profile.Decode.Value == 0)
                 {
-                    if (profile.QuietZoneLeft.Value >= 0 && profile.QuietZoneLeft.Value < 90)
+                    if (profile.QuietZoneLeft != null && profile.QuietZoneLeft.Value >= 0 && profile.QuietZoneLeft.Value < 90)
                         sb.AppendLine("    Possible violation of left quiet zone!");
-                    else if (profile.QuietZoneRight.Value >= 0 && profile.QuietZoneRight.Value < 90)
+                    else if (profile.QuietZoneRight != null && profile.QuietZoneRight.Value >= 0 && profile.QuietZoneRight.Value < 90)
                         sb.AppendLine("    Possible violation of right quiet zone!");
                 }
             }
